@@ -3,9 +3,20 @@ import subprocess
 class Device:
 
     def __init__(self, deviceID):
-        self.deviceID = ""
+        self.deviceID = deviceID
         self.screenWidth = 0
         self.screenHeight = 0
+
+    def CaptureScreen(self, fileName):
+        params = ["adb", "-s", self.deviceID, "shell", "screencap", "-p", "/sdcard/" + fileName]
+        if Device.ExecuteCommand(params) == False:
+            return
+        self.Pull(fileName)
+
+    
+    def Pull(self, fileName):
+        params = ["adb", "-s", self.deviceID, "pull", "/sdcard/" + fileName]
+        Device.ExecuteCommand(params)
 
     @staticmethod
     def Connect(deviceID):
