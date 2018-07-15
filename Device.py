@@ -15,7 +15,7 @@ class Device:
             print("Device: Connected")
             return Device(deviceID)
         else:
-            print("Devece: Fail to connect")
+            print("Device: Fail to connect")
             return None
 
     @staticmethod
