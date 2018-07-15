@@ -4,8 +4,6 @@ class Device:
 
     def __init__(self, deviceID):
         self.deviceID = deviceID
-        self.screenWidth = 0
-        self.screenHeight = 0
 
     def CaptureScreen(self, fileName):
         params = ["adb", "-s", self.deviceID, "shell", "screencap", "-p", "/sdcard/" + fileName]
