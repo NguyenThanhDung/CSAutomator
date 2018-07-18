@@ -34,14 +34,23 @@ class Device:
             return
         lines = info.split('\n')
         for line in lines:
-            if "SurfaceOrientation" in line:
+            if "SurfaceWidth" in line:
+                widthLine = line.split(' ')
+                self.screenWidth = widthLine[len(widthLine)-1][:-4]
+                continue
+            elif "SurfaceHeight" in line:
+                heightLine = line.split(' ')
+                self.screenHeight = heightLine[len(heightLine)-1][:-4]
+                continue
+            elif "SurfaceOrientation" in line:
                 orientationLine = line.split(' ')
                 orientation = orientationLine[len(orientationLine)-1]
                 if orientation == 0 or orientation == 2:
                     self.screenOrientation = ScreenOrientation.LANDSCAPE
                 else:
                     self.screenOrientation = ScreenOrientation.PORTRAIT
-                break
+                continue
+        print("[Device " + self.deviceID + "] Screen size: " + str(self.screenWidth) + " " + str(self.screenHeight))
         print("[Device " + self.deviceID + "] " + str(self.screenOrientation))
 
     def CaptureScreen(self):
