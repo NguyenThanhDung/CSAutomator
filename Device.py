@@ -1,31 +1,34 @@
 import subprocess
+from ScreenShot import ScreenShot
 
 class Device:
+
+    screenShotFileName = "Screenshot.png"
 
     def __init__(self, deviceID):
         self.deviceID = deviceID
 
-    def CaptureScreen(self, fileName):
-        params = ["adb", "-s", self.deviceID, "shell", "screencap", "-p", "/sdcard/" + fileName]
+    def Connect(self):
+        print("[Device " + self.deviceID + "] Connecting...")
+        params = ["adb", "connect", self.deviceID]
+        if Device.ExecuteCommand(params):
+            print("[Device " + self.deviceID + "] Connected")
+            return True
+        else:
+            print("[Device " + self.deviceID + "] Fail to connect")
+            return False
+
+    def CaptureScreen(self):
+        params = ["adb", "-s", self.deviceID, "shell", "screencap", "-p", "/sdcard/" + Device.screenShotFileName]
         if Device.ExecuteCommand(params) == False:
             return
-        self.Pull(fileName)
+        self.Pull(Device.screenShotFileName)
+        return ScreenShot(Device.screenShotFileName)
 
     
     def Pull(self, fileName):
         params = ["adb", "-s", self.deviceID, "pull", "/sdcard/" + fileName]
         Device.ExecuteCommand(params)
-
-    @staticmethod
-    def Connect(deviceID):
-        print("Device: Connecting to " + deviceID)
-        params = ["adb", "connect", deviceID]
-        if Device.ExecuteCommand(params):
-            print("Device: Connected")
-            return Device(deviceID)
-        else:
-            print("Device: Fail to connect")
-            return None
 
     @staticmethod
     def ExecuteCommand(params):

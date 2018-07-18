@@ -25,7 +25,16 @@
     <Compile Include="Device.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Screen.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScreenShot.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ScreenManager.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Test.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

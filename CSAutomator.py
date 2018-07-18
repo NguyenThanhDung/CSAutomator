@@ -1,15 +1,14 @@
 from Device import Device
 from ScreenManager import ScreenManager
 
-SCREENSHOT = "Screenshot.png"
-
 def Run():
-    device = Device.Connect("127.0.0.1:62001")
+    device = Device("127.0.0.1:62001")
+    device.Connect()
     screenManager = ScreenManager()
 
-    device.CaptureScreen(SCREENSHOT)
-    screenManager.Load(SCREENSHOT)
-    print(screenManager.IsResultScreen())
+    screenshot = device.CaptureScreen()
+    screen = screenManager.GetScreen(screenshot)
+    print("Screen: " + str(screen))
 
 if __name__ == "__main__":
     Run()
