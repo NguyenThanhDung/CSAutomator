@@ -36,11 +36,11 @@ class Device:
         for line in lines:
             if "SurfaceWidth" in line:
                 widthLine = line.split(' ')
-                self.screenWidth = widthLine[len(widthLine)-1][:-4]
+                self.screenWidth = int(widthLine[len(widthLine)-1][:-4])
                 continue
             elif "SurfaceHeight" in line:
                 heightLine = line.split(' ')
-                self.screenHeight = heightLine[len(heightLine)-1][:-4]
+                self.screenHeight = int(heightLine[len(heightLine)-1][:-4])
                 continue
             elif "SurfaceOrientation" in line:
                 orientationLine = line.split(' ')
@@ -66,8 +66,14 @@ class Device:
         Device.ExecuteCommand(params)
 
     def Touch(self, x, y):
-        print("[Device " + self.deviceID + "] Touch " + str(x) + " " + str(y))
-        params = ["adb", "-s", self.deviceID, "shell", "input", "tap", str(x), str(y)]
+        if self.screenOrientation == ScreenOrientation.LANDSCAPE:
+            touchX = x
+            touchY = y
+        else:
+            touchX = self.screenHeight - y
+            touchY = x
+        print("[Device " + self.deviceID + "] Touch " + str(touchX) + " " + str(touchY))
+        params = ["adb", "-s", self.deviceID, "shell", "input", "tap", str(touchX), str(touchY)]
         Device.ExecuteCommand(params)
 
     @staticmethod
