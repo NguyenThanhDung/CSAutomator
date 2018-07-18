@@ -7,8 +7,9 @@ class ScreenType(Enum):
 
 class Screen:
 
-    def __init__(self, screenType):
+    def __init__(self, screenType, matchLocation):
         self.screenType = screenType
+        self.matchLocation = matchLocation
 
     def __str__(self):
         return str(self.screenType)

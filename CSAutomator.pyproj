@@ -25,6 +25,9 @@
     <Compile Include="Device.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GameManager.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Screen.py">
       <SubType>Code</SubType>
     </Compile>

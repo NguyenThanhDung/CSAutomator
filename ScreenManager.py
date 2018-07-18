@@ -14,14 +14,20 @@ class ScreenManager:
 
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
+        matchLocation = None
         for type in self.templates.keys():
-            if self.IsMatch(screenShot.image, self.templates[type]):
+            result = self.MatchTemplate(screenShot.image, self.templates[type])
+            if result["IsMatch"] == True:
                 screenType = type
+                matchLocation = result["Location"]
                 break
-        return Screen(screenType)
+        return Screen(screenType, matchLocation)
 
-    def IsMatch(self, image, template):
+    def MatchTemplate(self, image, template):
         res = cv2.matchTemplate(image, template, cv2.TM_SQDIFF)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
         print("[ScreenManager] IsMatch: " + str(min_val) + " -> " + str(min_val < self.threadHold))
-        return min_val < self.threadHold
+        if min_val < self.threadHold:
+            return {"IsMatch": True, "Location" : min_loc}
+        else:
+            return {"IsMatch": False}

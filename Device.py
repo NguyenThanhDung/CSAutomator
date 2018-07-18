@@ -30,6 +30,11 @@ class Device:
         params = ["adb", "-s", self.deviceID, "pull", "/sdcard/" + fileName]
         Device.ExecuteCommand(params)
 
+    def Touch(self, x, y):
+        print("[Device " + self.deviceID + "] Touch " + str(x) + " " + str(y))
+        params = ["adb", "-s", self.deviceID, "shell", "input", "tap", str(x), str(y)]
+        Device.ExecuteCommand(params)
+
     @staticmethod
     def ExecuteCommand(params):
         #print("ExecuteCommand: " + ParamToString(params))
