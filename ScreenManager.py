@@ -8,15 +8,16 @@ class ScreenManager:
 
     def __init__(self):
         self.threadHold = 1000
-        self.deviceHomeTemplate = cv2.imread(ScreenManager.templateFolder + "\DeviceHome.png", 0)
-        self.resultScreenTemplate = cv2.imread(ScreenManager.templateFolder + "\Result.png", 0)
+        self.templates = {}
+        self.templates[ScreenType.DEVICE_HOME] = cv2.imread(ScreenManager.templateFolder + "\DeviceHome.png", 0)
+        self.templates[ScreenType.RESULT] = cv2.imread(ScreenManager.templateFolder + "\Result.png", 0)
 
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
-        if self.IsMatch(screenShot.image, self.deviceHomeTemplate):
-            screenType = ScreenType.DEVICE_HOME
-        elif self.IsMatch(screenShot.image, self.resultScreenTemplate):
-            screenType = ScreenType.RESULT
+        for type in self.templates.keys():
+            if self.IsMatch(screenShot.image, self.templates[type]):
+                screenType = type
+                break
         return Screen(screenType)
 
     def IsMatch(self, image, template):
