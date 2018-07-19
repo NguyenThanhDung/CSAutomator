@@ -10,6 +10,11 @@ def Run():
 
     while True:
         screenshot = device.CaptureScreen()
+        if screenshot.image is None:
+            print("Can not capture screenshot. Retry...")
+            time.sleep(5)
+            continue
+
         screen = screenManager.GetScreen(screenshot)
         screen.ShowName()
 
