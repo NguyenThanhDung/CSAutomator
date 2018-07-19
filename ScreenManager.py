@@ -25,6 +25,7 @@ class ScreenManager:
         map.AddCriteria("Map_UnknownLand.png")
         self.templates.append(map)
         
+        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png", 1000))
         self.templates.append(TemplateImage(ScreenType.RESULT, "Result.png", 1000))
 
     def GetScreen(self, screenShot):

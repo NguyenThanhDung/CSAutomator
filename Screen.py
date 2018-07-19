@@ -7,6 +7,7 @@ class ScreenType(Enum):
     DAILY_LOGIN_REWARD = 3
     GAME_HOME = 4
     MAP = 5
+    MYSTERIOUS_SANCTUARY = 6
     RESULT = 10
     UNKNOWN = 99
 
