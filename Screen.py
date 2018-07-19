@@ -5,6 +5,7 @@ class ScreenType(Enum):
     TAP_TO_START = 1
     EVENT_INFO = 2
     DAILY_LOGIN_REWARD = 3
+    GAME_HOME = 4
     RESULT = 10
     UNKNOWN = 99
 
