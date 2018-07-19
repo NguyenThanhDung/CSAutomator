@@ -6,6 +6,7 @@ class ScreenType(Enum):
     EVENT_INFO = 2
     DAILY_LOGIN_REWARD = 3
     GAME_HOME = 4
+    MAP = 5
     RESULT = 10
     UNKNOWN = 99
 

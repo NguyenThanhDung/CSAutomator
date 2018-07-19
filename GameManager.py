@@ -26,7 +26,10 @@ class GameManager:
             print("[GameManager] Daily log-in reward")
             self.device.Touch(974, 357)
         if self.screen.screenType == ScreenType.GAME_HOME:
-            print("[GameManager] Game home")
+            print("[GameManager] Game home. Open map...")
             self.device.Touch(1174, 360)
+        if self.screen.screenType == ScreenType.MAP:
+            print("[GameManager] Map. Open Mysterious Sanctuary...")
+            self.device.Touch(630, 600)
         else:
             print("[GameManager] Idle")

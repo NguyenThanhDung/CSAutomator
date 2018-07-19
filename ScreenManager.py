@@ -19,6 +19,11 @@ class ScreenManager:
         gameHome.AddCriteria("GameHome_Shoes.png")
         gameHome.AddCriteria("GameHome_BattleTickets.png")
         self.templates.append(gameHome)
+
+        map = TemplateImage(ScreenType.MAP, "Map_GoToLobby.png")
+        map.AddCriteria("Map_MysteriousSanctuary.png")
+        map.AddCriteria("Map_UnknownLand.png")
+        self.templates.append(map)
         
         self.templates.append(TemplateImage(ScreenType.RESULT, "Result.png", 1000))
 
