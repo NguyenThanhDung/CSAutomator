@@ -22,7 +22,6 @@ class GameManager:
         if self.screen.screenType == ScreenType.EVENT_INFO:
             print("[GameManager] Event information")
             self.device.Touch(1215, 630)
-            self.device.Touch(1215, 88)
         if self.screen.screenType == ScreenType.DAILY_LOGIN_REWARD:
             print("[GameManager] Daily log-in reward")
             self.device.Touch(974, 357)

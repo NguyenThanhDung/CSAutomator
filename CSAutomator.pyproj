@@ -37,6 +37,9 @@
     <Compile Include="ScreenManager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TemplateImage.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Test.py">
       <SubType>Code</SubType>
     </Compile>
