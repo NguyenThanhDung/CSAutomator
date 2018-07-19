@@ -20,6 +20,8 @@ class GameManager:
             print("[GameManager] Tap to start")
             self.device.Touch(self.screen.matchLocation[0], self.screen.matchLocation[1])
         if self.screen.screenType == ScreenType.EVENT_INFO:
-            print("[GameManager] Event information. Finding check box location...")
+            print("[GameManager] Event information")
+            self.device.Touch(1215, 630)
+            self.device.Touch(1215, 88)
         else:
             print("[GameManager] Idle")
