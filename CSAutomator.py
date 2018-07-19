@@ -1,3 +1,4 @@
+import time
 from Device import Device
 from ScreenManager import ScreenManager
 from GameManager import GameManager
@@ -7,13 +8,16 @@ def Run():
     device.Connect()
     screenManager = ScreenManager()
 
-    screenshot = device.CaptureScreen()
-    screen = screenManager.GetScreen(screenshot)
-    print("Screen: " + str(screen))
+    while True:
+        screenshot = device.CaptureScreen()
+        screen = screenManager.GetScreen(screenshot)
+        screen.ShowName()
 
-    gameManager = GameManager(device)
-    gameManager.SetScreen(screen)
-    gameManager.Play()
+        gameManager = GameManager(device)
+        gameManager.SetScreen(screen)
+        gameManager.Play()
+
+        time.sleep(5)
 
 if __name__ == "__main__":
     Run()

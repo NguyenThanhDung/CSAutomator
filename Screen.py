@@ -12,5 +12,5 @@ class Screen:
         self.screenType = screenType
         self.matchLocation = matchLocation
 
-    def __str__(self):
-        return str(self.screenType)
+    def ShowName(self):
+        print("[Screen] " + str(self.screenType))

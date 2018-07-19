@@ -21,13 +21,13 @@ class Device:
         params = ["adb", "connect", self.deviceID]
         if Device.ExecuteCommand(params):
             print("[Device " + self.deviceID + "] Connected")
-            self.GetDeviceInfo()
+            self.LoadDeviceInfo()
             return True
         else:
             print("[Device " + self.deviceID + "] Fail to connect")
             return False
 
-    def GetDeviceInfo(self):
+    def LoadDeviceInfo(self):
         params = ["adb", "-s", self.deviceID, "shell", "dumpsys", "input"]
         info = Device.ExecuteCommand(params)
         if info is None:
@@ -44,7 +44,7 @@ class Device:
                 continue
             elif "SurfaceOrientation" in line:
                 orientationLine = line.split(' ')
-                orientation = orientationLine[len(orientationLine)-1]
+                orientation = int(orientationLine[len(orientationLine)-1])
                 if orientation == 0 or orientation == 2:
                     self.screenOrientation = ScreenOrientation.LANDSCAPE
                 else:
