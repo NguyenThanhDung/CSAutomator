@@ -7,10 +7,11 @@ class ScreenManager:
     templateFolder = "ScreenTemplate"
 
     def __init__(self):
-        self.threadHold = 1000
+        self.threadHold = 5000
         self.templates = {}
         self.templates[ScreenType.DEVICE_HOME] = cv2.imread(ScreenManager.templateFolder + "\DeviceHome.png", 0)
         self.templates[ScreenType.TAP_TO_START] = cv2.imread(ScreenManager.templateFolder + "\TapToStart.png", 0)
+        self.templates[ScreenType.EVENT_INFO] = cv2.imread(ScreenManager.templateFolder + "\EventInfo.png", 0)
         self.templates[ScreenType.RESULT] = cv2.imread(ScreenManager.templateFolder + "\Result.png", 0)
 
     def GetScreen(self, screenShot):
