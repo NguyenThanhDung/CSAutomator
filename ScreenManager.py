@@ -28,6 +28,11 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png", 1000))
         self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png", 1000))
         self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png", 1000))
+
+        pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png")
+        pve_result_victory.AddCriteria("PvEResult_Victory.png")
+        self.templates.append(pve_result_victory)
+
         self.templates.append(TemplateImage(ScreenType.RESULT, "Result.png", 1000))
 
     def GetScreen(self, screenShot):

@@ -10,6 +10,7 @@ class ScreenType(Enum):
     MYSTERIOUS_SANCTUARY = 6
     SHRINE_OF_LIGHT = 7
     GUARDIAN_PLACEMENT = 8
+    PVE_RESULT_VICTORY = 9
     RESULT = 10
     UNKNOWN = 99
 
