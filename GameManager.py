@@ -42,7 +42,7 @@ class GameManager:
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
             self.AutoTouch(10)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE:
             print("[GameManager] Replay...")
             self.AutoTouch(10)
         else:

@@ -29,6 +29,13 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png", 1000))
         self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png", 1000))
 
+        actionPhase = TemplateImage(ScreenType.ACTION_PHASE, "ActionPhase_AutoPlayButton.png")
+        actionPhase.AddCriteria("ActionPhase_ChatButton.png")
+        actionPhase.AddCriteria("ActionPhase_HelpButton.png")
+        actionPhase.AddCriteria("ActionPhase_SettingButton.png")
+        actionPhase.AddCriteria("ActionPhase_x2Button.png")
+        self.templates.append(actionPhase)
+
         pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png")
         pve_result_victory.AddCriteria("PvEResult_Victory.png")
         self.templates.append(pve_result_victory)
