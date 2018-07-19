@@ -27,6 +27,6 @@ class GameManager:
             self.device.Touch(974, 357)
         if self.screen.screenType == ScreenType.GAME_HOME:
             print("[GameManager] Game home")
-            #self.device.Touch(974, 357)
+            self.device.Touch(1174, 360)
         else:
             print("[GameManager] Idle")
