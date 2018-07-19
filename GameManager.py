@@ -41,5 +41,24 @@ class GameManager:
             print("[GameManager] Guardian placement. Auto place and start...")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
+            self.AutoTouch(10)
         else:
             print("[GameManager] Idle")
+
+    def AutoTouch(self, maxTime):
+        interval = 5
+        currentTime = 0
+        while (currentTime < maxTime):
+            tick = time.time()
+            self.device.Touch(1200, 425)
+            newTick = time.time()
+            adbTime = newTick - tick
+            sleepTime = interval - adbTime
+            if sleepTime < 0:
+                currentTime += adbTime
+                sleepTime = 0
+            else:
+                currentTime += interval
+            remainingTime = maxTime - currentTime
+            print("[GameManager] Auto touch: " + str(remainingTime // 60).zfill(2) + ":" + str(remainingTime % 60).zfill(2))
+            time.sleep(sleepTime)
