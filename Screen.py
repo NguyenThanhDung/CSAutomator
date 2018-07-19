@@ -9,6 +9,7 @@ class ScreenType(Enum):
     MAP = 5
     MYSTERIOUS_SANCTUARY = 6
     SHRINE_OF_LIGHT = 7
+    GUARDIAN_PLACEMENT = 8
     RESULT = 10
     UNKNOWN = 99
 
