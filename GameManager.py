@@ -34,5 +34,8 @@ class GameManager:
         if self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
             print("[GameManager] Mysterious Sanctuary. Open Shrine of Light...")
             self.device.Touch(400, 560)
+        if self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
+            print("[GameManager] Shrine of Light. Open floor 6F...")
+            self.device.Touch(1115, 120)
         else:
             print("[GameManager] Idle")

@@ -8,6 +8,7 @@ class ScreenType(Enum):
     GAME_HOME = 4
     MAP = 5
     MYSTERIOUS_SANCTUARY = 6
+    SHRINE_OF_LIGHT = 7
     RESULT = 10
     UNKNOWN = 99
 
