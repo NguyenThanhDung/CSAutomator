@@ -12,6 +12,7 @@ class ScreenType(Enum):
     GUARDIAN_PLACEMENT = 8
     ACTION_PHASE = 9
     PVE_RESULT_VICTORY = 10
+    NOT_ENOUGH_SHOES = 11
     RESULT = 20
     UNKNOWN = 99
 

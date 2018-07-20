@@ -45,6 +45,8 @@ class GameManager:
         if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE:
             print("[GameManager] Replay...")
             self.AutoTouch(10)
+        if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+            print("[GameManager] Not enough shoes. What next?")
         else:
             print("[GameManager] Idle")
 
