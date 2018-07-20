@@ -24,17 +24,24 @@ class ScreenManager:
         map.AddCriteria("Map_MysteriousSanctuary.png", 1000000)
         map.AddCriteria("Map_UnknownLand.png", 1000000)
         self.templates.append(map)
+
+        actionPhase_PlayButtonEnabled = TemplateImage(ScreenType.ACTION_PHASE_PLAY_ENABLED, "ActionPhase_AutoPlayButton_Enabled.png", 1000000)
+        actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_ChatButton.png", 1000000)
+        actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_HelpButton.png", 1000000)
+        actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_SettingButton.png", 1000000)
+        actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_x2Button.png", 1000000)
+        self.templates.append(actionPhase_PlayButtonEnabled)
+
+        actionPhase_PlayButtonDisabled = TemplateImage(ScreenType.ACTION_PHASE_PLAY_DISABLED, "ActionPhase_AutoPlayButton_Disables.png", 1000000)
+        actionPhase_PlayButtonDisabled.AddCriteria("ActionPhase_ChatButton.png", 1000000)
+        actionPhase_PlayButtonDisabled.AddCriteria("ActionPhase_HelpButton.png", 1000000)
+        actionPhase_PlayButtonDisabled.AddCriteria("ActionPhase_SettingButton.png", 1000000)
+        actionPhase_PlayButtonDisabled.AddCriteria("ActionPhase_x2Button.png", 1000000)
+        self.templates.append(actionPhase_PlayButtonDisabled)
         
         self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png"))
         self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png"))
         self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png"))
-
-        actionPhase = TemplateImage(ScreenType.ACTION_PHASE, "ActionPhase_AutoPlayButton.png", 1000000)
-        actionPhase.AddCriteria("ActionPhase_ChatButton.png", 1000000)
-        actionPhase.AddCriteria("ActionPhase_HelpButton.png", 1000000)
-        actionPhase.AddCriteria("ActionPhase_SettingButton.png", 1000000)
-        actionPhase.AddCriteria("ActionPhase_x2Button.png", 1000000)
-        self.templates.append(actionPhase)
 
         pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png")
         pve_result_victory.AddCriteria("PvEResult_Victory.png")

@@ -40,6 +40,9 @@ class GameManager:
                 print("[GameManager] Start Mysterious Sanctuary...")
                 self.gameState = GameState.MYSTERIOUS_SANCTUARY
                 self.PlayMysteriousSanctuary()
+        if self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
+            print("[GameManager] Enable auto play...")
+            self.device.Touch(58, 107)
         else:
             if self.gameState == GameState.NONE:
                 self.gameState = GameState.PROMOTION_BATTLE
@@ -63,7 +66,7 @@ class GameManager:
             print("[GameManager] Auto place and start...")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Go home...")
             #self.AutoTouch(10)
         if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
@@ -103,7 +106,7 @@ class GameManager:
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
             self.AutoTouch(10)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Replay...")
             self.AutoTouch(10)
         if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
