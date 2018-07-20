@@ -1,11 +1,16 @@
 import time
 from Screen import ScreenType
 
+class GameState:
+    BATTLE = 0
+    MYSTERIOUS_SANCTUARY = 1
+
 class GameManager:
 
     def __init__(self, device):
         self.device = device
         self.screen = None
+        self.gameState = GameState.MYSTERIOUS_SANCTUARY
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -46,7 +51,10 @@ class GameManager:
             print("[GameManager] Replay...")
             self.AutoTouch(10)
         if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            print("[GameManager] Not enough shoes. What next?")
+            print("[GameManager] Not enough shoes. Go to battle...")
+            self.gameState = GameState.BATTLE
+            self.device.Touch(790, 474)
+            self.device.Touch(1199, 664)
         else:
             print("[GameManager] Idle")
 
