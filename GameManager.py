@@ -61,8 +61,8 @@ class GameManager:
             print("[GameManager] Go home...")
         if self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
             print("[GameManager] Auto place and start...")
-            #self.device.Touch(767, 627)
-            #self.device.Touch(765, 141)
+            self.device.Touch(767, 627)
+            self.device.Touch(765, 141)
         if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE:
             print("[GameManager] Go home...")
             #self.AutoTouch(10)
@@ -79,6 +79,7 @@ class GameManager:
             batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
             if batteButtonLocaltion is not None:
                 print("[GameManager] Press Battle button at " + str(batteButtonLocaltion))
+                self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
             else:
                 print("[GameManager] Schroll down...")
         else:
