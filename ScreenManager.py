@@ -41,6 +41,10 @@ class ScreenManager:
         self.templates.append(pve_result_victory)
 
         self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES, "NotEnoughShoes.png"))
+
+        promotionBattle_RivalAvailable = TemplateImage(ScreenType.BATTLE_LIST_RIVAL_AVAILABLE, "PromotionBattle_BattleList_Main.png")
+        promotionBattle_RivalAvailable.AddCriteria("PromotionBattle_BattleList_RivalAvailable.png")
+        self.templates.append(promotionBattle_RivalAvailable)
         self.templates.append(TemplateImage(ScreenType.RESULT, "Result.png"))
 
     def GetScreen(self, screenShot):

@@ -2,7 +2,7 @@ import time
 from Screen import ScreenType
 
 class GameState:
-    BATTLE = 0
+    PROMOTION_BATTLE = 0
     MYSTERIOUS_SANCTUARY = 1
 
 class GameManager:
@@ -10,7 +10,7 @@ class GameManager:
     def __init__(self, device):
         self.device = device
         self.screen = None
-        self.gameState = GameState.MYSTERIOUS_SANCTUARY
+        self.gameState = GameState.PROMOTION_BATTLE
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -34,8 +34,12 @@ class GameManager:
             print("[GameManager] Open map...")
             self.device.Touch(1174, 360)
         if self.screen.screenType == ScreenType.MAP:
-            print("[GameManager] Open Mysterious Sanctuary...")
-            self.device.Touch(630, 600)
+            if self.gameState == GameState.PROMOTION_BATTLE:
+                print("[GameManager] Open Promotion Battle...")
+                self.device.Touch(1077, 547)
+            else:
+                print("[GameManager] Open Mysterious Sanctuary...")
+                self.device.Touch(630, 600)
         if self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
             print("[GameManager] Open Shrine of Light...")
             self.device.Touch(400, 560)
@@ -52,9 +56,12 @@ class GameManager:
             self.AutoTouch(10)
         if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Not enough shoes. Go to battle...")
-            self.gameState = GameState.BATTLE
+            self.gameState = GameState.PROMOTION_BATTLE
             self.device.Touch(790, 474)
             self.device.Touch(1199, 664)
+        if self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
+            print("[GameManager] Open Rival Battle List...")
+            #self.device.Touch(790, 474)
         else:
             print("[GameManager] Idle")
 
