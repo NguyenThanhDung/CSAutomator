@@ -45,13 +45,19 @@ class ScreenManager:
         promotionBattle_RivalAvailable = TemplateImage(ScreenType.BATTLE_LIST_RIVAL_AVAILABLE, "PromotionBattle_BattleList_Main.png")
         promotionBattle_RivalAvailable.AddCriteria("PromotionBattle_BattleList_RivalAvailable.png")
         self.templates.append(promotionBattle_RivalAvailable)
+
+        promotionBattle_RivalList_Available = TemplateImage(ScreenType.RIVAL_LIST_AVAILABLE, "PromotionBattle_RivalList_Main.png")
+        promotionBattle_RivalList_Available.AddCriteria("PromotionBattle_RivalList_Available.png")
+        self.templates.append(promotionBattle_RivalList_Available)
+
         self.templates.append(TemplateImage(ScreenType.RESULT, "Result.png"))
 
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
+        image = None
         for template in self.templates:
-            result = template.FindMatch(screenShot)
-            if result.isMatch == True:
+            if template.IsMatch(screenShot) == True:
                 screenType = template.screenType
+                image = screenShot.image
                 break
-        return Screen(screenType, result.location)
+        return Screen(screenType, image)

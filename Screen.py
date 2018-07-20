@@ -1,3 +1,5 @@
+import os
+import cv2
 from enum import Enum
 
 class ScreenType(Enum):
@@ -16,6 +18,7 @@ class ScreenType(Enum):
     NOT_ENOUGH_SHOES = 15
 
     BATTLE_LIST_RIVAL_AVAILABLE = 20
+    RIVAL_LIST_AVAILABLE = 21
     RESULT = 30
     
     UNKNOWN = 99
@@ -23,9 +26,19 @@ class ScreenType(Enum):
 
 class Screen:
 
-    def __init__(self, screenType, matchLocation):
+    def __init__(self, screenType, image):
         self.screenType = screenType
-        self.matchLocation = matchLocation
+        self.image = image
 
     def ShowName(self):
         print("[Screen] " + str(self.screenType))
+
+    def Find(self, fileName, precision = 1000):
+        filePath = os.path.abspath("ScreenTemplate\\" + fileName)
+        targetImage = cv2.imread(filePath, 0)
+        res = cv2.matchTemplate(self.image, targetImage, cv2.TM_SQDIFF)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+        if min_val < precision:
+            return min_loc
+        else:
+            return None

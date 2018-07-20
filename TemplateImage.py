@@ -14,21 +14,15 @@ class TemplateImage:
         filePath = os.path.abspath(TemplateImage.templateFolder + "/" +  fileName)
         self.criterias.append([fileName, cv2.imread(filePath, 0), precision])
 
-    def FindMatch(self, screenShot):
-        result = FindMatchResult(True, [0, 0])
+    def IsMatch(self, screenShot):
+        isFound = True
         for criteria in self.criterias:
             res = cv2.matchTemplate(screenShot.image, criteria[1], cv2.TM_SQDIFF)
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
             print("[ScreenManager] IsMatch() " + str(self.screenType).ljust(40) + " " + criteria[0].ljust(45) + " " + str(min_val).rjust(15) + " " + str(min_val < criteria[2]))
             if min_val < criteria[2]:
-                result.location = min_loc
+                continue
             else:
-                result.isMatch = False
+                isFound = False
                 break
-        return result
-
-class FindMatchResult:
-
-    def __init__(self, isMatch, location):
-        self.isMatch = isMatch
-        self.location = location
+        return isFound

@@ -73,7 +73,14 @@ class GameManager:
             #self.device.Touch(1199, 664)
         if self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
             print("[GameManager] Open Rival Battle List...")
-            #self.device.Touch(790, 474)
+            self.device.Touch(1221, 505)
+        if self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
+            print("[GameManager] Start Rival match...")
+            batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
+            if batteButtonLocaltion is not None:
+                print("[GameManager] Press Battle button at " + str(batteButtonLocaltion))
+            else:
+                print("[GameManager] Schroll down...")
         else:
             print("[GameManager] Idle")
     
@@ -105,7 +112,10 @@ class GameManager:
             self.device.Touch(1199, 664)
         if self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
             print("[GameManager] Go home")
-            #self.device.Touch(790, 474)
+            self.device.Touch(38, 46)
+        if self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
         else:
             print("[GameManager] Idle")
 
