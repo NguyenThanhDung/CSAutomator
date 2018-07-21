@@ -52,15 +52,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST, "PromotionBattle_BattleList.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION, "PromotionBattle_BattleList_RefreshConfirmation.png", 1500000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE, "PromotionBattle_BattleList_RefreshWithMoonstone.png", 1500000))
-
-        promotionBattle_RivalList_Available = TemplateImage(ScreenType.RIVAL_LIST_AVAILABLE, "PromotionBattle_RivalList_Main.png")
-        promotionBattle_RivalList_Available.AddCriteria("PromotionBattle_RivalList_Available.png")
-        self.templates.append(promotionBattle_RivalList_Available)
-
-        promotionBattle_RivalList_NotAvailable = TemplateImage(ScreenType.RIVAL_LIST_NOT_AVAILABLE, "PromotionBattle_RivalList_Main.png")
-        promotionBattle_RivalList_NotAvailable.AddCriteria("PromotionBattle_RivalList_NotAvailable.png")
-        self.templates.append(promotionBattle_RivalList_NotAvailable)
-
+        self.templates.append(TemplateImage(ScreenType.RIVAL_LIST, "PromotionBattle_RivalList.png"))
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT, "Battle_Result.png"))
 

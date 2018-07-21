@@ -125,18 +125,20 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
             print("[GameManager] Don't refresh with moonstone")
             self.device.Touch(784, 474)
-        elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
-            print("[GameManager] Start Rival match...")
-            batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
-            if batteButtonLocaltion is not None:
-                print("[GameManager] Press Battle button at " + str(batteButtonLocaltion))
-                self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
+        elif self.screen.screenType == ScreenType.RIVAL_LIST:
+            revalAvailable = self.screen.Find("PromotionBattle_RivalList_Available.png")
+            if revalAvailable is not None:
+                print("[GameManager] Start Rival match...")
+                batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
+                if batteButtonLocaltion is not None:
+                    print("[GameManager] Press Battle button at " + str(batteButtonLocaltion))
+                    self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
+                else:
+                    print("[GameManager] Schroll down")
+                    self.device.Swipe(1116, 351, 569, 351)
             else:
-                print("[GameManager] Schroll down")
-                self.device.Swipe(1116, 351, 569, 351)
-        elif self.screen.screenType == ScreenType.RIVAL_LIST_NOT_AVAILABLE:
-            print("[GameManager] Switch to Battle list")
-            self.device.Touch(1218, 646)
+                print("[GameManager] Switch to Battle list")
+                self.device.Touch(1218, 646)
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
             print("[GameManager] Press Skip")
             self.device.Touch(1223, 58)
@@ -187,10 +189,7 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
             print("[GameManager] Don't refresh with moonstone")
             self.device.Touch(784, 474)
-        elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.RIVAL_LIST_NOT_AVAILABLE:
+        elif self.screen.screenType == ScreenType.RIVAL_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
