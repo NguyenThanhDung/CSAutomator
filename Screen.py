@@ -20,6 +20,7 @@ class ScreenType(Enum):
 
     BATTLE_LIST_RIVAL_AVAILABLE = 20
     RIVAL_LIST_AVAILABLE = 21
+    RIVAL_MATCH_END = 22
     RESULT = 30
     
     UNKNOWN = 99

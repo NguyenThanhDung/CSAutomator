@@ -57,6 +57,7 @@ class ScreenManager:
         promotionBattle_RivalList_Available.AddCriteria("PromotionBattle_RivalList_Available.png")
         self.templates.append(promotionBattle_RivalList_Available)
 
+        self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.RESULT, "Result.png"))
 
     def GetScreen(self, screenShot):

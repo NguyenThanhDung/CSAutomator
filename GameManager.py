@@ -85,6 +85,9 @@ class GameManager:
                 self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
             else:
                 print("[GameManager] Schroll down...")
+        if self.screen.screenType == ScreenType.RIVAL_MATCH_END:
+            print("[GameManager] Press Skip...")
+            self.device.Touch(1223, 58)
         else:
             print("[GameManager] Idle")
     
