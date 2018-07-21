@@ -56,8 +56,8 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT, "Battle_Result.png"))
 
-        promotionBattle_RewardInfo = TemplateImage(ScreenType.BATTLE_REWARD_INFO, "PromotionBattle_RewardInfo_Title.png", 10000)
-        promotionBattle_RewardInfo.AddCriteria("PromotionBattle_RewardInfo_CupIcon.png")
+        promotionBattle_RewardInfo = TemplateImage(ScreenType.BATTLE_REWARD_INFO, "RewardInfo_Title.png", 10000)
+        promotionBattle_RewardInfo.AddCriteria("RewardInfo_OkButton.png")
         self.templates.append(promotionBattle_RewardInfo)
 
         self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
