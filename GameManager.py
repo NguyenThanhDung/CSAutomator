@@ -83,10 +83,10 @@ class GameManager:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
             if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
-                print("[GameManager] Not enough shoes at guardian placement. Go to battle")
+                print("[GameManager] Not enough shoes at guardian placement. Find more shoes...")
                 self.device.Touch(46, 51)
             elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
-                print("[GameManager] Not enough shoes at result. Go to battle")
+                print("[GameManager] Not enough shoes at result. Find more shoes...")
                 self.device.Touch(1197, 663)
             else:
                 print("[GameManager] Not enough shoes. Close the pop-up")
@@ -179,7 +179,6 @@ class GameManager:
             print("[GameManager] Auto place and start")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
-            self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Replay...")
             self.AutoTouch(10)
@@ -191,10 +190,10 @@ class GameManager:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
             if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
-                print("[GameManager] Not enough shoes at guardian placement. Go to battle")
+                print("[GameManager] Not enough shoes at guardian placement. Find more shoes...")
                 self.device.Touch(46, 51)
             elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
-                print("[GameManager] Not enough shoes at result. Go to battle")
+                print("[GameManager] Not enough shoes at result. Find more shoes...")
                 self.device.Touch(1197, 663)
             else:
                 print("[GameManager] Not enough shoes. Close the pop-up")
