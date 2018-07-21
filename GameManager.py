@@ -80,9 +80,16 @@ class GameManager:
             print("[GameManager] Go home")
             self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            print("[GameManager] Go home")
+            self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
-            self.device.Touch(1199, 664)
+            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
+                print("[GameManager] Not enough shoes at guardian placement. Go to battle")
+                self.device.Touch(46, 51)
+            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
+                print("[GameManager] Not enough shoes at result. Go to battle")
+                self.device.Touch(1197, 663)
+            else:
+                print("[GameManager] Not enough shoes. Close the pop-up")
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
             if self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png") is not None:
                 print("[GameManager] Rival available. Switch to Rival list")
@@ -163,13 +170,13 @@ class GameManager:
             print("[GameManager] Open Mysterious Sanctuary")
             self.device.Touch(630, 600)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
-            print("[GameManager] Open Shrine of Light...")
+            print("[GameManager] Open Shrine of Light")
             self.device.Touch(400, 560)
         elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            print("[GameManager] Open floor 6F...")
+            print("[GameManager] Open floor 6F")
             self.device.Touch(1115, 120)
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
-            print("[GameManager] Auto place and start...")
+            print("[GameManager] Auto place and start")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
             self.AutoTouch(10)
@@ -181,11 +188,16 @@ class GameManager:
             self.gameState = GameState.PROMOTION_BATTLE
             self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            print("[GameManager] Not enough shoes. Go to battle...")
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
             if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
+                print("[GameManager] Not enough shoes at guardian placement. Go to battle")
                 self.device.Touch(46, 51)
+            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
+                print("[GameManager] Not enough shoes at result. Go to battle")
+                self.device.Touch(1197, 663)
+            else:
+                print("[GameManager] Not enough shoes. Close the pop-up")
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
