@@ -88,6 +88,9 @@ class GameManager:
         if self.screen.screenType == ScreenType.RIVAL_MATCH_END:
             print("[GameManager] Press Skip...")
             self.device.Touch(1223, 58)
+        if self.screen.screenType == ScreenType.BATTLE_RESULT:
+            print("[GameManager] Press Exit...")
+            self.device.Touch(1196, 115)
         else:
             print("[GameManager] Idle")
     
