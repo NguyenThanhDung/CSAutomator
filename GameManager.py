@@ -66,7 +66,7 @@ class GameManager:
             print("[GameManager] Auto place and start...")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Go home...")
             #self.AutoTouch(10)
         if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
