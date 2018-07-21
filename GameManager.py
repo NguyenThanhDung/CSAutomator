@@ -75,12 +75,11 @@ class GameManager:
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Go home...")
-            #self.AutoTouch(10)
+            self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Go home...")
-            #self.gameState = GameState.PROMOTION_BATTLE
-            #self.device.Touch(790, 474)
-            #self.device.Touch(1199, 664)
+            self.device.Touch(790, 474)
+            self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
             if self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png") is not None:
                 print("[GameManager] Rival available. Switch to Rival list")
