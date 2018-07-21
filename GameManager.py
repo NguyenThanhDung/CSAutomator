@@ -91,8 +91,20 @@ class GameManager:
                         print("[GameManager] There is a potential match, go for battle")
                         self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
                     else:
-                        print("[GameManager] There isn't any potential match, refresh list")
-                        self.device.Touch(514, 108)
+                        print("[GameManager] Can not find any potential match, schroll up")
+                        self.device.Swipe(569, 226, 1116, 226)
+                        potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
+                        if potentialMatch is not None:
+                            print("[GameManager] There is a potential match, go for battle")
+                            self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
+                        else:
+                            refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
+                            if refreshAvailable is not None:
+                                print("[GameManager] There isn't any potential match, refresh list")
+                                self.device.Touch(514, 108)
+                            else:
+                                print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
+                                self.gameState = GameState.MYSTERIOUS_SANCTUARY
         elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
             print("[GameManager] Confirm refresh")
             self.device.Touch(784, 243)

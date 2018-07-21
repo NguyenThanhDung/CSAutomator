@@ -50,8 +50,8 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES, "NotEnoughShoes.png"))
 
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST, "PromotionBattle_BattleList.png"))
-        self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION, "PromotionBattle_BattleList_RefreshConfirmation.png"))
-        self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE, "PromotionBattle_BattleList_RefreshWithMoonstone.png"))
+        self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION, "PromotionBattle_BattleList_RefreshConfirmation.png", 1500000))
+        self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE, "PromotionBattle_BattleList_RefreshWithMoonstone.png", 1500000))
 
         promotionBattle_RivalList_Available = TemplateImage(ScreenType.RIVAL_LIST_AVAILABLE, "PromotionBattle_RivalList_Main.png")
         promotionBattle_RivalList_Available.AddCriteria("PromotionBattle_RivalList_Available.png")

@@ -19,7 +19,7 @@ class TemplateImage:
         for criteria in self.criterias:
             res = cv2.matchTemplate(screenShot.image, criteria[1], cv2.TM_SQDIFF)
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-            #print("[ScreenManager] IsMatch() " + str(self.screenType).ljust(40) + " " + criteria[0].ljust(45) + " " + str(min_val).rjust(15) + " " + str(min_val < criteria[2]))
+            #print("[ScreenManager] IsMatch() " + str(self.screenType).ljust(45) + " " + criteria[0].ljust(50) + " " + str(min_val).rjust(15) + " " + str(min_val < criteria[2]))
             if min_val < criteria[2]:
                 continue
             else:
