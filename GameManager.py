@@ -6,6 +6,7 @@ class GameState(Enum):
     NONE = 0
     PROMOTION_BATTLE = 1
     MYSTERIOUS_SANCTUARY = 2
+    OUT_OF_SHOES = 3
 
 class ScrollDirection(Enum):
     UP = 0
@@ -174,11 +175,12 @@ class GameManager:
             print("[GameManager] Replay...")
             self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            print("[GameManager] Replay...")
-            self.AutoTouch(10)
+            print("[GameManager] Go to battle")
+            self.gameState = GameState.PROMOTION_BATTLE
+            self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Not enough shoes. Go to battle...")
-            self.gameState = GameState.PROMOTION_BATTLE
+            self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
             self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
