@@ -99,7 +99,7 @@ class GameManager:
                             self.device.Swipe(1116, 226, 569, 226)
                             self.battleListScrollStep = self.battleListScrollStep + 1
                         else:
-                            self.battleListScrollDirection == ScrollDirection.DOWN
+                            self.battleListScrollDirection = ScrollDirection.DOWN
                             self.battleListScrollStep = 0
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
@@ -114,7 +114,7 @@ class GameManager:
                             self.device.Swipe(569, 226, 1116, 226)
                             self.battleListScrollStep = self.battleListScrollStep + 1
                         else:
-                            self.battleListScrollDirection == ScrollDirection.UP
+                            self.battleListScrollDirection = ScrollDirection.UP
                             self.battleListScrollStep = 0
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
