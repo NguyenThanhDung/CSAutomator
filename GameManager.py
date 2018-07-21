@@ -132,26 +132,29 @@ class GameManager:
                 print("[GameManager] Press Battle button at " + str(batteButtonLocaltion))
                 self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
             else:
-                print("[GameManager] Schroll down...")
+                print("[GameManager] Schroll down")
                 self.device.Swipe(1116, 351, 569, 351)
         elif self.screen.screenType == ScreenType.RIVAL_LIST_NOT_AVAILABLE:
-            print("[GameManager] Switch to Battle list...")
+            print("[GameManager] Switch to Battle list")
             self.device.Touch(1218, 646)
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
-            print("[GameManager] Press Skip...")
+            print("[GameManager] Press Skip")
             self.device.Touch(1223, 58)
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
-            print("[GameManager] Press Exit...")
+            print("[GameManager] Press Exit")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.BATTLE_REWARD_INFO:
+            print("[GameManager] Press OK")
+            self.device.Touch(797, 356)
         else:
             print("[GameManager] Idle")
     
     def PlayMysteriousSanctuary(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
-            print("[GameManager] Open map...")
+            print("[GameManager] Open map")
             self.device.Touch(1174, 360)
         elif self.screen.screenType == ScreenType.MAP:
-            print("[GameManager] Open Mysterious Sanctuary...")
+            print("[GameManager] Open Mysterious Sanctuary")
             self.device.Touch(630, 600)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
             print("[GameManager] Open Shrine of Light...")
@@ -196,6 +199,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.BATTLE_REWARD_INFO:
+            print("[GameManager] Press OK")
+            self.device.Touch(797, 356)
         else:
             print("[GameManager] Idle")
 

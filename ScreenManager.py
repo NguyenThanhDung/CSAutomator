@@ -59,10 +59,14 @@ class ScreenManager:
 
         promotionBattle_RivalList_NotAvailable = TemplateImage(ScreenType.RIVAL_LIST_NOT_AVAILABLE, "PromotionBattle_RivalList_Main.png")
         promotionBattle_RivalList_NotAvailable.AddCriteria("PromotionBattle_RivalList_NotAvailable.png")
-        self.templates.append(TemplateImage(ScreenType.RIVAL_LIST_NOT_AVAILABLE, "PromotionBattle_RivalList_Main.png"))
+        self.templates.append(promotionBattle_RivalList_NotAvailable)
 
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT, "Battle_Result.png"))
+
+        promotionBattle_RewardInfo = TemplateImage(ScreenType.BATTLE_REWARD_INFO, "PromotionBattle_RewardInfo_Title.png", 10000)
+        promotionBattle_RewardInfo.AddCriteria("PromotionBattle_RewardInfo_CupIcon.png")
+        self.templates.append(promotionBattle_RewardInfo)
 
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
