@@ -96,6 +96,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
             print("[GameManager] Confirm refresh")
             self.device.Touch(784, 243)
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
+            print("[GameManager] Don't refresh with moonstone")
+            self.device.Touch(784, 474)
         elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
             print("[GameManager] Start Rival match...")
             batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
@@ -152,6 +155,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
             print("[GameManager] Confirm refresh")
             self.device.Touch(784, 243)
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
+            print("[GameManager] Don't refresh with moonstone")
+            self.device.Touch(784, 474)
         elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
