@@ -48,6 +48,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
             print("[GameManager] Enable auto play")
             self.device.Touch(58, 107)
+        elif self.screen.screenType == ScreenType.REWARD_INFO:
+            print("[GameManager] Press OK")
+            self.device.Touch(797, 356)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
             if collectButton is not None:
@@ -169,9 +172,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit")
             self.device.Touch(1196, 115)
-        elif self.screen.screenType == ScreenType.BATTLE_REWARD_INFO:
-            print("[GameManager] Press OK")
-            self.device.Touch(797, 356)
         else:
             print("[GameManager] Idle")
     
@@ -194,7 +194,7 @@ class GameManager:
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Replay...")
-            self.AutoTouch(10)
+            self.AutoTouch()
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Go to battle")
             self.gameState = GameState.PROMOTION_BATTLE
@@ -228,9 +228,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
-        elif self.screen.screenType == ScreenType.BATTLE_REWARD_INFO:
-            print("[GameManager] Press OK")
-            self.device.Touch(797, 356)
         else:
             print("[GameManager] Idle")
 
@@ -291,14 +288,11 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
-        elif self.screen.screenType == ScreenType.BATTLE_REWARD_INFO:
-            print("[GameManager] Press OK")
-            self.device.Touch(797, 356)
         else:
             print("[GameManager] Idle")
 
 
-    def AutoTouch(self, autoTime):
+    def AutoTouch(self, autoTime = 10):
         maxTime = autoTime * 60
         interval = 5
         currentTime = 0

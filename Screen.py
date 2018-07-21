@@ -11,6 +11,7 @@ class ScreenType(Enum):
     MAP = 5
     ACTION_PHASE_PLAY_ENABLED = 6
     ACTION_PHASE_PLAY_DISABLED = 7
+    REWARD_INFO = 8
     
     MYSTERIOUS_SANCTUARY = 10
     SHRINE_OF_LIGHT = 11
@@ -24,7 +25,6 @@ class ScreenType(Enum):
     RIVAL_LIST = 23
     RIVAL_MATCH_END = 25
     BATTLE_RESULT = 26
-    BATTLE_REWARD_INFO = 27
 
     DAILY_MISSION = 30
     

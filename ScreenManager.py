@@ -38,6 +38,10 @@ class ScreenManager:
         actionPhase_PlayButtonDisabled.AddCriteria("ActionPhase_SettingButton.png", 1000000)
         actionPhase_PlayButtonDisabled.AddCriteria("ActionPhase_x2Button.png", 1000000)
         self.templates.append(actionPhase_PlayButtonDisabled)
+
+        promotionBattle_RewardInfo = TemplateImage(ScreenType.REWARD_INFO, "RewardInfo_Title.png", 10000)
+        promotionBattle_RewardInfo.AddCriteria("RewardInfo_OkButton.png")
+        self.templates.append(promotionBattle_RewardInfo)
         
         self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png"))
         self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png"))
@@ -55,10 +59,6 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.RIVAL_LIST, "PromotionBattle_RivalList.png"))
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT, "Battle_Result.png"))
-
-        promotionBattle_RewardInfo = TemplateImage(ScreenType.BATTLE_REWARD_INFO, "RewardInfo_Title.png", 10000)
-        promotionBattle_RewardInfo.AddCriteria("RewardInfo_OkButton.png")
-        self.templates.append(promotionBattle_RewardInfo)
 
         self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
 
