@@ -25,7 +25,7 @@ class ScreenManager:
         map.AddCriteria("Map_UnknownLand.png", 1000000)
         self.templates.append(map)
 
-        actionPhase_PlayButtonEnabled = TemplateImage(ScreenType.ACTION_PHASE_PLAY_ENABLED, "ActionPhase_AutoPlayButton_Enabled.png", 3000000)
+        actionPhase_PlayButtonEnabled = TemplateImage(ScreenType.ACTION_PHASE_PLAY_ENABLED, "ActionPhase_AutoPlayButton_Enabled.png", 1000000)
         actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_ChatButton.png", 1000000)
         actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_HelpButton.png", 1000000)
         actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_SettingButton.png", 1000000)
