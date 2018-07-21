@@ -76,6 +76,21 @@ class Device:
         params = ["adb", "-s", self.deviceID, "shell", "input", "tap", str(touchX), str(touchY)]
         Device.ExecuteCommand(params)
 
+    def Swipe(self, beginX, beginY, endX, endY, duration = 500):
+        if self.screenOrientation == ScreenOrientation.LANDSCAPE:
+            touchBeginX = beginX
+            touchBeginY = beginY
+            touchEndX = endX
+            touchEndY = endY
+        else:
+            touchBeginX = self.screenHeight - beginY
+            touchBeginY = beginX
+            touchEndX = self.screenHeight - endY
+            touchEndY = endX
+        print("[Device " + self.deviceID + "] Swipe " + str(touchBeginX) + ":" + str(touchBeginY) + " to " + str(touchEndX) + ":" + str(touchEndY))
+        params = ["adb", "-s", self.deviceID, "shell", "input", "swipe", str(touchBeginX), str(touchBeginY), str(touchEndX), str(touchEndY), str(duration)]
+        Device.ExecuteCommand(params)
+
     @staticmethod
     def ExecuteCommand(params):
         #print("ExecuteCommand: " + ParamToString(params))

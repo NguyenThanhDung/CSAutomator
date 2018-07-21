@@ -40,7 +40,7 @@ class GameManager:
                 print("[GameManager] Start Mysterious Sanctuary...")
                 self.gameState = GameState.MYSTERIOUS_SANCTUARY
                 self.PlayMysteriousSanctuary()
-        if self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
+        elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
             print("[GameManager] Enable auto play...")
             self.device.Touch(58, 107)
         else:
@@ -55,29 +55,29 @@ class GameManager:
         if self.screen.screenType == ScreenType.GAME_HOME:
             print("[GameManager] Open map...")
             self.device.Touch(1174, 360)
-        if self.screen.screenType == ScreenType.MAP:
+        elif self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Open Promotion Battle...")
             self.device.Touch(1077, 547)
-        if self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
             print("[GameManager] Go home...")
-        if self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
+        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
             print("[GameManager] Go home...")
-        if self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
             print("[GameManager] Auto place and start...")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Go home...")
             #self.AutoTouch(10)
-        if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Go home...")
             #self.gameState = GameState.PROMOTION_BATTLE
             #self.device.Touch(790, 474)
             #self.device.Touch(1199, 664)
-        if self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
             print("[GameManager] Open Rival Battle List...")
             self.device.Touch(1221, 505)
-        if self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
+        elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
             print("[GameManager] Start Rival match...")
             batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
             if batteButtonLocaltion is not None:
@@ -85,10 +85,11 @@ class GameManager:
                 self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
             else:
                 print("[GameManager] Schroll down...")
-        if self.screen.screenType == ScreenType.RIVAL_MATCH_END:
+                self.device.Swipe(1116, 351, 569, 349)
+        elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
             print("[GameManager] Press Skip...")
             self.device.Touch(1223, 58)
-        if self.screen.screenType == ScreenType.BATTLE_RESULT:
+        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
         else:
@@ -98,32 +99,32 @@ class GameManager:
         if self.screen.screenType == ScreenType.GAME_HOME:
             print("[GameManager] Open map...")
             self.device.Touch(1174, 360)
-        if self.screen.screenType == ScreenType.MAP:
+        elif self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Open Mysterious Sanctuary...")
             self.device.Touch(630, 600)
-        if self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
             print("[GameManager] Open Shrine of Light...")
             self.device.Touch(400, 560)
-        if self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
+        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
             print("[GameManager] Open floor 6F...")
             self.device.Touch(1115, 120)
-        if self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
             print("[GameManager] Auto place and start...")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
             self.AutoTouch(10)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY or self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Replay...")
             self.AutoTouch(10)
-        if self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Not enough shoes. Go to battle...")
             self.gameState = GameState.PROMOTION_BATTLE
             self.device.Touch(790, 474)
             self.device.Touch(1199, 664)
-        if self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
-        if self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
+        elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         else:
