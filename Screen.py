@@ -18,7 +18,7 @@ class ScreenType(Enum):
     PVE_RESULT_VICTORY = 13
     NOT_ENOUGH_SHOES = 14
 
-    BATTLE_LIST_RIVAL_AVAILABLE = 20
+    BATTLE_LIST = 20
     RIVAL_LIST_AVAILABLE = 21
     RIVAL_LIST_NOT_AVAILABLE = 22
     RIVAL_MATCH_END = 23
@@ -39,6 +39,8 @@ class Screen:
     def Find(self, fileName, precision = 1000):
         filePath = os.path.abspath("ScreenTemplate\\" + fileName)
         targetImage = cv2.imread(filePath, 0)
+        if targetImage is None:
+            return None
         res = cv2.matchTemplate(self.image, targetImage, cv2.TM_SQDIFF)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
         #print("[Screen] Find Value: " + str(min_val))

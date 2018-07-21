@@ -74,9 +74,25 @@ class GameManager:
             #self.gameState = GameState.PROMOTION_BATTLE
             #self.device.Touch(790, 474)
             #self.device.Touch(1199, 664)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
-            print("[GameManager] Open Rival Battle List...")
-            self.device.Touch(1221, 505)
+        elif self.screen.screenType == ScreenType.BATTLE_LIST:
+            if self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png") is not None:
+                print("[GameManager] Rival available. Switch to Rival list")
+                self.device.Touch(1221, 505)
+            else:
+                potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
+                if potentialMatch is not None:
+                    print("[GameManager] There is a potential match, go for battle")
+                    self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
+                else:
+                    print("[GameManager] Can not find any potential match, schroll down")
+                    self.device.Swipe(1116, 226, 569, 226)
+                    potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
+                    if potentialMatch is not None:
+                        print("[GameManager] There is a potential match, go for battle")
+                        self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
+                    else:
+                        print("[GameManager] There isn't any potential match, refresh list")
+                        self.device.Touch(514, 108)
         elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:
             print("[GameManager] Start Rival match...")
             batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
@@ -85,7 +101,7 @@ class GameManager:
                 self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
             else:
                 print("[GameManager] Schroll down...")
-                self.device.Swipe(1116, 351, 569, 349)
+                self.device.Swipe(1116, 351, 569, 351)
         elif self.screen.screenType == ScreenType.RIVAL_LIST_NOT_AVAILABLE:
             print("[GameManager] Switch to Battle list...")
             self.device.Touch(1218, 646)
@@ -127,7 +143,7 @@ class GameManager:
             self.gameState = GameState.PROMOTION_BATTLE
             self.device.Touch(790, 474)
             self.device.Touch(1199, 664)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_RIVAL_AVAILABLE:
+        elif self.screen.screenType == ScreenType.BATTLE_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.RIVAL_LIST_AVAILABLE:

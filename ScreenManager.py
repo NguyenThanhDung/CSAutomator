@@ -49,9 +49,7 @@ class ScreenManager:
 
         self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES, "NotEnoughShoes.png"))
 
-        promotionBattle_RivalAvailable = TemplateImage(ScreenType.BATTLE_LIST_RIVAL_AVAILABLE, "PromotionBattle_BattleList_Main.png")
-        promotionBattle_RivalAvailable.AddCriteria("PromotionBattle_BattleList_RivalAvailable.png")
-        self.templates.append(promotionBattle_RivalAvailable)
+        self.templates.append(TemplateImage(ScreenType.BATTLE_LIST, "PromotionBattle_BattleList.png"))
 
         promotionBattle_RivalList_Available = TemplateImage(ScreenType.RIVAL_LIST_AVAILABLE, "PromotionBattle_RivalList_Main.png")
         promotionBattle_RivalList_Available.AddCriteria("PromotionBattle_RivalList_Available.png")
@@ -59,7 +57,7 @@ class ScreenManager:
 
         promotionBattle_RivalList_NotAvailable = TemplateImage(ScreenType.RIVAL_LIST_NOT_AVAILABLE, "PromotionBattle_RivalList_Main.png")
         promotionBattle_RivalList_NotAvailable.AddCriteria("PromotionBattle_RivalList_NotAvailable.png")
-        self.templates.append(promotionBattle_RivalList_NotAvailable)
+        self.templates.append(TemplateImage(ScreenType.RIVAL_LIST_NOT_AVAILABLE, "PromotionBattle_RivalList_Main.png"))
 
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT, "Battle_Result.png"))
