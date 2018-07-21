@@ -97,6 +97,7 @@ class GameManager:
                             self.battleListScrollStep = self.battleListScrollStep + 1
                         else:
                             self.battleListScrollDirection == ScrollDirection.DOWN
+                            self.battleListScrollStep = 0
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
                                 print("[GameManager] There isn't any potential match, refresh list")
@@ -105,12 +106,13 @@ class GameManager:
                                 print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
                                 self.gameState = GameState.MYSTERIOUS_SANCTUARY
                     else:
-                        if self.battleListScrollStep > 0:
+                        if self.battleListScrollStep < 2:
                             print("[GameManager] Can not find any potential match, scroll down")
                             self.device.Swipe(569, 226, 1116, 226)
-                            self.battleListScrollStep = self.battleListScrollStep - 1
+                            self.battleListScrollStep = self.battleListScrollStep + 1
                         else:
-                            self.battleListScrollDirection == ScrollDirection.DOWN
+                            self.battleListScrollDirection == ScrollDirection.UP
+                            self.battleListScrollStep = 0
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
                                 print("[GameManager] There isn't any potential match, refresh list")
