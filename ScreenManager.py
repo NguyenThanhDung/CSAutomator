@@ -10,7 +10,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png"))
         self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
-        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 6000))
+        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         
         gameHome = TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png", 30000000)
         gameHome.AddCriteria("GameHome_EventMailChatButtons.png", 1000000)
