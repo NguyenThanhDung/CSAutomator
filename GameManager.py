@@ -292,7 +292,7 @@ class GameManager:
             print("[GameManager] Idle")
 
 
-    def AutoTouch(self, autoTime = 10):
+    def AutoTouch(self, autoTime = 2):
         maxTime = autoTime * 60
         interval = 5
         currentTime = 0

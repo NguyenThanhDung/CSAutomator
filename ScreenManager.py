@@ -39,7 +39,7 @@ class ScreenManager:
         actionPhase_PlayButtonDisabled.AddCriteria("ActionPhase_x2Button.png", 1000000)
         self.templates.append(actionPhase_PlayButtonDisabled)
 
-        promotionBattle_RewardInfo = TemplateImage(ScreenType.REWARD_INFO, "RewardInfo_Title.png", 10000)
+        promotionBattle_RewardInfo = TemplateImage(ScreenType.REWARD_INFO, "RewardInfo_Title.png", 20000)
         promotionBattle_RewardInfo.AddCriteria("RewardInfo_OkButton.png")
         self.templates.append(promotionBattle_RewardInfo)
         
