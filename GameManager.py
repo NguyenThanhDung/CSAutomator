@@ -12,6 +12,11 @@ class ScrollDirection(Enum):
     UP = 0
     DOWN = 1
 
+class ShoesSource(Enum):
+    DAILY_MISSION_REWARD = 0
+    MAIL_BOX = 1
+    SHOP = 2
+
 class GameManager:
 
     def __init__(self, device):
@@ -20,6 +25,7 @@ class GameManager:
         self.gameState = GameState.NONE
         self.battleListScrollDirection = ScrollDirection.UP
         self.battleListScrollStep = 0
+        self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -216,7 +222,15 @@ class GameManager:
 
     def FindShoes(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
-            print("[GameManager] Open daily mission reward, mail box, or shop")
+            if self.shoesSource == ShoesSource.DAILY_MISSION_REWARD:
+                print("[GameManager] Open daily mission reward")
+                self.device.Touch(1184, 634)
+                time.sleep(1)
+                self.device.Touch(756, 82)
+            elif self.shoesSource == ShoesSource.MAIL_BOX:
+                print("[GameManager] Open mail box")
+            elif self.shoesSource == ShoesSource.SHOP:
+                print("[GameManager] Open shop")
         elif self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
