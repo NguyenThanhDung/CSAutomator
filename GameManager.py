@@ -89,7 +89,7 @@ class GameManager:
                 potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
                 if potentialMatch is not None:
                     print("[GameManager] There is a potential match, go for battle")
-                    self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
+                    self.device.Touch(potentialMatch[0] + 40, potentialMatch[1] + 70)
                 else:
                     if self.battleListScrollDirection == ScrollDirection.UP:
                         if self.battleListScrollStep < 2:
