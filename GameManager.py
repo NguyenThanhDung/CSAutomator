@@ -1,10 +1,15 @@
 import time
+from enum import Enum
 from Screen import ScreenType
 
-class GameState:
+class GameState(Enum):
     NONE = 0
     PROMOTION_BATTLE = 1
     MYSTERIOUS_SANCTUARY = 2
+
+class ScrollDirection(Enum):
+    UP = 0
+    DOWN = 0
 
 class GameManager:
 
@@ -12,6 +17,8 @@ class GameManager:
         self.device = device
         self.screen = None
         self.gameState = GameState.NONE
+        self.battleListScrollDirection = ScrollDirection.DOWN
+        self.battleListScrollStep = 0
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -84,20 +91,27 @@ class GameManager:
                     print("[GameManager] There is a potential match, go for battle")
                     self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
                 else:
-                    print("[GameManager] Can not find any potential match, schroll down")
-                    self.device.Swipe(1116, 226, 569, 226)
-                    potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
-                    if potentialMatch is not None:
-                        print("[GameManager] There is a potential match, go for battle")
-                        self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
-                    else:
-                        print("[GameManager] Can not find any potential match, schroll up")
-                        self.device.Swipe(569, 226, 1116, 226)
-                        potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
-                        if potentialMatch is not None:
-                            print("[GameManager] There is a potential match, go for battle")
-                            self.device.Touch(potentialMatch[0] + 45, potentialMatch[1] - 235)
+                    if self.battleListScrollDirection == ScrollDirection.UP:
+                        if self.battleListScrollStep < 2:
+                            print("[GameManager] Can not find any potential match, scroll up")
+                            self.device.Swipe(1116, 226, 569, 226)
+                            self.battleListScrollStep = self.battleListScrollStep + 1
                         else:
+                            self.battleListScrollDirection == ScrollDirection.UP
+                            refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
+                            if refreshAvailable is not None:
+                                print("[GameManager] There isn't any potential match, refresh list")
+                                self.device.Touch(514, 108)
+                            else:
+                                print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
+                                self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                    else:
+                        if self.battleListScrollStep > 0:
+                            print("[GameManager] Can not find any potential match, scroll down")
+                            self.device.Swipe(569, 226, 1116, 226)
+                            self.battleListScrollStep = self.battleListScrollStep - 1
+                        else:
+                            self.battleListScrollDirection == ScrollDirection.DOWN
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
                                 print("[GameManager] There isn't any potential match, refresh list")
