@@ -7,6 +7,7 @@ def Run():
     device = Device("127.0.0.1:62001")
     device.Connect()
     screenManager = ScreenManager()
+    gameManager = GameManager(device)
 
     while True:
         screenshot = device.CaptureScreen()
@@ -18,7 +19,6 @@ def Run():
         screen = screenManager.GetScreen(screenshot)
         screen.ShowName()
 
-        gameManager = GameManager(device)
         gameManager.SetScreen(screen)
         gameManager.Play()
 

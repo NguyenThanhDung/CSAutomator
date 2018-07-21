@@ -9,7 +9,7 @@ class GameState(Enum):
 
 class ScrollDirection(Enum):
     UP = 0
-    DOWN = 0
+    DOWN = 1
 
 class GameManager:
 
@@ -17,7 +17,7 @@ class GameManager:
         self.device = device
         self.screen = None
         self.gameState = GameState.NONE
-        self.battleListScrollDirection = ScrollDirection.DOWN
+        self.battleListScrollDirection = ScrollDirection.UP
         self.battleListScrollStep = 0
 
     def SetScreen(self, screen):
@@ -97,7 +97,7 @@ class GameManager:
                             self.device.Swipe(1116, 226, 569, 226)
                             self.battleListScrollStep = self.battleListScrollStep + 1
                         else:
-                            self.battleListScrollDirection == ScrollDirection.UP
+                            self.battleListScrollDirection == ScrollDirection.DOWN
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
                                 print("[GameManager] There isn't any potential match, refresh list")
