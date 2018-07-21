@@ -57,6 +57,10 @@ class ScreenManager:
         promotionBattle_RivalList_Available.AddCriteria("PromotionBattle_RivalList_Available.png")
         self.templates.append(promotionBattle_RivalList_Available)
 
+        promotionBattle_RivalList_NotAvailable = TemplateImage(ScreenType.RIVAL_LIST_NOT_AVAILABLE, "PromotionBattle_RivalList_Main.png")
+        promotionBattle_RivalList_NotAvailable.AddCriteria("PromotionBattle_RivalList_NotAvailable.png")
+        self.templates.append(promotionBattle_RivalList_NotAvailable)
+
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT, "Battle_Result.png"))
 
