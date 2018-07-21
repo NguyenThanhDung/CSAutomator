@@ -60,6 +60,8 @@ class ScreenManager:
         promotionBattle_RewardInfo.AddCriteria("PromotionBattle_RewardInfo_CupIcon.png")
         self.templates.append(promotionBattle_RewardInfo)
 
+        self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
+
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
         image = None

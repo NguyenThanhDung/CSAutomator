@@ -23,8 +23,8 @@ class GameManager:
         self.device = device
         self.screen = None
         self.gameState = GameState.NONE
-        self.battleListScrollDirection = ScrollDirection.UP
-        self.battleListScrollStep = 0
+        self.scrollDirection = ScrollDirection.UP
+        self.scrollStep = 0
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
 
     def SetScreen(self, screen):
@@ -48,6 +48,20 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
             print("[GameManager] Enable auto play")
             self.device.Touch(58, 107)
+        elif self.screen.screenType == ScreenType.DAILY_MISSION:
+            collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
+            if collectButton is not None:
+                print("[GameManager] Collect reward")
+                self.device.Touch(collectButton[0] + 34, collectButton[1] + 66)
+            else:
+                if self.scrollStep < 2:
+                    print("[GameManager] Can not find any reward, scroll up")
+                    self.device.Swipe(1158, 273, 265, 273)
+                    self.scrollStep = self.scrollStep + 1
+                else:
+                    print("[GameManager] Collected all rewards, go to Mysterious Sanctuary")
+                    self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                    self.shoesSource == ShoesSource.MAIL_BOX
         else:
             if self.gameState == GameState.NONE:
                 self.gameState = GameState.PROMOTION_BATTLE
@@ -99,14 +113,14 @@ class GameManager:
                     print("[GameManager] There is a potential match, go for battle")
                     self.device.Touch(potentialMatch[0] + 40, potentialMatch[1] + 70)
                 else:
-                    if self.battleListScrollDirection == ScrollDirection.UP:
-                        if self.battleListScrollStep < 2:
+                    if self.scrollDirection == ScrollDirection.UP:
+                        if self.scrollStep < 2:
                             print("[GameManager] Can not find any potential match, scroll up")
                             self.device.Swipe(1116, 226, 569, 226)
-                            self.battleListScrollStep = self.battleListScrollStep + 1
+                            self.scrollStep = self.scrollStep + 1
                         else:
-                            self.battleListScrollDirection = ScrollDirection.DOWN
-                            self.battleListScrollStep = 0
+                            self.scrollDirection = ScrollDirection.DOWN
+                            self.scrollStep = 0
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
                                 print("[GameManager] There isn't any potential match, refresh list")
@@ -115,13 +129,13 @@ class GameManager:
                                 print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
                                 self.gameState = GameState.MYSTERIOUS_SANCTUARY
                     else:
-                        if self.battleListScrollStep < 2:
+                        if self.scrollStep < 2:
                             print("[GameManager] Can not find any potential match, scroll down")
                             self.device.Swipe(569, 226, 1116, 226)
-                            self.battleListScrollStep = self.battleListScrollStep + 1
+                            self.scrollStep = self.scrollStep + 1
                         else:
-                            self.battleListScrollDirection = ScrollDirection.UP
-                            self.battleListScrollStep = 0
+                            self.scrollDirection = ScrollDirection.UP
+                            self.scrollStep = 0
                             refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
                             if refreshAvailable is not None:
                                 print("[GameManager] There isn't any potential match, refresh list")
@@ -227,6 +241,7 @@ class GameManager:
                 self.device.Touch(1184, 634)
                 time.sleep(1)
                 self.device.Touch(756, 82)
+                self.scrollStep = 0
             elif self.shoesSource == ShoesSource.MAIL_BOX:
                 print("[GameManager] Open mail box")
             elif self.shoesSource == ShoesSource.SHOP:

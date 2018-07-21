@@ -25,6 +25,8 @@ class ScreenType(Enum):
     RIVAL_MATCH_END = 25
     BATTLE_RESULT = 26
     BATTLE_REWARD_INFO = 27
+
+    DAILY_MISSION = 30
     
     UNKNOWN = 99
 
