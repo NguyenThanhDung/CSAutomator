@@ -49,7 +49,7 @@ class GameManager:
                 self.gameState = GameState.MYSTERIOUS_SANCTUARY
                 self.PlayMysteriousSanctuary()
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
-            print("[GameManager] Enable auto play...")
+            print("[GameManager] Enable auto play")
             self.device.Touch(58, 107)
         else:
             if self.gameState == GameState.NONE:
@@ -61,24 +61,26 @@ class GameManager:
     
     def PlayPromotionBattle(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
-            print("[GameManager] Open map...")
+            print("[GameManager] Open map")
             self.device.Touch(1174, 360)
         elif self.screen.screenType == ScreenType.MAP:
-            print("[GameManager] Open Promotion Battle...")
+            print("[GameManager] Open Promotion Battle")
             self.device.Touch(1077, 547)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
-            print("[GameManager] Go home...")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            print("[GameManager] Go home...")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
-            print("[GameManager] Auto place and start...")
+            print("[GameManager] Auto place and start")
             self.device.Touch(767, 627)
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            print("[GameManager] Go home...")
+            print("[GameManager] Go home")
             self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            print("[GameManager] Go home...")
+            print("[GameManager] Go home")
             self.device.Touch(790, 474)
             self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
@@ -182,7 +184,8 @@ class GameManager:
             print("[GameManager] Not enough shoes. Go to battle...")
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
-            self.device.Touch(1199, 664)
+            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
+                self.device.Touch(46, 51)
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
