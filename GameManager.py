@@ -124,7 +124,7 @@ class GameManager:
                 else:
                     if self.scrollStep < 2:
                         print("[GameManager] Can not find any potential match, scroll up")
-                        self.device.Swipe(1116, 226, 569, 226)
+                        self.device.Swipe(1016, 226, 614, 226)
                         self.scrollStep = self.scrollStep + 1
                     else:
                         self.scrollStep = 0
