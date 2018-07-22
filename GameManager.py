@@ -32,13 +32,17 @@ class GameManager:
 
     def Play(self):
         if self.screen.screenType == ScreenType.DEVICE_HOME:
-            print("[GameManager] Start game")
-            self.device.Touch(self.screen.matchLocation[0] + 5, self.screen.matchLocation[1] + 5)
-            time.sleep(5)
-            self.device.LoadDeviceInfo()
+            iconLocation = self.screen.Find("DeviceHome.png")
+            if iconLocation is not None:
+                print("[GameManager] Start game")
+                self.device.Touch(iconLocation[0] + 5, iconLocation[1] + 5)
+                time.sleep(5)
+                self.device.LoadDeviceInfo()
+            else:
+                print("[GameManager] Can not find the game icon!")
         elif self.screen.screenType == ScreenType.TAP_TO_START:
             print("[GameManager] Tap to start...")
-            self.device.Touch(self.screen.matchLocation[0], self.screen.matchLocation[1])
+            self.device.Touch(640, 360)
         elif self.screen.screenType == ScreenType.EVENT_INFO:
             print("[GameManager] Close event information dialog...")
             self.device.Touch(1215, 630)

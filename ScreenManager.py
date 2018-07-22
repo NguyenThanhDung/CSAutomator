@@ -7,8 +7,8 @@ class ScreenManager:
 
     def __init__(self):
         self.templates = []
-        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png"))
-        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png"))
+        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
+        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
         self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         
