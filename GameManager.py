@@ -295,9 +295,15 @@ class GameManager:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
-            print("[GameManager] Collect reward")
-            self.device.Touch(299, 57)
-            self.gameState = GameState.PROMOTION_BATTLE
+            collectButton = self.screen.Find("MailBox_CollectButton.png")
+            if collectButton is not None:
+                print("[GameManager] Collect reward")
+                self.device.Touch(299, 57)
+                self.gameState = GameState.PROMOTION_BATTLE
+            else:
+                print("[GameManager] Mail box is empty. Close mail box, go to shop...")
+                self.shoesSource = ShoesSource.SHOP
+                self.device.Touch(51, 40)
         else:
             print("[GameManager] Idle")
 
