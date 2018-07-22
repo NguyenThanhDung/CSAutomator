@@ -67,7 +67,7 @@ class GameManager:
                     self.scrollStep = self.scrollStep + 1
                 else:
                     print("[GameManager] Collected all rewards, go to Mysterious Sanctuary")
-                    self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                    self.gameState = GameState.PROMOTION_BATTLE
                     self.shoesSource == ShoesSource.MAIL_BOX
                     self.device.Touch(40, 48)
         else:
