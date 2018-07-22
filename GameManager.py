@@ -63,21 +63,6 @@ class GameManager:
             self.gameState = GameState.MYSTERIOUS_SANCTUARY
             self.device.Touch(788, 471)
             self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.DAILY_MISSION:
-            collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
-            if collectButton is not None:
-                print("[GameManager] Collect reward")
-                self.device.Touch(collectButton[0] + 34, collectButton[1] + 66)
-            else:
-                if self.scrollStep < 2:
-                    print("[GameManager] Can not find any reward, scroll up")
-                    self.device.Swipe(1158, 273, 265, 273)
-                    self.scrollStep = self.scrollStep + 1
-                else:
-                    print("[GameManager] Collected all rewards, go to battle...")
-                    self.gameState = GameState.PROMOTION_BATTLE
-                    self.shoesSource = ShoesSource.MAIL_BOX
-                    self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.MAIL_BOX_COLLECT:
             print("[GameManager] OK")
             self.device.Touch(799, 357)
@@ -129,11 +114,14 @@ class GameManager:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+        elif self.screen.screenType == ScreenType.DAILY_MISSION:
             mission = self.screen.Find("DailyMission_PowerUpGuardian.png")
             if mission is not None:
                 self.dailMissionState = DailyMission.POWER_UP_GUARDIAN
                 self.device.Touch(mission[0] + 64, mission[1] + 240)
+        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+            print("[GameManager] Close mail box")
+            self.device.Touch(51, 40)
         else:
             print("[GameManager] Idle")
     
@@ -223,6 +211,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.DAILY_MISSION:
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
             print("[GameManager] Close mail box")
             self.device.Touch(51, 40)
@@ -282,6 +273,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.DAILY_MISSION:
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
             print("[GameManager] Close mail box")
             self.device.Touch(51, 40)
@@ -348,6 +342,21 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.DAILY_MISSION:
+            collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
+            if collectButton is not None:
+                print("[GameManager] Collect reward")
+                self.device.Touch(collectButton[0] + 34, collectButton[1] + 66)
+            else:
+                if self.scrollStep < 2:
+                    print("[GameManager] Can not find any reward, scroll up")
+                    self.device.Swipe(1158, 273, 265, 273)
+                    self.scrollStep = self.scrollStep + 1
+                else:
+                    print("[GameManager] Collected all rewards, go to battle...")
+                    self.gameState = GameState.PROMOTION_BATTLE
+                    self.shoesSource = ShoesSource.MAIL_BOX
+                    self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
             collectButton = self.screen.Find("MailBox_CollectButton.png")
             if collectButton is not None:
