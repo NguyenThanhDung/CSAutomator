@@ -8,10 +8,6 @@ class GameState(Enum):
     MYSTERIOUS_SANCTUARY = 2
     OUT_OF_SHOES = 3
 
-class ScrollDirection(Enum):
-    UP = 0
-    DOWN = 1
-
 class ShoesSource(Enum):
     DAILY_MISSION_REWARD = 0
     MAIL_BOX = 1
@@ -23,7 +19,6 @@ class GameManager:
         self.device = device
         self.screen = None
         self.gameState = GameState.NONE
-        self.scrollDirection = ScrollDirection.UP
         self.scrollStep = 0
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
 
@@ -124,38 +119,24 @@ class GameManager:
                 potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
                 if potentialMatch is not None:
                     print("[GameManager] There is a potential match, go for battle")
+                    self.scrollStep = 0
                     self.device.Touch(potentialMatch[0] + 40, potentialMatch[1] + 70)
                 else:
-                    if self.scrollDirection == ScrollDirection.UP:
-                        if self.scrollStep < 2:
-                            print("[GameManager] Can not find any potential match, scroll up")
-                            self.device.Swipe(1116, 226, 569, 226)
-                            self.scrollStep = self.scrollStep + 1
-                        else:
-                            self.scrollDirection = ScrollDirection.DOWN
-                            self.scrollStep = 0
-                            refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
-                            if refreshAvailable is not None:
-                                print("[GameManager] There isn't any potential match, refresh list")
-                                self.device.Touch(514, 108)
-                            else:
-                                print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
-                                self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                    if self.scrollStep < 2:
+                        print("[GameManager] Can not find any potential match, scroll up")
+                        self.device.Swipe(1116, 226, 569, 226)
+                        self.scrollStep = self.scrollStep + 1
                     else:
-                        if self.scrollStep < 2:
-                            print("[GameManager] Can not find any potential match, scroll down")
+                        self.scrollStep = 0
+                        refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
+                        if refreshAvailable is not None:
+                            print("[GameManager] There isn't any potential match, refresh list")
                             self.device.Swipe(569, 226, 1116, 226)
-                            self.scrollStep = self.scrollStep + 1
+                            self.device.Swipe(569, 226, 1116, 226)
+                            self.device.Touch(514, 108)
                         else:
-                            self.scrollDirection = ScrollDirection.UP
-                            self.scrollStep = 0
-                            refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
-                            if refreshAvailable is not None:
-                                print("[GameManager] There isn't any potential match, refresh list")
-                                self.device.Touch(514, 108)
-                            else:
-                                print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
-                                self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                            print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
+                            self.gameState = GameState.MYSTERIOUS_SANCTUARY
         elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
             print("[GameManager] Confirm refresh")
             self.device.Touch(784, 243)
