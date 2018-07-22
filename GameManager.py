@@ -65,6 +65,7 @@ class GameManager:
                     print("[GameManager] Collected all rewards, go to Mysterious Sanctuary")
                     self.gameState = GameState.MYSTERIOUS_SANCTUARY
                     self.shoesSource == ShoesSource.MAIL_BOX
+                    self.device.Touch(40, 48)
         else:
             if self.gameState == GameState.NONE:
                 self.gameState = GameState.PROMOTION_BATTLE
