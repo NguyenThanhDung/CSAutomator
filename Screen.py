@@ -28,6 +28,7 @@ class ScreenType(Enum):
     NOT_ENOUGH_TICKETS = 27
 
     DAILY_MISSION = 30
+    MAIL_BOX_INBOX_TAB = 31
     
     UNKNOWN = 99
 

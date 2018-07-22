@@ -62,6 +62,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_TICKETS, "PromotionBattle_NotEnoughTickets.png", 500000))
 
         self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
+        self.templates.append(TemplateImage(ScreenType.MAIL_BOX_INBOX_TAB, "MailBox_InboxTab.png"))
 
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN

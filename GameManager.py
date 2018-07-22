@@ -70,6 +70,10 @@ class GameManager:
                     self.gameState = GameState.PROMOTION_BATTLE
                     self.shoesSource = ShoesSource.MAIL_BOX
                     self.device.Touch(40, 48)
+        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+            print("[GameManager] Collect reward")
+            self.device.Touch(299, 57)
+            self.gameState = GameState.PROMOTION_BATTLE
         else:
             if self.gameState == GameState.NONE:
                 self.gameState = GameState.PROMOTION_BATTLE
