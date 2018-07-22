@@ -4,14 +4,20 @@ from Screen import ScreenType
 
 class GameState(Enum):
     NONE = 0
-    PROMOTION_BATTLE = 1
-    MYSTERIOUS_SANCTUARY = 2
-    OUT_OF_SHOES = 3
+    DAILY_MISSION = 1
+    PROMOTION_BATTLE = 2
+    MYSTERIOUS_SANCTUARY = 3
+    OUT_OF_SHOES = 4
 
 class ShoesSource(Enum):
     DAILY_MISSION_REWARD = 0
     MAIL_BOX = 1
     SHOP = 2
+
+class DailyMission(Enum):
+    POWER_UP_GUARDIAN = 0
+    SUMMON_GUARDIAN = 1
+    POWER_UP_EQUIPMENT = 2
 
 class GameManager:
 
@@ -75,13 +81,53 @@ class GameManager:
             self.device.Touch(799, 357)
         else:
             if self.gameState == GameState.NONE:
-                self.gameState = GameState.PROMOTION_BATTLE
+                self.gameState = GameState.DAILY_MISSION
+            if self.gameState == GameState.DAILY_MISSION:
+                self.PlayDailyMission()
             if self.gameState == GameState.PROMOTION_BATTLE:
                 self.PlayPromotionBattle()
             elif self.gameState == GameState.MYSTERIOUS_SANCTUARY:
                 self.PlayMysteriousSanctuary()
             elif self.gameState == GameState.OUT_OF_SHOES:
                 self.FindShoes()
+
+    def PlayDailyMission(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            print("[GameManager] Open daily mission reward")
+            self.device.Touch(1184, 634)
+            time.sleep(1)
+            self.device.Touch(756, 82)
+            self.scrollStep = 0
+        elif self.screen.screenType == ScreenType.MAP:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_LIST:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.RIVAL_LIST:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+            print("[GameManager] Idle")
+        else:
+            print("[GameManager] Idle")
     
     def PlayPromotionBattle(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
