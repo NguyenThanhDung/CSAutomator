@@ -15,9 +15,10 @@ class ShoesSource(Enum):
     SHOP = 2
 
 class DailyMission(Enum):
-    POWER_UP_GUARDIAN = 0
-    SUMMON_GUARDIAN = 1
-    POWER_UP_EQUIPMENT = 2
+    NONE = 0
+    POWER_UP_GUARDIAN = 1
+    SUMMON_GUARDIAN = 2
+    POWER_UP_EQUIPMENT = 3
 
 class GameManager:
 
@@ -27,6 +28,7 @@ class GameManager:
         self.gameState = GameState.NONE
         self.scrollStep = 0
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
+        self.dailMissionState = DailyMission.NONE
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -93,11 +95,14 @@ class GameManager:
 
     def PlayDailyMission(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
-            print("[GameManager] Open daily mission reward")
-            self.device.Touch(1184, 634)
-            time.sleep(1)
-            self.device.Touch(756, 82)
-            self.scrollStep = 0
+            if self.dailMissionState == DailyMission.NONE:
+                print("[GameManager] Open daily mission reward")
+                self.device.Touch(1184, 634)
+                time.sleep(1)
+                self.device.Touch(756, 82)
+                self.scrollStep = 0
+            else:
+                print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
@@ -125,7 +130,10 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
-            print("[GameManager] Idle")
+            mission = self.screen.Find("DailyMission_PowerUpGuardian.png")
+            if mission is not None:
+                self.dailMissionState = DailyMission.POWER_UP_GUARDIAN
+                self.device.Touch(mission[0] + 64, mission[1] + 240)
         else:
             print("[GameManager] Idle")
     
@@ -353,6 +361,39 @@ class GameManager:
         else:
             print("[GameManager] Idle")
 
+    def PowerUpGuardian(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.MAP:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_LIST:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.RIVAL_LIST:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
+            print("[GameManager] Idle")
+        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+            print("[GameManager] Idle")
+        else:
+            print("[GameManager] Idle")
 
     def AutoTouch(self, autoTime = 2):
         maxTime = autoTime * 60
