@@ -32,7 +32,7 @@ class GameManager:
 
     def Play(self):
         if self.screen.screenType == ScreenType.DEVICE_HOME:
-            iconLocation = self.screen.Find("DeviceHome.png")
+            iconLocation = self.screen.Find("DeviceHome.png", 30000)
             if iconLocation is not None:
                 print("[GameManager] Start game")
                 self.device.Touch(iconLocation[0] + 5, iconLocation[1] + 5)
