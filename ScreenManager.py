@@ -59,7 +59,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.RIVAL_LIST, "PromotionBattle_RivalList.png"))
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT, "Battle_Result.png"))
-        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_TICKETS, "PromotionBattle_NotEnoughTickets.png", 10000))
+        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_TICKETS, "PromotionBattle_NotEnoughTickets.png", 500000))
 
         self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
 
