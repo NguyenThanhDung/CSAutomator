@@ -70,10 +70,9 @@ class GameManager:
                     self.gameState = GameState.PROMOTION_BATTLE
                     self.shoesSource = ShoesSource.MAIL_BOX
                     self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
-            print("[GameManager] Collect reward")
-            self.device.Touch(299, 57)
-            self.gameState = GameState.PROMOTION_BATTLE
+        elif self.screen.screenType == ScreenType.MAIL_BOX_COLLECT:
+            print("[GameManager] OK")
+            self.device.Touch(799, 357)
         else:
             if self.gameState == GameState.NONE:
                 self.gameState = GameState.PROMOTION_BATTLE
@@ -167,6 +166,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+            print("[GameManager] Close mail box")
+            self.device.Touch(51, 40)
         else:
             print("[GameManager] Idle")
     
@@ -223,6 +225,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+            print("[GameManager] Close mail box")
+            self.device.Touch(51, 40)
         else:
             print("[GameManager] Idle")
 
@@ -284,6 +289,10 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Press Exit...")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+            print("[GameManager] Collect reward")
+            self.device.Touch(299, 57)
+            self.gameState = GameState.PROMOTION_BATTLE
         else:
             print("[GameManager] Idle")
 

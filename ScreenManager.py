@@ -64,6 +64,10 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
         self.templates.append(TemplateImage(ScreenType.MAIL_BOX_INBOX_TAB, "MailBox_InboxTab.png"))
 
+        mailBox_Collect = TemplateImage(ScreenType.MAIL_BOX_COLLECT, "MailBox_CollectPopup_Title.png", 100000)
+        mailBox_Collect.AddCriteria("MailBox_CollectPopup_OkButton.png")
+        self.templates.append(mailBox_Collect)
+
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
         image = None

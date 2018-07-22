@@ -29,6 +29,7 @@ class ScreenType(Enum):
 
     DAILY_MISSION = 30
     MAIL_BOX_INBOX_TAB = 31
+    MAIL_BOX_COLLECT = 32
     
     UNKNOWN = 99
 
