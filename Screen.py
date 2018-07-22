@@ -25,6 +25,7 @@ class ScreenType(Enum):
     RIVAL_LIST = 23
     RIVAL_MATCH_END = 25
     BATTLE_RESULT = 26
+    NOT_ENOUGH_TICKETS = 27
 
     DAILY_MISSION = 30
     

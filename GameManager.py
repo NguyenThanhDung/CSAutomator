@@ -55,6 +55,11 @@ class GameManager:
         elif self.screen.screenType == ScreenType.REWARD_INFO:
             print("[GameManager] Press OK")
             self.device.Touch(797, 356)
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_TICKETS:
+            print("[GameManager] Go to Mysterious Sanctuary...")
+            self.gameState = GameState.MYSTERIOUS_SANCTUARY
+            self.device.Touch(788, 471)
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
             if collectButton is not None:
