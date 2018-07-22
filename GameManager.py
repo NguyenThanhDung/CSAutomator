@@ -42,7 +42,7 @@ class GameManager:
             print("[GameManager] Close event information dialog...")
             self.device.Touch(1215, 630)
         elif self.screen.screenType == ScreenType.DAILY_LOGIN_REWARD:
-            print("[GameManager] Close dayly log-gin reward...")
+            print("[GameManager] Close dayly log-gin reward")
             self.device.Touch(974, 357)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
             print("[GameManager] Enable auto play")
@@ -66,9 +66,9 @@ class GameManager:
                     self.device.Swipe(1158, 273, 265, 273)
                     self.scrollStep = self.scrollStep + 1
                 else:
-                    print("[GameManager] Collected all rewards, go to Mysterious Sanctuary")
+                    print("[GameManager] Collected all rewards, go to battle...")
                     self.gameState = GameState.PROMOTION_BATTLE
-                    self.shoesSource == ShoesSource.MAIL_BOX
+                    self.shoesSource = ShoesSource.MAIL_BOX
                     self.device.Touch(40, 48)
         else:
             if self.gameState == GameState.NONE:
@@ -232,6 +232,7 @@ class GameManager:
                 self.scrollStep = 0
             elif self.shoesSource == ShoesSource.MAIL_BOX:
                 print("[GameManager] Open mail box")
+                self.device.Touch(137, 52)
             elif self.shoesSource == ShoesSource.SHOP:
                 print("[GameManager] Open shop")
         elif self.screen.screenType == ScreenType.MAP:
