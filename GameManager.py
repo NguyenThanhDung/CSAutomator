@@ -70,6 +70,9 @@ class GameManager:
             self.gameState = GameState.MYSTERIOUS_SANCTUARY
             self.device.Touch(788, 471)
             self.device.Touch(40, 48)
+        elif self.screen.screenType == ScreenType.BATTLE_NEW_SEASON:
+            print("[GameManager] OK")
+            self.device.Touch(784, 358)
         elif self.screen.screenType == ScreenType.MAIL_BOX_COLLECT:
             print("[GameManager] OK")
             self.device.Touch(799, 357)
