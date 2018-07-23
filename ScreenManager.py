@@ -7,10 +7,6 @@ class ScreenManager:
 
     def __init__(self):
         self.templates = []
-        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
-        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
-        self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
-        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         
         gameHome = TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png", 30000000)
         gameHome.AddCriteria("GameHome_EventMailChatButtons.png", 1000000)
@@ -72,6 +68,11 @@ class ScreenManager:
         mailBox_Collect = TemplateImage(ScreenType.MAIL_BOX_COLLECT, "MailBox_CollectPopup_Title.png", 100000)
         mailBox_Collect.AddCriteria("MailBox_CollectPopup_OkButton.png")
         self.templates.append(mailBox_Collect)
+
+        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
+        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
+        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
 
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
