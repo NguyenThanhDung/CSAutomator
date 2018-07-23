@@ -62,6 +62,10 @@ class ScreenManager:
         battleRefreshReset.AddCriteria("PromotionBattle_RefreshReset_OkButton.png")
         self.templates.append(battleRefreshReset)
 
+        dailyMissionPopup = TemplateImage(ScreenType.DAILY_MISSION_POPUP, "DailyMission_Popup_Go.png")
+        dailyMissionPopup.AddCriteria("DailyMission_Popup_Close.png")
+        self.templates.append(dailyMissionPopup)
+
         self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
         self.templates.append(TemplateImage(ScreenType.MAIL_BOX_INBOX_TAB, "MailBox_InboxTab.png"))
 
