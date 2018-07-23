@@ -74,6 +74,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
         self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.BATTLE_RANKING, "Battle_Ranking.png"))
 
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
