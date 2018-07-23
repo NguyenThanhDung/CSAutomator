@@ -55,6 +55,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
             print("[GameManager] Enable auto play")
             self.device.Touch(58, 107)
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            print("[GameManager] Go home")
+            self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.REWARD_INFO:
             print("[GameManager] Press OK")
             self.device.Touch(797, 356)
@@ -108,14 +111,15 @@ class GameManager:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Idle")
@@ -158,9 +162,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Idle in 20 seconds...")
             time.sleep(20)
-        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            print("[GameManager] Go home")
-            self.device.Touch(1199, 664)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
@@ -262,10 +263,7 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Idle in 2 minutes...")
             time.sleep(120)
-        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            print("[GameManager] Go to battle")
-            self.gameState = GameState.PROMOTION_BATTLE
-            self.device.Touch(1199, 664)
+            #self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
@@ -326,9 +324,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Idle in 20 seconds...")
             time.sleep(20)
-        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            print("[GameManager] Go home")
-            self.device.Touch(1197, 663)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
@@ -387,15 +382,14 @@ class GameManager:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
