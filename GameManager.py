@@ -58,6 +58,10 @@ class GameManager:
         elif self.screen.screenType == ScreenType.REWARD_INFO:
             print("[GameManager] Press OK")
             self.device.Touch(797, 356)
+        elif self.screen.screenType == ScreenType.BATTLE_RESULT_WIN \
+            or self.screen.screenType == ScreenType.BATTLE_RESULT_LOSE:
+            print("[GameManager] Press Exit")
+            self.device.Touch(1196, 115)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_TICKETS:
             print("[GameManager] Go to Mysterious Sanctuary...")
             self.gameState = GameState.MYSTERIOUS_SANCTUARY
@@ -111,8 +115,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             mission = self.screen.Find("DailyMission_PowerUpGuardian.png")
@@ -208,9 +210,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
             print("[GameManager] Press Skip")
             self.device.Touch(1223, 58)
-        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
-            print("[GameManager] Press Exit")
-            self.device.Touch(1196, 115)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             print("[GameManager] Go home")
             self.device.Touch(40, 48)
@@ -270,9 +269,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
             print("[GameManager] Press Skip")
             self.device.Touch(1223, 58)
-        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
-            print("[GameManager] Press Exit")
-            self.device.Touch(1196, 115)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             print("[GameManager] Go home")
             self.device.Touch(40, 48)
@@ -339,9 +335,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
             print("[GameManager] Press Skip...")
             self.device.Touch(1223, 58)
-        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
-            print("[GameManager] Press Exit...")
-            self.device.Touch(1196, 115)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
             if collectButton is not None:
@@ -396,8 +389,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_RESULT:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
             print("[GameManager] Idle")
