@@ -105,7 +105,8 @@ class GameManager:
             else:
                 print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.MAP:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(1190, 360)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
@@ -383,7 +384,8 @@ class GameManager:
         if self.screen.screenType == ScreenType.GAME_HOME:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.MAP:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(1190, 360)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
