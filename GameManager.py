@@ -90,7 +90,7 @@ class GameManager:
             self.device.Touch(799, 357)
         else:
             if self.gameState == GameState.NONE:
-                self.gameState = GameState.DAILY_MISSION
+                self.gameState = GameState.PROMOTION_BATTLE
             if self.gameState == GameState.DAILY_MISSION:
                 self.PlayDailyMission()
             if self.gameState == GameState.PROMOTION_BATTLE:
@@ -270,8 +270,8 @@ class GameManager:
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Idle in 2 minutes...")
-            time.sleep(120)
-            #self.AutoTouch(10)
+            #time.sleep(120)
+            self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
