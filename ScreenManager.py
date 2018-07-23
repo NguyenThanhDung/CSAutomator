@@ -61,6 +61,10 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT_WIN, "Battle_Result_Win.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT_LOSE, "Battle_Result_Lose.png"))
         self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_TICKETS, "PromotionBattle_NotEnoughTickets.png", 500000))
+        
+        battleRefreshReset = TemplateImage(ScreenType.BATTLE_REFRESH_RESET, "PromotionBattle_RefreshReset_Title.png", 100000)
+        battleRefreshReset.AddCriteria("PromotionBattle_RefreshReset_OkButton.png")
+        self.templates.append(battleRefreshReset)
 
         self.templates.append(TemplateImage(ScreenType.DAILY_MISSION, "DailyChallenge.png"))
         self.templates.append(TemplateImage(ScreenType.MAIL_BOX_INBOX_TAB, "MailBox_InboxTab.png"))

@@ -62,6 +62,9 @@ class GameManager:
             or self.screen.screenType == ScreenType.BATTLE_RESULT_LOSE:
             print("[GameManager] Press Exit")
             self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.BATTLE_REFRESH_RESET:
+            print("[GameManager] OK")
+            self.device.Touch(784, 357)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_TICKETS:
             print("[GameManager] Go to Mysterious Sanctuary...")
             self.gameState = GameState.MYSTERIOUS_SANCTUARY
