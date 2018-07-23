@@ -58,6 +58,12 @@ class GameManager:
         elif self.screen.screenType == ScreenType.REWARD_INFO:
             print("[GameManager] Press OK")
             self.device.Touch(797, 356)
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
+            print("[GameManager] Confirm refresh")
+            self.device.Touch(784, 243)
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
+            print("[GameManager] Don't refresh with moonstone")
+            self.device.Touch(784, 474)
         elif self.screen.screenType == ScreenType.BATTLE_RESULT_WIN \
             or self.screen.screenType == ScreenType.BATTLE_RESULT_LOSE:
             print("[GameManager] Press Exit")
@@ -78,7 +84,7 @@ class GameManager:
             self.device.Touch(799, 357)
         else:
             if self.gameState == GameState.NONE:
-                self.gameState = GameState.PROMOTION_BATTLE
+                self.gameState = GameState.DAILY_MISSION
             if self.gameState == GameState.DAILY_MISSION:
                 self.PlayDailyMission()
             if self.gameState == GameState.PROMOTION_BATTLE:
@@ -113,13 +119,11 @@ class GameManager:
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
@@ -193,12 +197,6 @@ class GameManager:
                         else:
                             print("[GameManager] There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
                             self.gameState = GameState.MYSTERIOUS_SANCTUARY
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
-            print("[GameManager] Confirm refresh")
-            self.device.Touch(784, 243)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
-            print("[GameManager] Don't refresh with moonstone")
-            self.device.Touch(784, 474)
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             rivalAvailable = self.screen.Find("PromotionBattle_RivalList_Available.png")
             if rivalAvailable is not None:
@@ -281,12 +279,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
-            print("[GameManager] Confirm refresh")
-            self.device.Touch(784, 243)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
-            print("[GameManager] Don't refresh with moonstone")
-            self.device.Touch(784, 474)
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
@@ -350,12 +342,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
-            print("[GameManager] Confirm refresh")
-            self.device.Touch(784, 243)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
-            print("[GameManager] Don't refresh with moonstone")
-            self.device.Touch(784, 474)
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
@@ -411,11 +397,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
-            print("[GameManager] Idle")
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
