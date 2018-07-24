@@ -371,7 +371,7 @@ class GameManager:
             print("[GameManager] Close pop up")
             self.device.Touch(436, 103)
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
-            collectButton = self.screen.Find("MailBox_CollectButton.png")
+            collectButton = self.screen.Find("MailBox_CollectButton.png", 10000)
             if collectButton is not None:
                 print("[GameManager] Collect reward")
                 self.device.Touch(299, 57)
