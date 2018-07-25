@@ -43,8 +43,8 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png"))
         self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png"))
 
-        pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png")
-        pve_result_victory.AddCriteria("PvEResult_Victory.png")
+        pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png", 100000)
+        pve_result_victory.AddCriteria("PvEResult_Victory.png", 500000)
         self.templates.append(pve_result_victory)
 
         self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES, "NotEnoughShoes.png", 300000))
