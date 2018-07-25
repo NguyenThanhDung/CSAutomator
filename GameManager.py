@@ -47,8 +47,11 @@ class GameManager:
             print("[GameManager] Tap to start...")
             self.device.Touch(640, 360)
         elif self.screen.screenType == ScreenType.EVENT_INFO:
-            print("[GameManager] Close event information dialog...")
+            print("[GameManager] Close event information dialog")
             self.device.Touch(1215, 630)
+        elif self.screen.screenType == ScreenType.WEEKLY_LIMITED:
+            print("[GameManager] Close dialog")
+            self.device.Touch(344, 38)
         elif self.screen.screenType == ScreenType.DAILY_LOGIN_REWARD:
             print("[GameManager] Close dayly log-gin reward")
             self.device.Touch(974, 357)
