@@ -77,6 +77,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
         self.templates.append(TemplateImage(ScreenType.WEEKLY_LIMITED, "WeeklyLimited.png"))
+        self.templates.append(TemplateImage(ScreenType.LIMITED_OFFER, "LimitedOffer.png"))
         self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RANKING, "Battle_Ranking.png"))
