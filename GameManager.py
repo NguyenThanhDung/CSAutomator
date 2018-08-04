@@ -26,7 +26,7 @@ class GameManager:
     def __init__(self, device):
         self.device = device
         self.screen = None
-        self.gameState = GameState.DAILY_MISSION
+        self.gameState = GameState.PROMOTION_BATTLE
         self.scrollStep = 0
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
