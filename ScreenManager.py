@@ -79,7 +79,11 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.WEEKLY_LIMITED, "WeeklyLimited.png"))
         self.templates.append(TemplateImage(ScreenType.LIMITED_OFFER, "LimitedOffer.png"))
         self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
-        self.templates.append(TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000))
+        
+        battleNewSeason = TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000)
+        battleNewSeason.AddCriteria("Dialog_OK_Button.png", 100000)
+        self.templates.append(battleNewSeason)
+        
         self.templates.append(TemplateImage(ScreenType.BATTLE_RANKING, "Battle_Ranking.png"))
 
     def GetScreen(self, screenShot):
