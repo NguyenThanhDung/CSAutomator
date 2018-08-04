@@ -20,6 +20,7 @@ class DailyMission(Enum):
     SUMMON_GUARDIAN = 2
     POWER_UP_EQUIPMENT = 3
     DISASSEMBLY = 4
+    DEAR_FRIEND = 5
 
 class GameManager:
 
@@ -104,55 +105,70 @@ class GameManager:
                 self.FindShoes()
 
     def PlayDailyMission(self):
-        if self.screen.screenType == ScreenType.GAME_HOME:
-            if self.dailMissionState == DailyMission.NONE:
+        if self.dailMissionState == DailyMission.NONE:
+            if self.screen.screenType == ScreenType.GAME_HOME:
                 print("[GameManager] Open daily mission reward")
                 self.device.Touch(1184, 634)
                 time.sleep(1)
                 self.device.Touch(756, 82)
                 self.scrollStep = 0
+            elif self.screen.screenType == ScreenType.MAP:
+                print("[GameManager] Go home")
+                self.device.Touch(1190, 360)
+            elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
+                print("[GameManager] Go home")
+                self.device.Touch(40, 48)
+            elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
+                print("[GameManager] Go home")
+                self.device.Touch(40, 48)
+            elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+                print("[GameManager] Go home")
+                self.device.Touch(40, 48)
+            elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
+                print("[GameManager] Idle")
+            elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+                print("[GameManager] Idle")
+            elif self.screen.screenType == ScreenType.BATTLE_LIST:
+                print("[GameManager] Go home")
+                self.device.Touch(38, 46)
+            elif self.screen.screenType == ScreenType.RIVAL_LIST:
+                print("[GameManager] Go home")
+                self.device.Touch(38, 46)
+            elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
+                print("[GameManager] Go home")
+                self.device.Touch(38, 46)
+            elif self.screen.screenType == ScreenType.DAILY_MISSION:
+                mission = self.screen.Find("DailyMission_Disassembly.png")
+                if mission is not None:
+                    print("[GameManager] Open mission")
+                    self.dailMissionState = DailyMission.DISASSEMBLY
+                    self.device.Touch(mission[0] + 64, mission[1] + 240)
+                    return
+                mission = self.screen.Find("DailyMission_DearFriend.png")
+                if mission is not None:
+                    self.dailMissionState = DailyMission.DEAR_FRIEND
+                    print("[GameManager] Go home")
+                    self.device.Touch(38, 46)
+                    return
+            elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
+                print("[GameManager] Close mail box")
+                self.device.Touch(51, 40)
             else:
                 print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.MAP:
-            print("[GameManager] Go home")
-            self.device.Touch(1190, 360)
-        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
-            print("[GameManager] Go home")
-            self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            print("[GameManager] Go home")
-            self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
-            print("[GameManager] Go home")
-            self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_LIST:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.RIVAL_LIST:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.DAILY_MISSION:
-            mission = self.screen.Find("DailyMission_Disassembly.png")
-            if mission is not None:
-                self.dailMissionState = DailyMission.DISASSEMBLY
-                self.device.Touch(mission[0] + 64, mission[1] + 240)
-        elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
-            if self.dailMissionState == DailyMission.DISASSEMBLY:
+        elif self.dailMissionState == DailyMission.DISASSEMBLY:
+            if self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
                 print("[GameManager] Go to play mission...")
                 self.device.Touch(785, 460)
             else:
-                print("[GameManager] Close pop up")
-                self.device.Touch(436, 103)
-        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
-            print("[GameManager] Close mail box")
-            self.device.Touch(51, 40)
+                print("[GameManager] Idle")
+        elif self.dailMissionState == DailyMission.DEAR_FRIEND:
+            if self.screen.screenType == ScreenType.GAME_HOME:
+                print("[GameManager] Open Community")
+                self.device.Touch(1183, 634)
+                time.sleep(1)
+                self.device.Touch(891, 632)
+            else:
+                print("[GameManager] Idle")
         else:
             print("[GameManager] Idle")
     
