@@ -25,7 +25,7 @@ class GameManager:
     def __init__(self, device):
         self.device = device
         self.screen = None
-        self.gameState = GameState.NONE
+        self.gameState = GameState.DAILY_MISSION
         self.scrollStep = 0
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
@@ -93,8 +93,6 @@ class GameManager:
             print("[GameManager] OK")
             self.device.Touch(799, 357)
         else:
-            if self.gameState == GameState.NONE:
-                self.gameState = GameState.PROMOTION_BATTLE
             if self.gameState == GameState.DAILY_MISSION:
                 self.PlayDailyMission()
             if self.gameState == GameState.PROMOTION_BATTLE:
