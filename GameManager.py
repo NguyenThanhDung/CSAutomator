@@ -19,6 +19,7 @@ class DailyMission(Enum):
     POWER_UP_GUARDIAN = 1
     SUMMON_GUARDIAN = 2
     POWER_UP_EQUIPMENT = 3
+    DISASSEMBLY = 4
 
 class GameManager:
 
@@ -138,12 +139,12 @@ class GameManager:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
-            mission = self.screen.Find("DailyMission_PowerUpGuardian.png")
+            mission = self.screen.Find("DailyMission_Disassembly.png")
             if mission is not None:
-                self.dailMissionState = DailyMission.POWER_UP_GUARDIAN
+                self.dailMissionState = DailyMission.DISASSEMBLY
                 self.device.Touch(mission[0] + 64, mission[1] + 240)
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
-            if self.dailMissionState == DailyMission.POWER_UP_GUARDIAN:
+            if self.dailMissionState == DailyMission.DISASSEMBLY:
                 print("[GameManager] Go to play mission...")
                 self.device.Touch(785, 460)
             else:
