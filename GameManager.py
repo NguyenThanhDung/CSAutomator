@@ -136,6 +136,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
+        elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             mission = self.screen.Find("DailyMission_PowerUpGuardian.png")
             if mission is not None:
@@ -243,6 +246,19 @@ class GameManager:
                 else:
                     print("[GameManager] Go home")
                     self.device.Touch(38, 46)
+        elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
+            rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
+            if rivalAvailable is not None:
+                print("[GameManager] Switch to Rival tab")
+                self.device.Touch(rivalAvailable[0] + 62, rivalAvailable[1] + 66)
+            else:
+                battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
+                if battleAvailable is not None:
+                    print("[GameManager] Switch to Battle tab")
+                    self.device.Touch(battleAvailable[0] + 52, battleAvailable[1] + 44)
+                else:
+                    print("[GameManager] Go home")
+                    self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             print("[GameManager] Go home")
             self.device.Touch(40, 48)
@@ -294,6 +310,9 @@ class GameManager:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.BATTLE_RANKING:
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
+        elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
@@ -356,6 +375,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_RANKING:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
+        elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
             if collectButton is not None:
@@ -411,6 +433,9 @@ class GameManager:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.BATTLE_RANKING:
+            print("[GameManager] Go home")
+            self.device.Touch(38, 46)
+        elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
