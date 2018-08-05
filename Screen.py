@@ -37,6 +37,8 @@ class ScreenType(Enum):
 
     MAIL_BOX_INBOX_TAB = 45
     MAIL_BOX_COLLECT = 46
+
+    SHOP = 50
     
     DIALOG_WEEKLY_LIMITED = 80
     DIALOG_LIMITED_OFFER = 81

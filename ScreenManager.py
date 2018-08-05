@@ -73,6 +73,8 @@ class ScreenManager:
         mailBox_Collect.AddCriteria("MailBox_CollectPopup_OkButton.png")
         self.templates.append(mailBox_Collect)
 
+        self.templates.append(TemplateImage(ScreenType.SHOP, "Shop.png", 30000))
+
         self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
         self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))

@@ -427,6 +427,14 @@ class GameManager:
                 print("[GameManager] Mail box is empty. Close mail box, go to shop...")
                 self.shoesSource = ShoesSource.SHOP
                 self.device.Touch(51, 40)
+        elif self.screen.screenType == ScreenType.SHOP:
+            print("[GameManager] Scroll to right")
+            self.device.Swipe(924, 118, 924, 591)
+            time.sleep(1)
+            shoesButton = self.screen.Find("Shop_Shoes.png")
+            if shoesButton is not None:
+                print("[GameManager] Buy shoes")
+                self.device.Touch(shoesButton[0] + 262, shoesButton[1] + 108)
         else:
             print("[GameManager] Idle")
 
