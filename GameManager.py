@@ -97,12 +97,14 @@ class GameManager:
         else:
             if self.gameState == GameState.DAILY_MISSION:
                 self.PlayDailyMission()
-            if self.gameState == GameState.PROMOTION_BATTLE:
+            elif self.gameState == GameState.PROMOTION_BATTLE:
                 self.PlayPromotionBattle()
             elif self.gameState == GameState.MYSTERIOUS_SANCTUARY:
                 self.PlayMysteriousSanctuary()
             elif self.gameState == GameState.OUT_OF_SHOES:
                 self.FindShoes()
+            else:
+                print("[GameManager] Idle")
 
     def PlayDailyMission(self):
         if self.dailMissionState == DailyMission.NONE:
@@ -355,6 +357,7 @@ class GameManager:
                 self.device.Touch(137, 52)
             elif self.shoesSource == ShoesSource.SHOP:
                 print("[GameManager] Open shop")
+                self.device.Touch(1193, 224)
         elif self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
