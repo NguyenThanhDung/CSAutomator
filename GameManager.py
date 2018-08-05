@@ -431,10 +431,9 @@ class GameManager:
             print("[GameManager] Scroll to right")
             self.device.Swipe(924, 118, 924, 591)
             time.sleep(1)
-            shoesButton = self.screen.Find("Shop_Shoes.png")
-            if shoesButton is not None:
-                print("[GameManager] Buy shoes")
-                self.device.Touch(shoesButton[0] + 262, shoesButton[1] + 108)
+            self.device.Touch(1063, 133)
+            time.sleep(1)
+            self.device.Touch(735, 237)
         else:
             print("[GameManager] Idle")
 
