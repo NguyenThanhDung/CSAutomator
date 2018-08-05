@@ -12,7 +12,8 @@ class GameState(Enum):
 class ShoesSource(Enum):
     DAILY_MISSION_REWARD = 0
     MAIL_BOX = 1
-    SHOP = 2
+    SHOP_WITH_FP = 2
+    SHOP_WITH_MOONSTONE = 3
 
 class DailyMission(Enum):
     NONE = 0
@@ -358,7 +359,7 @@ class GameManager:
             elif self.shoesSource == ShoesSource.MAIL_BOX:
                 print("[GameManager] Open mail box")
                 self.device.Touch(137, 52)
-            elif self.shoesSource == ShoesSource.SHOP:
+            elif self.shoesSource == ShoesSource.SHOP_WITH_FP:
                 print("[GameManager] Open shop")
                 self.device.Touch(1193, 224)
         elif self.screen.screenType == ScreenType.MAP:
@@ -425,7 +426,7 @@ class GameManager:
                 self.gameState = GameState.PROMOTION_BATTLE
             else:
                 print("[GameManager] Mail box is empty. Close mail box, go to shop...")
-                self.shoesSource = ShoesSource.SHOP
+                self.shoesSource = ShoesSource.SHOP_WITH_FP
                 self.device.Touch(51, 40)
         elif self.screen.screenType == ScreenType.SHOP:
             print("[GameManager] Scroll to right")
@@ -434,6 +435,10 @@ class GameManager:
             self.device.Touch(1063, 133)
             time.sleep(1)
             self.device.Touch(735, 237)
+        elif self.screen.screenType == ScreenType.DIALOG_NOT_ENOUGH_FP:
+            self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
+            print("[GameManager] Close dialog. Go to buy shoes by moonstones...")
+            self.device.Touch(785, 357)
         else:
             print("[GameManager] Idle")
 
