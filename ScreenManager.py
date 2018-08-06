@@ -84,6 +84,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.DIALOG_SHOES_RECHARGE_FP, "Dialog_ShoesRecharge.png", 100000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_SHOES_RECHARGE_II, "Dialog_ShoesRechargeII.png", 100000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_NOT_ENOUGH_FP, "Dialog_NotEnoughFP.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.DIALOG_PURCHASE_COMPLETE, "Dialog_PurchaseComplete.png", 100000))
         self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         
         battleNewSeason = TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000)
