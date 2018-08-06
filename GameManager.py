@@ -365,6 +365,13 @@ class GameManager:
             else:
                 print("[GameManager] Cancel")
                 self.device.Touch(735, 477)
+        elif self.screen.screenType == ScreenType.DIALOG_SHOES_RECHARGE_II:
+            if self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
+                print("[GameManager] Confirm buy shoes with moonstones")
+                self.device.Touch(735, 237)
+            else:
+                print("[GameManager] Cancel")
+                self.device.Touch(735, 477)
         elif self.screen.screenType == ScreenType.DIALOG_NOT_ENOUGH_FP:
             print("[GameManager] Close dialog. Go to buy shoes by moonstones...")
             self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
