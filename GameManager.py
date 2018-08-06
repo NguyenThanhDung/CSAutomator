@@ -351,7 +351,10 @@ class GameManager:
                 time.sleep(1)
                 self.device.Touch(1063, 133)
             elif self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
-                print("[GameManager] Buy shoes with moonstones [TODO]")
+                print("[GameManager] Buy shoes with moonstones")
+                self.device.Swipe(924, 591, 924, 118)
+                time.sleep(1)
+                self.device.Touch(1063, 358)
             else:
                 print("[GameManager] Cancel")
                 self.device.Touch(735, 477)
