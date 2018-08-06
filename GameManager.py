@@ -345,15 +345,26 @@ class GameManager:
                 self.shoesSource = ShoesSource.SHOP_WITH_FP
                 self.device.Touch(51, 40)
         elif self.screen.screenType == ScreenType.SHOP:
-            print("[GameManager] Scroll to right")
-            self.device.Swipe(924, 118, 924, 591)
-            time.sleep(1)
-            self.device.Touch(1063, 133)
-            time.sleep(1)
-            self.device.Touch(735, 237)
+            if self.shoesSource == ShoesSource.SHOP_WITH_FP:
+                print("[GameManager] Buy shoes with FP")
+                self.device.Swipe(924, 118, 924, 591)
+                time.sleep(1)
+                self.device.Touch(1063, 133)
+            elif self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
+                print("[GameManager] Buy shoes with moonstones [TODO]")
+            else:
+                print("[GameManager] Cancel")
+                self.device.Touch(735, 477)
+        elif self.screen.screenType == ScreenType.DIALOG_SHOES_RECHARGE_FP:
+            if self.shoesSource == ShoesSource.SHOP_WITH_FP:
+                print("[GameManager] Confirm buy shoes with FP")
+                self.device.Touch(735, 237)
+            else:
+                print("[GameManager] Cancel")
+                self.device.Touch(735, 477)
         elif self.screen.screenType == ScreenType.DIALOG_NOT_ENOUGH_FP:
-            self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
             print("[GameManager] Close dialog. Go to buy shoes by moonstones...")
+            self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
             self.device.Touch(785, 357)
         else:
             self.GoHome()
