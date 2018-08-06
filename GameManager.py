@@ -270,8 +270,8 @@ class GameManager:
             print("[GameManager] Open Shrine of Light")
             self.device.Touch(400, 560)
         elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            print("[GameManager] Open floor 6F")
-            self.device.Touch(1115, 120)
+            print("[GameManager] Open floor 7F")
+            self.device.Touch(1123, 120)
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
             print("[GameManager] Auto place and start")
             self.device.Touch(767, 627)
