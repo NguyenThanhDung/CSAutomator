@@ -280,6 +280,9 @@ class GameManager:
             print("[GameManager] Idle in 2 minutes...")
             time.sleep(120)
             #self.AutoTouch(10)
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            print("[GameManager] Replay")
+            self.device.Touch(1194, 336)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
@@ -400,6 +403,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
             print("[GameManager] Go home")
             self.device.Touch(40, 48)
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            print("[GameManager] Go home")
+            self.device.Touch(1194, 666)
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             print("[GameManager] Idle")
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
