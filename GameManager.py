@@ -92,7 +92,7 @@ class GameManager:
         elif self.screen.screenType == ScreenType.DIALOG_PURCHASE_COMPLETE:
             print("[GameManager] Close dialog. Go to battle...")
             self.gameState = GameState.PROMOTION_BATTLE
-            self.shoesSource = ShoesSource.SHOP_WITH_FP
+            self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
             self.device.Touch(783, 355)
             self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.BATTLE_NEW_SEASON:
@@ -365,8 +365,8 @@ class GameManager:
                 time.sleep(1)
                 self.device.Touch(1063, 358)
             else:
-                print("[GameManager] Cancel")
-                self.device.Touch(735, 477)
+                print("[GameManager] Go home")
+                self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.DIALOG_SHOES_RECHARGE_FP:
             if self.shoesSource == ShoesSource.SHOP_WITH_FP:
                 print("[GameManager] Confirm buy shoes with FP")
