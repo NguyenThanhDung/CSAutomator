@@ -241,7 +241,8 @@ class GameManager:
                     print("[GameManager] Switch to Battle tab")
                     self.device.Touch(battleAvailable[0] + 52, battleAvailable[1] + 44)
                 else:
-                    print("[GameManager] Go home")
+                    print("[GameManager] Play Mysterious Sanctuary...")
+                    self.gameState = GameState.MYSTERIOUS_SANCTUARY
                     self.device.Touch(38, 46)
         elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
             rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
