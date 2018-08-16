@@ -87,6 +87,11 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.DIALOG_PURCHASE_COMPLETE, "Dialog_PurchaseComplete.png", 1000000))
         self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         
+        unstableNetworkDialog = TemplateImage(ScreenType.DIALOG_UNSTABLE_NETWORK, "UnstableNetwork_Title.png", 1000000)
+        unstableNetworkDialog.AddCriteria("UnstableNetwork_YesButton.png", 1000000)
+        unstableNetworkDialog.AddCriteria("UnstableNetwork_NoButton.png", 1000000)
+        self.templates.append(unstableNetworkDialog)
+        
         battleNewSeason = TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000)
         battleNewSeason.AddCriteria("Dialog_OK_Button.png", 100000)
         self.templates.append(battleNewSeason)

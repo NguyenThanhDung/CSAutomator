@@ -101,6 +101,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAIL_BOX_COLLECT:
             print("[GameManager] OK")
             self.device.Touch(799, 357)
+        elif self.screen.screenType == ScreenType.DIALOG_UNSTABLE_NETWORK:
+            print("[GameManager] Yes")
+            self.device.Touch(788, 244)
         else:
             if self.gameState == GameState.DAILY_MISSION:
                 self.PlayDailyMission()
