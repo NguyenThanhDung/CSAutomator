@@ -282,8 +282,8 @@ class GameManager:
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Idle in 2 minutes...")
-            time.sleep(120)
-            #self.AutoTouch(10)
+            #time.sleep(120)
+            self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Replay")
             self.device.Touch(1194, 336)
