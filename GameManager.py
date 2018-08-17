@@ -430,6 +430,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
             print("[GameManager] Go home")
             self.device.Touch(38, 46)
+        elif self.screen.screenType == ScreenType.SHOP:
+            print("[GameManager] Go home")
+            self.device.Touch(40, 48)
         else:
             print("[GameManager] Idle")
 
