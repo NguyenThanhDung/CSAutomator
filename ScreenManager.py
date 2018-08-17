@@ -87,7 +87,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.DIALOG_PURCHASE_COMPLETE, "Dialog_PurchaseComplete.png", 1000000))
         self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
         
-        unstableNetworkDialog = TemplateImage(ScreenType.DIALOG_UNSTABLE_NETWORK, "UnstableNetwork_Title.png", 1000000)
+        unstableNetworkDialog = TemplateImage(ScreenType.DIALOG_UNSTABLE_NETWORK, "UnstableNetwork_Title.png", 10000000)
         unstableNetworkDialog.AddCriteria("UnstableNetwork_YesButton.png", 1000000)
         unstableNetworkDialog.AddCriteria("UnstableNetwork_NoButton.png", 1000000)
         self.templates.append(unstableNetworkDialog)
