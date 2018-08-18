@@ -1,4 +1,5 @@
 import subprocess
+import sys
 from enum import Enum
 from ScreenShot import ScreenShot
 
@@ -19,13 +20,9 @@ class Device:
     def Connect(self):
         print("[Device " + self.deviceID + "] Connecting...")
         params = ["adb", "connect", self.deviceID]
-        if Device.ExecuteCommand(params):
-            print("[Device " + self.deviceID + "] Connected")
-            self.LoadDeviceInfo()
-            return True
-        else:
-            print("[Device " + self.deviceID + "] Fail to connect")
-            return False
+        Device.ExecuteCommand(params)
+        print("[Device " + self.deviceID + "] Connected")
+        self.LoadDeviceInfo()
 
     def LoadDeviceInfo(self):
         params = ["adb", "-s", self.deviceID, "shell", "dumpsys", "input"]
@@ -55,8 +52,7 @@ class Device:
 
     def CaptureScreen(self):
         params = ["adb", "-s", self.deviceID, "shell", "screencap", "-p", "/sdcard/" + Device.screenShotFileName]
-        if Device.ExecuteCommand(params) is None:
-            return
+        Device.ExecuteCommand(params)
         self.Pull(Device.screenShotFileName)
         return ScreenShot(Device.screenShotFileName)
 
@@ -93,10 +89,20 @@ class Device:
 
     @staticmethod
     def ExecuteCommand(params):
-        #print("ExecuteCommand: " + ParamToString(params))
-        process = subprocess.Popen(params, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = process.communicate()
-        if len(stderr) > 0 :
-            print("Device Error: " + stderr)
-            return None
-        return stdout
+        # print("[Popen] ExecuteCommand: " + ParamToString(params))
+        try:
+            process = subprocess.Popen(params, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output, error = process.communicate()
+            # print("[Popen] Return Code: " + str(process.returncode))
+            # if output:
+            #     print("[Popen] Output: " + output)
+            if error:
+                print("[Popen] Error: " + error)
+            if output:
+                return output
+        except OSError as e:
+            print("[Popen] OSError: " + e.errno)
+            print("[Popen] OSError: " + e.strerror)
+            print("[Popen] OSError: " + e.filename)
+        except:
+            print("[Popen] SysError: " + sys.exc_info()[0])
