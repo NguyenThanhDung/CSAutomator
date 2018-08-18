@@ -109,7 +109,7 @@ class GameManager:
             screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
             if screenPiece is not None:
                 print("[GameManager] Shop available. Open shop")
-                self.device.TouchPosition(ButtonPositions.GetPosition(Button.Home_Shop))
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Shop))
             else:
                 print("[GameManager] Shop isn't available. Continue...")
                 self.PlaySubstate()
@@ -117,11 +117,12 @@ class GameManager:
             screenPiece = self.screen.Find("Shop_MagicShopAvailable.png")
             if screenPiece is not None:
                 print("[GameManager] Magic shop is available. Open magic shop...")
-                self.device.TouchPosition(ButtonPositions.GetPosition(Button.Shop_MagicShop))
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Shop_MagicShop))
             else:
                 screenPiece = self.screen.Find("Shop_MagicShopOpening.png")
                 if screenPiece is not None:
-                    print("[GameManager] Magic shop is opening...")
+                    print("[GameManager] Magic shop is opening. Find good items...")
+                    self.FindAndBuyInMagicShop()
                 else:
                     print("[GameManager] Magic Shop isn't available. Continue...")
                     self.PlaySubstate()
@@ -416,6 +417,20 @@ class GameManager:
             self.device.Touch(785, 357)
         else:
             self.GoHome()
+
+    def FindAndBuyInMagicShop(self):
+        screenPiece = self.screen.Find("ActionPhase_AutoPlayButton_Disables.png")
+        if screenPiece is not None:
+            print("[GameManager] Found a good item")
+        else:
+            if self.scrollStep < 2:
+                print("[GameManager] No good item is found. Find more...")
+                self.device.Swipe(989, 127, 989, 594)
+                self.scrollStep = self.scrollStep + 1
+            else:
+                print("[GameManager] No good item is found. Go home")
+                self.scrollStep = 0
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
 
     def GoHome(self):
         if self.screen.screenType == ScreenType.GAME_HOME:

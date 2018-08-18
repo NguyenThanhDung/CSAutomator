@@ -61,7 +61,7 @@ class Device:
         params = ["adb", "-s", self.deviceID, "pull", "/sdcard/" + fileName]
         Device.ExecuteCommand(params)
 
-    def TouchPosition(self, position):
+    def TouchAtPosition(self, position):
         self.Touch(position.x, position.y)
 
     def Touch(self, x, y):

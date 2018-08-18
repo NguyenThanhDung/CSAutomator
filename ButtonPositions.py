@@ -20,11 +20,13 @@ class Button(Enum):
     Shop_Special = 13
     Shop_MagicShop = 14
 
+    Back = 999
+
 class ButtonPositions:
 
     @staticmethod
     def GetPosition(button):
-        
+
         if button == Button.Home_Menu:
             return Position(1218, 635)
         if button == Button.Home_Guardian:
@@ -46,3 +48,6 @@ class ButtonPositions:
             return Position(1225, 213)
         if button == Button.Shop_MagicShop:
             return Position(1225, 73)
+            
+        if button == Button.Back:
+            return Position(40, 48)
