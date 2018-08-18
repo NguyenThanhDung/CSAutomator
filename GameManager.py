@@ -448,7 +448,14 @@ class GameManager:
             time.sleep(1)
             self.device.Touch(846, 360)
         else:
-            self.GoHome()
+            screenPiece = self.screen.Find("Summon_MysteriousBookAvaiable.png")
+            if screenPiece is not None:
+                print("[GameManager] Summon mysterious book")
+                self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
+                time.sleep(1)
+                self.device.Touch(846, 360)
+            else:
+                self.GoHome()
 
     def GoHome(self):
         if self.screen.screenType == ScreenType.MAP  \
