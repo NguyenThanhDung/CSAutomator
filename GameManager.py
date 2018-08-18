@@ -127,7 +127,7 @@ class GameManager:
                 screenPiece = self.screen.Find("Shop_MagicShopOpening.png")
                 if screenPiece is not None:
                     print("[GameManager] Magic shop is opening. Find good items...")
-                    self.FindAndBuyInMagicShop()
+                    self.BuyGoodItemInMagicShop()
                 else:
                     print("[GameManager] Magic Shop isn't available. Continue...")
                     self.PlaySubstate()
@@ -426,10 +426,11 @@ class GameManager:
         else:
             self.GoHome()
 
-    def FindAndBuyInMagicShop(self):
-        screenPiece = self.screen.Find("ActionPhase_AutoPlayButton_Disables.png")
+    def BuyGoodItemInMagicShop(self):
+        screenPiece = self.FindGoodItemInMagicShop()
         if screenPiece is not None:
-            print("[GameManager] Found a good item")
+            print("[GameManager] Open item info")
+            self.device.Touch(screenPiece[0] + 193, screenPiece[1] + 70)
         else:
             if self.scrollStep < 2:
                 print("[GameManager] No good item is found. Find more...")
@@ -439,6 +440,13 @@ class GameManager:
                 print("[GameManager] No good item is found")
                 self.scrollStep = 0
                 self.GoHome()
+
+    def FindGoodItemInMagicShop(self):
+        screenPiece = self.screen.Find("Shop_Equipment_Necklace_6stars_Purple.png")
+        if screenPiece is not None:
+            print("[GameManager] Found 6 stars purple necklace")
+            return screenPiece
+        return None
 
     def Summon(self):
         screenPiece = self.screen.Find("Summon_BasicBookAvaiable.png")
