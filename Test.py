@@ -1,19 +1,28 @@
-from enum import Enum
-from Screen import Screen
-from Screen import ScreenType
+# pip install pytesseract
+# https://github.com/UB-Mannheim/tesseract/wiki
 
-class TestType(Enum):
-    TYPE1 = 0
-    TYPE2 = 1
-    TYPE3 = 2
+import os
+from PIL import Image
+import pytesseract
 
-class Test:
+fileName = "EquipmentScreen.png"
+filePath = os.path.abspath("Test/" + fileName)
+image = Image.open(filePath)
 
-    def __init__(self):
-        self.value = TestType.TYPE1
+equipmentArea = (91, 347, 471, 713)
+equipmentImage = image.crop(equipmentArea)
+equipmentImage = equipmentImage.rotate(270, expand=1)
+equipmentFilePath = os.path.abspath("Test/Equipment.png")
+equipmentImage.save(equipmentFilePath)
 
-    def __str__(self):
-        return str(self.value)
+# mainStatArea = (178, 371, 212, 558)
+# mainStatImage = image.crop(mainStatArea)
+# # mainStatImage.show()
+# text = pytesseract.image_to_string(mainStatImage)
+# print(text)
 
-test = Screen(ScreenType.DEVICE_HOME)
-print("Test" + str(test))
+# X: 91
+# Y: 347
+# W: 380
+# H: 366
+# print(str(347 + 366))
