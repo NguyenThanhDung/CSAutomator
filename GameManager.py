@@ -1,6 +1,7 @@
 import time
 from enum import Enum
 from Screen import ScreenType
+from ButtonPositions import ButtonPositions, Button, Position
 
 class GameState(Enum):
     NONE = 0
@@ -108,6 +109,7 @@ class GameManager:
             screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
             if screenPiece is not None:
                 print("[GameManager] Shop available. Open shop")
+                self.device.TouchPosition(ButtonPositions.GetPosition(Button.HomeShop))
             else:
                 print("[GameManager] Shop isn't available. Continue...")
                 self.PlaySubstate()

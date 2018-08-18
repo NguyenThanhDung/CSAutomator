@@ -61,6 +61,9 @@ class Device:
         params = ["adb", "-s", self.deviceID, "pull", "/sdcard/" + fileName]
         Device.ExecuteCommand(params)
 
+    def TouchPosition(self, position):
+        self.Touch(position.x, position.y)
+
     def Touch(self, x, y):
         if self.screenOrientation == ScreenOrientation.LANDSCAPE:
             touchX = x
