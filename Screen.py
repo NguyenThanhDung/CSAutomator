@@ -39,6 +39,9 @@ class ScreenType(Enum):
     MAIL_BOX_COLLECT = 46
 
     SHOP = 50
+
+    SUMMON = 60
+    SUMMON_BASIC_DONE = 61
     
     DIALOG_WEEKLY_LIMITED = 80
     DIALOG_LIMITED_OFFER = 81

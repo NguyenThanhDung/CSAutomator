@@ -131,6 +131,9 @@ class GameManager:
                 else:
                     print("[GameManager] Magic Shop isn't available. Continue...")
                     self.PlaySubstate()
+        elif self.screen.screenType == ScreenType.SUMMON:
+            print("[GameManager] Summon...")
+            self.Summon()
         else:
             self.PlaySubstate()
 
@@ -433,51 +436,43 @@ class GameManager:
                 self.device.Swipe(989, 127, 989, 594)
                 self.scrollStep = self.scrollStep + 1
             else:
-                print("[GameManager] No good item is found. Go home")
+                print("[GameManager] No good item is found")
                 self.scrollStep = 0
-                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
+                self.GoHome()
+
+    def Summon(self):
+        screenPiece = self.screen.Find("Summon_BasicBookAvaiable.png")
+        if screenPiece is not None:
+            print("[GameManager] Summon basic book")
+            self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
+            time.sleep(1)
+            self.device.Touch(846, 360)
+        else:
+            self.GoHome()
 
     def GoHome(self):
-        if self.screen.screenType == ScreenType.GAME_HOME:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.MAP:
+        if self.screen.screenType == ScreenType.MAP  \
+            or self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
-        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
+            or self.screen.screenType == ScreenType.SHRINE_OF_LIGHT         \
+            or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \
+            or self.screen.screenType == ScreenType.BATTLE_LIST             \
+            or self.screen.screenType == ScreenType.RIVAL_LIST              \
+            or self.screen.screenType == ScreenType.BATTLE_RANKING          \
+            or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD   \
+            or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB      \
+            or self.screen.screenType == ScreenType.SHOP                    \
+            or self.screen.screenType == ScreenType.SUMMON:
             print("[GameManager] Go home")
-            self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            print("[GameManager] Go home")
-            self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
-            print("[GameManager] Go home")
-            self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            print("[GameManager] Go home")
-            self.device.Touch(1194, 666)
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            print("[GameManager] Idle")
-        elif self.screen.screenType == ScreenType.BATTLE_LIST:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.RIVAL_LIST:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.BATTLE_RANKING:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
             print("[GameManager] Go to play mission...")
             self.device.Touch(785, 460)
-        elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
-            print("[GameManager] Go home")
-            self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.SHOP:
-            print("[GameManager] Go home")
-            self.device.Touch(40, 48)
+        elif self.screen.screenType == ScreenType.SUMMON_BASIC_DONE:
+            print("[GameManager] OK")
+            self.device.Touch(1185, 361)
         else:
             print("[GameManager] Idle")
 
