@@ -28,7 +28,7 @@ class GameManager:
     def __init__(self, device):
         self.device = device
         self.screen = None
-        self.gameState = GameState.PROMOTION_BATTLE
+        self.gameState = GameState.DAILY_MISSION
         self.scrollStep = 0
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
@@ -104,6 +104,12 @@ class GameManager:
         elif self.screen.screenType == ScreenType.DIALOG_UNSTABLE_NETWORK:
             print("[GameManager] Yes")
             self.device.Touch(788, 244)
+        elif self.screen.screenType == ScreenType.GAME_HOME:
+            screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
+            if screenPiece is not None:
+                print("[GameManager] Shop available. Open shop")
+            else:
+                print("[GameManager] Shop isn't available")
         else:
             if self.gameState == GameState.DAILY_MISSION:
                 self.PlayDailyMission()
