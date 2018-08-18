@@ -111,8 +111,13 @@ class GameManager:
                 print("[GameManager] Shop available. Open shop")
                 self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Shop))
             else:
-                print("[GameManager] Shop isn't available. Continue...")
-                self.PlaySubstate()
+                screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
+                if screenPiece is not None:
+                    print("[GameManager] Summon available. Go to summon...")
+                    self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
+                else:
+                    print("[GameManager] Shop isn't available. Continue...")
+                    self.PlaySubstate()
         elif self.screen.screenType == ScreenType.SHOP:
             screenPiece = self.screen.Find("Shop_MagicShopAvailable.png")
             if screenPiece is not None:
