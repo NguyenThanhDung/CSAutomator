@@ -30,9 +30,9 @@ class GameManager:
         self.device = device
         self.screen = None
         self.gameState = GameState.DAILY_MISSION
-        self.scrollStep = 0
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
+        self.scrollStep = 0
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -109,10 +109,22 @@ class GameManager:
             screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
             if screenPiece is not None:
                 print("[GameManager] Shop available. Open shop")
-                self.device.TouchPosition(ButtonPositions.GetPosition(Button.HomeShop))
+                self.device.TouchPosition(ButtonPositions.GetPosition(Button.Home_Shop))
             else:
                 print("[GameManager] Shop isn't available. Continue...")
                 self.PlaySubstate()
+        elif self.screen.screenType == ScreenType.SHOP:
+            screenPiece = self.screen.Find("Shop_MagicShopAvailable.png")
+            if screenPiece is not None:
+                print("[GameManager] Magic shop is available. Open magic shop...")
+                self.device.TouchPosition(ButtonPositions.GetPosition(Button.Shop_MagicShop))
+            else:
+                screenPiece = self.screen.Find("Shop_MagicShopOpening.png")
+                if screenPiece is not None:
+                    print("[GameManager] Magic shop is opening...")
+                else:
+                    print("[GameManager] Magic Shop isn't available. Continue...")
+                    self.PlaySubstate()
         else:
             self.PlaySubstate()
 
