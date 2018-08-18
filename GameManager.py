@@ -109,18 +109,22 @@ class GameManager:
             if screenPiece is not None:
                 print("[GameManager] Shop available. Open shop")
             else:
-                print("[GameManager] Shop isn't available")
+                print("[GameManager] Shop isn't available. Continue...")
+                self.PlaySubstate()
         else:
-            if self.gameState == GameState.DAILY_MISSION:
-                self.PlayDailyMission()
-            elif self.gameState == GameState.PROMOTION_BATTLE:
-                self.PlayPromotionBattle()
-            elif self.gameState == GameState.MYSTERIOUS_SANCTUARY:
-                self.PlayMysteriousSanctuary()
-            elif self.gameState == GameState.OUT_OF_SHOES:
-                self.FindShoes()
-            else:
-                self.GoHome()
+            self.PlaySubstate()
+
+    def PlaySubstate(self):
+        if self.gameState == GameState.DAILY_MISSION:
+            self.PlayDailyMission()
+        elif self.gameState == GameState.PROMOTION_BATTLE:
+            self.PlayPromotionBattle()
+        elif self.gameState == GameState.MYSTERIOUS_SANCTUARY:
+            self.PlayMysteriousSanctuary()
+        elif self.gameState == GameState.OUT_OF_SHOES:
+            self.FindShoes()
+        else:
+            self.GoHome()
 
     def PlayDailyMission(self):
         if self.dailMissionState == DailyMission.NONE:
