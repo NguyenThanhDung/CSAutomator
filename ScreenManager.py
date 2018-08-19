@@ -75,6 +75,10 @@ class ScreenManager:
 
         self.templates.append(TemplateImage(ScreenType.SHOP, "Shop.png", 30000))
 
+        screenTemplate = TemplateImage(ScreenType.SHOP_DIALOG_IS_OPENNING, "Shop_DialogIsOpening.png", 30000)
+        screenTemplate.AddCriteria("Shop_EquipmentInfo_Buttons.png")
+        self.templates.append(screenTemplate)
+
         self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png", 100000))
         self.templates.append(TemplateImage(ScreenType.SUMMON_BASIC_DONE, "Summon_BasicDone.png"))
 

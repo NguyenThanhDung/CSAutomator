@@ -131,6 +131,8 @@ class GameManager:
                 else:
                     print("[GameManager] Magic Shop isn't available. Continue...")
                     self.PlaySubstate()
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
+            print("[GameManager] Opening item info...")
         elif self.screen.screenType == ScreenType.SUMMON:
             print("[GameManager] Summon...")
             self.Summon()
