@@ -446,6 +446,10 @@ class GameManager:
         if screenPiece is not None:
             print("[GameManager] Found 6 stars purple necklace")
             return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Ring_6stars_Gold.png")
+        if screenPiece is not None:
+            print("[GameManager] Found 6 stars gold ring")
+            return screenPiece
         return None
 
     def Summon(self):
