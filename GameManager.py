@@ -146,14 +146,14 @@ class GameManager:
             elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
                 print("[GameManager] Idle")
             elif self.screen.screenType == ScreenType.DAILY_MISSION:
-                mission = self.screen.Find("DailyMission_Disassembly.png")
-                if mission is not None:
+                screenPiece = self.screen.Find("DailyMission_Disassembly.png")
+                if screenPiece is not None:
                     print("[GameManager] Open mission")
                     self.dailMissionState = DailyMission.DISASSEMBLY
-                    self.device.Touch(mission[0] + 64, mission[1] + 240)
+                    self.device.Touch(screenPiece[0] + 64, screenPiece[1] + 240)
                     return
-                mission = self.screen.Find("DailyMission_DearFriend.png")
-                if mission is not None:
+                screenPiece = self.screen.Find("DailyMission_DearFriend.png")
+                if screenPiece is not None:
                     self.dailMissionState = DailyMission.DEAR_FRIEND
                     self.GoHome()
                     return
