@@ -90,3 +90,5 @@ class Screen:
         
         filePath = os.path.join(dirPath, str(self.screenType) + ".png")
         cv2.imwrite(filePath, self.image)
+
+        return filePath
