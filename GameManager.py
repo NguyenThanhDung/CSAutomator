@@ -106,39 +106,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.DIALOG_UNSTABLE_NETWORK:
             print("[GameManager] Yes")
             self.device.Touch(788, 244)
-        elif self.screen.screenType == ScreenType.GAME_HOME:
-            screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
-            if screenPiece is not None:
-                print("[GameManager] Shop available. Open shop")
-                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Shop))
-            else:
-                screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
-                if screenPiece is not None:
-                    print("[GameManager] Summon available. Go to summon...")
-                    self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
-                else:
-                    print("[GameManager] Shop isn't available. Continue...")
-                    self.PlaySubstate()
-        elif self.screen.screenType == ScreenType.SHOP:
-            screenPiece = self.screen.Find("Shop_MagicShopAvailable.png")
-            if screenPiece is not None:
-                print("[GameManager] Magic shop is available. Open magic shop...")
-                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Shop_MagicShop))
-            else:
-                screenPiece = self.screen.Find("Shop_MagicShopOpening.png")
-                if screenPiece is not None:
-                    print("[GameManager] Magic shop is opening. Find good items...")
-                    self.BuyGoodItemInMagicShop()
-                else:
-                    print("[GameManager] Magic Shop isn't available. Continue...")
-                    self.PlaySubstate()
-        elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
-            print("[GameManager] Opening item info...")
-            equipment = Equipment(self.screen)
-            if equipment.isGood:
-                print("[GameManager] Good equipment. Should buy")
-            else:
-                print("[GameManager] Not good equipment. Close")
         elif self.screen.screenType == ScreenType.SUMMON:
             print("[GameManager] Summon...")
             self.Summon()
@@ -506,6 +473,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.LEVEL_UP:
             print("[GameManager] Press anywhere")
             self.device.Touch(500, 500)
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
+            print("[GameManager] Close dialog...")
         else:
             print("[GameManager] Idle")
 
