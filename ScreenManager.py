@@ -102,6 +102,8 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.BATTLE_RANKING, "Battle_Ranking.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_DEFENSE_RECORD, "Battle_DefenseRecord.png"))
 
+        self.templates.append(TemplateImage(ScreenType.LEVEL_UP, "LevelUp.png"))
+
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
         image = None
