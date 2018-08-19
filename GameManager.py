@@ -328,7 +328,7 @@ class GameManager:
             self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Replay")
-            self.device.Touch(1194, 336)
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
@@ -478,10 +478,12 @@ class GameManager:
                 self.GoHome()
 
     def GoHome(self):
-        if self.screen.screenType == ScreenType.MAP  \
-            or self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+        if self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            print("[GameManager] Go home")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
             or self.screen.screenType == ScreenType.SHRINE_OF_LIGHT         \
             or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \

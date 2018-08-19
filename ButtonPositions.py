@@ -20,6 +20,12 @@ class Button(Enum):
     Shop_Special = 13
     Shop_MagicShop = 14
 
+    Result_Home = 20
+    Result_Guardian = 21
+    Result_Map = 22
+    Result_Replay = 23
+    Result_NextArea = 24
+
     Back = 999
 
 class ButtonPositions:
@@ -48,6 +54,17 @@ class ButtonPositions:
             return Position(1225, 213)
         if button == Button.Shop_MagicShop:
             return Position(1225, 73)
+
+        if button == Button.Result_Home:
+            return Position(1200, 663)
+        if button == Button.Result_Guardian:
+            return Position(1200, 583)
+        if button == Button.Result_Map:
+            return Position(1200, 503)
+        if button == Button.Result_Replay:
+            return Position(1200, 336)
+        if button == Button.Result_NextArea:
+            return Position(1200, 116)
             
         if button == Button.Back:
             return Position(40, 48)
