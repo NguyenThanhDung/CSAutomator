@@ -475,6 +475,7 @@ class GameManager:
             self.device.Touch(500, 500)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
             print("[GameManager] Close dialog...")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
         else:
             print("[GameManager] Idle")
 
