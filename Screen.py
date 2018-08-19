@@ -1,4 +1,4 @@
-import os
+import os, errno
 import cv2
 from enum import Enum
 
@@ -79,3 +79,14 @@ class Screen:
             return min_loc
         else:
             return None
+
+    def Save(self):
+        dirPath = os.path.abspath( "Temp/")
+        try:
+            os.makedirs(dirPath)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+        
+        filePath = os.path.join(dirPath, str(self.screenType) + ".png")
+        cv2.imwrite(filePath, self.image)

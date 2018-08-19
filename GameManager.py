@@ -2,6 +2,7 @@ import time
 from enum import Enum
 from Screen import ScreenType
 from ButtonPositions import ButtonPositions, Button, Position
+from Equipment import Equipment
 
 class GameState(Enum):
     NONE = 0
@@ -133,6 +134,11 @@ class GameManager:
                     self.PlaySubstate()
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
             print("[GameManager] Opening item info...")
+            equipment = Equipment(self.screen)
+            if equipment.isGood:
+                print("[GameManager] Good equipment. Should buy")
+            else:
+                print("[GameManager] Not good equipment. Close")
         elif self.screen.screenType == ScreenType.SUMMON:
             print("[GameManager] Summon...")
             self.Summon()

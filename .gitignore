@@ -106,3 +106,4 @@ venv.bak/
 *.suo
 
 Screenshot\.png
+/Temp/
