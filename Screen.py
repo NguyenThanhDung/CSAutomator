@@ -75,7 +75,7 @@ class Screen:
             return None
         res = cv2.matchTemplate(self.image, targetImage, cv2.TM_SQDIFF)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-        print("[Screen] Find Value: " + str(min_val))
+        # print("[Screen] Find Value: " + str(min_val))
         if min_val < precision:
             return min_loc
         else:
