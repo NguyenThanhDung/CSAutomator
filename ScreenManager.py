@@ -83,6 +83,8 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.SUMMON_BASIC_DONE, "Summon_BasicDone.png"))
         self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png"))
 
+        self.templates.append(TemplateImage(ScreenType.CRAFT_HOUSE, "CraftHouse.png"))
+
         self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
         self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))

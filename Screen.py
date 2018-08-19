@@ -54,9 +54,11 @@ class ScreenType(Enum):
     DIALOG_PURCHASE_COMPLETE = 86
     DIALOG_UNSTABLE_NETWORK = 87
 
-    LEVEL_UP = 90
+    CRAFT_HOUSE = 90
+
+    LEVEL_UP = 200
     
-    UNKNOWN = 99
+    UNKNOWN = 999
 
 
 class Screen:

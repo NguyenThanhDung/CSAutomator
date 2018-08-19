@@ -166,6 +166,8 @@ class GameManager:
             if self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
                 print("[GameManager] Go to play mission...")
                 self.device.Touch(785, 460)
+            elif self.screen.screenType == ScreenType.CRAFT_HOUSE:
+                print("[GameManager] Check if the first equipment is good or not...")
             else:
                 print("[GameManager] Idle")
         elif self.dailMissionState == DailyMission.DEAR_FRIEND:
