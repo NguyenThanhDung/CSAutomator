@@ -106,6 +106,14 @@ class GameManager:
         elif self.screen.screenType == ScreenType.DIALOG_UNSTABLE_NETWORK:
             print("[GameManager] Yes")
             self.device.Touch(788, 244)
+        elif self.screen.screenType == ScreenType.GAME_HOME:
+            screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
+            if screenPiece is not None:
+                print("[GameManager] Summon available. Go to summon...")
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
+            else:
+                print("[GameManager] Shop isn't available. Continue...")
+                self.PlaySubstate()
         elif self.screen.screenType == ScreenType.SUMMON:
             print("[GameManager] Summon...")
             self.Summon()
