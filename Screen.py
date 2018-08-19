@@ -48,6 +48,8 @@ class ScreenType(Enum):
     DIALOG_NOT_ENOUGH_FP = 85
     DIALOG_PURCHASE_COMPLETE = 86
     DIALOG_UNSTABLE_NETWORK = 87
+
+    LEVEL_UP = 90
     
     UNKNOWN = 99
 
