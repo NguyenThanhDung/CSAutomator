@@ -26,6 +26,9 @@ class Button(Enum):
     Result_Replay = 23
     Result_NextArea = 24
 
+    Dialog_BuyEquipment_Purchase = 30
+    Dialog_BuyEquipment_Cancel = 31
+
     Back = 999
 
 class ButtonPositions:
@@ -65,6 +68,11 @@ class ButtonPositions:
             return Position(1200, 336)
         if button == Button.Result_NextArea:
             return Position(1200, 116)
+            
+        if button == Button.Dialog_BuyEquipment_Purchase:
+            return Position(717, 235)
+        if button == Button.Dialog_BuyEquipment_Cancel:
+            return Position(717, 481)
             
         if button == Button.Back:
             return Position(40, 48)
