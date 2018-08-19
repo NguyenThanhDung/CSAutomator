@@ -488,6 +488,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.SUMMON_BASIC_DONE:
             print("[GameManager] OK")
             self.device.Touch(1185, 361)
+        elif self.screen.screenType == ScreenType.LEVEL_UP:
+            print("[GameManager] Press anywhere")
+            self.device.Touch(500, 500)
         else:
             print("[GameManager] Idle")
 
