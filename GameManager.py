@@ -134,6 +134,9 @@ class GameManager:
                 self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
             else:
                 self.PlaySubstate()
+        elif self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT:
+            print("[GameManager] Stop")
+            self.device.Touch(1195, 120)
         else:
             self.PlaySubstate()
 
