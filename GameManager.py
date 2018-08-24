@@ -127,6 +127,13 @@ class GameManager:
         elif self.screen.screenType == ScreenType.SUMMON:
             print("[GameManager] Summon...")
             self.Summon()
+        elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
+            screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+            if screenPiece is not None:
+                print("[GameManager] Play EXP Dungeon")
+                self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
+            else:
+                self.PlaySubstate()
         else:
             self.PlaySubstate()
 
