@@ -2,12 +2,15 @@ import time
 from Device import Device
 from ScreenManager import ScreenManager
 from GameManager import GameManager
+from Profile import Profile
 
 def Run():
     device = Device("127.0.0.1:62001")
     device.Connect()
+    profile = Profile("GaChien")
+    profile.Load()
+    gameManager = GameManager(device, profile)
     screenManager = ScreenManager()
-    gameManager = GameManager(device)
 
     while True:
         screenshot = device.CaptureScreen()

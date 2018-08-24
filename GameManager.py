@@ -27,8 +27,9 @@ class DailyMission(Enum):
 
 class GameManager:
 
-    def __init__(self, device):
+    def __init__(self, device, profile):
         self.device = device
+        self.profile = profile
         self.screen = None
         self.gameState = GameState.PROMOTION_BATTLE
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
