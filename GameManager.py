@@ -128,12 +128,27 @@ class GameManager:
             print("[GameManager] Summon...")
             self.Summon()
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
-            screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+            screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
             if screenPiece is not None:
-                print("[GameManager] Play EXP Dungeon")
-                self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
+                print("[GameManager] EXP Dungeon is out of entrance. Go home...")
+                self.profile.didPlayEventDungeon = True
+                self.profile.Save()
+                self.GoHome()
             else:
-                self.PlaySubstate()
+                # TODO: WIP
+                screenPiece = self.screen.Find("WeeklyLimited.png")
+                if screenPiece is not None:
+                    print("[GameManager] Gold Dungeon is out of entrance. Go home...")
+                    self.profile.didPlayEventDungeon = True
+                    self.profile.Save()
+                    self.GoHome()
+                else:
+                    screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+                    if screenPiece is not None:
+                        print("[GameManager] Play EXP Dungeon")
+                        self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
+                    else:
+                        self.PlaySubstate()
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT:
             print("[GameManager] Stop")
             self.device.Touch(1195, 120)
@@ -476,7 +491,8 @@ class GameManager:
         if self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY          \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT:
             print("[GameManager] Go home")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
@@ -488,7 +504,8 @@ class GameManager:
             or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD   \
             or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB      \
             or self.screen.screenType == ScreenType.SHOP                    \
-            or self.screen.screenType == ScreenType.SUMMON:
+            or self.screen.screenType == ScreenType.SUMMON                  \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON:
             print("[GameManager] Go home")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
