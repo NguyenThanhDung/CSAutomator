@@ -15,12 +15,17 @@ class Profile:
             self.SaveDefault()
 
     def Save(self):
-        print("Save " + self.filePath)
+        data = {}
+        data["didPlayEventDungeon"] = self.didPlayEventDungeon
+        if os.path.exists(os.path.dirname(self.filePath)) == False:
+            os.makedirs(os.path.dirname(self.filePath))
+        with open(self.filePath, 'w') as outfile:
+            json.dump(data, outfile)
 
     def SaveDefault(self):
         data = {}
         data["didPlayEventDungeon"] = False
         if os.path.exists(os.path.dirname(self.filePath)) == False:
             os.makedirs(os.path.dirname(self.filePath))
-        with open(self.filePath, 'w') as outfile:  
+        with open(self.filePath, 'w') as outfile:
             json.dump(data, outfile)
