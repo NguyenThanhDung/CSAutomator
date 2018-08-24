@@ -113,8 +113,17 @@ class GameManager:
                 print("[GameManager] Summon available. Go to summon...")
                 self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
             else:
-                print("[GameManager] Shop isn't available. Continue...")
-                self.PlaySubstate()
+                if self.profile.didPlayEventDungeon == False:
+                    screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+                    if screenPiece is not None:
+                        print("[GameManager] Open Event Dungeon")
+                        self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
+                    else:
+                        print("[GameManager] Can't find Event Dungeon button. Continue...")
+                        self.PlaySubstate()
+                else:
+                    print("[GameManager] There isn't any special event. Continue...")
+                    self.PlaySubstate()
         elif self.screen.screenType == ScreenType.SUMMON:
             print("[GameManager] Summon...")
             self.Summon()
