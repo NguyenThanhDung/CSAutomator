@@ -16,13 +16,22 @@ class Equipment:
         statTexts = {}
         for i in range(5):
             statTexts[i] = self.GetStatText(i)
-            print("[Equipment] statText[" + str(i) + "]: " + statTexts[i])
+            self.Log("statText[" + str(i) + "]: " + statTexts[i])
 
         if "%" not in statTexts[0]:
+            self.Log("Main stat is not %")
             self.isGood = False
         else:
-            print("[Equipment] Continue...")
-            self.isGood = True
+            percentCount = 0
+            for i in range(1, 5):
+                if "%" in statTexts[i]:
+                    percentCount = percentCount + 1
+            if percentCount >= 3:
+                self.Log("Main stat and at least 3 sub stats are %")
+                self.isGood = True
+            else:
+                self.Log("Less than 3 sub stats are %")
+                self.isGood = False
 
     def GetStatText(self, slot):
         if slot == 0:
@@ -43,3 +52,7 @@ class Equipment:
         text = pytesseract.image_to_string(mainStatImage)
         text = text.replace("\n", "").replace("\t", "").replace(" ", "")
         return text
+
+    def Log(self, log):
+        print("[Equipment] " + log)
+        return None

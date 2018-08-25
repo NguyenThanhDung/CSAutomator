@@ -48,4 +48,4 @@ def Run(isDebugging = False):
         gameManager.Play()
 
 if __name__ == "__main__":
-    Run(True)
+    Run()
