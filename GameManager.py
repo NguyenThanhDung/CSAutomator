@@ -509,6 +509,8 @@ class GameManager:
                 else:
                     self.gameState = GameState.PROMOTION_BATTLE
                     self.GoHome()
+        else:
+            self.GoHome()
 
     def GoHome(self):
         if self.screen.screenType == ScreenType.MAP:
