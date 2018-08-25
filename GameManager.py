@@ -10,6 +10,8 @@ class GameState(Enum):
     PROMOTION_BATTLE = 2
     MYSTERIOUS_SANCTUARY = 3
     OUT_OF_SHOES = 4
+    SHOPPING = 5
+    SUMMON = 6
 
 class ShoesSource(Enum):
     DAILY_MISSION_REWARD = 0
@@ -109,39 +111,14 @@ class GameManager:
         elif self.screen.screenType == ScreenType.GAME_HOME:
             screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
             if screenPiece is not None:
-                print("[GameManager] Shop available. Open shop")
-                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Shop))
+                print("[GameManager] Shop available. Go for shoping...")
+                self.gameState = GameState.SHOPPING
             else:
                 screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
                 if screenPiece is not None:
                     print("[GameManager] Summon available. Go to summon...")
-                    self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
-                else:
-                    print("[GameManager] Shop isn't available. Continue...")
-                    self.PlaySubstate()
-        elif self.screen.screenType == ScreenType.SHOP:
-            screenPiece = self.screen.Find("Shop_MagicShopAvailable.png")
-            if screenPiece is not None:
-                print("[GameManager] Magic shop is available. Open magic shop...")
-                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Shop_MagicShop))
-            else:
-                screenPiece = self.screen.Find("Shop_MagicShopOpening.png")
-                if screenPiece is not None:
-                    print("[GameManager] Magic shop is opening. Find good items...")
-                    self.BuyGoodItemInMagicShop()
-                else:
-                    print("[GameManager] Magic Shop isn't available. Continue...")
-                    self.PlaySubstate()
-        elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
-            print("[GameManager] Opening item info...")
-            equipment = Equipment(self.screen)
-            if equipment.isGood:
-                print("[GameManager] Good equipment. Should buy")
-            else:
-                print("[GameManager] Not good equipment. Close")
-        elif self.screen.screenType == ScreenType.SUMMON:
-            print("[GameManager] Summon...")
-            self.Summon()
+                    self.gameState = GameState.SUMMON
+            self.PlaySubstate()
         else:
             self.PlaySubstate()
 
@@ -154,6 +131,10 @@ class GameManager:
             self.PlayMysteriousSanctuary()
         elif self.gameState == GameState.OUT_OF_SHOES:
             self.FindShoes()
+        elif self.gameState == GameState.SHOPPING:
+            self.Shopping()
+        elif self.gameState == GameState.SUMMON:
+            self.Summon()
         else:
             self.GoHome()
 
@@ -434,6 +415,34 @@ class GameManager:
         else:
             self.GoHome()
 
+    def Shopping(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            print("[GameManager] Press Shop button")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Shop))
+        elif self.screen.screenType == ScreenType.SHOP:
+            screenPiece = self.screen.Find("Shop_MagicShopAvailable.png")
+            if screenPiece is not None:
+                print("[GameManager] Magic shop is available. Open magic shop...")
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Shop_MagicShop))
+            else:
+                screenPiece = self.screen.Find("Shop_MagicShopOpening.png")
+                if screenPiece is not None:
+                    print("[GameManager] Magic shop is opening. Find good items...")
+                    self.BuyGoodItemInMagicShop()
+                else:
+                    print("[GameManager] Magic Shop isn't available. Go home...")
+                    self.gameState = GameState.PROMOTION_BATTLE
+                    self.GoHome()
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
+            print("[GameManager] Opening item info...")
+            equipment = Equipment(self.screen)
+            if equipment.isGood:
+                print("[GameManager] Good equipment. Should buy")
+            else:
+                print("[GameManager] Not good equipment. Close")
+        else:
+            self.GoHome()
+
     def BuyGoodItemInMagicShop(self):
         screenPiece = self.FindGoodItemInMagicShop()
         if screenPiece is not None:
@@ -447,6 +456,7 @@ class GameManager:
             else:
                 print("[GameManager] No good item is found")
                 self.scrollStep = 0
+                self.gameState = GameState.PROMOTION_BATTLE
                 self.GoHome()
 
     def FindGoodItemInMagicShop(self):
@@ -477,21 +487,26 @@ class GameManager:
         return None
 
     def Summon(self):
-        screenPiece = self.screen.Find("Summon_BasicBookAvaiable.png")
-        if screenPiece is not None:
-            print("[GameManager] Summon basic book")
-            self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
-            time.sleep(1)
-            self.device.Touch(846, 360)
-        else:
-            screenPiece = self.screen.Find("Summon_MysteriousBookAvaiable.png")
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            print("[GameManager] Press Summon button")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
+        elif self.screen.screenType == ScreenType.SUMMON:
+            screenPiece = self.screen.Find("Summon_BasicBookAvaiable.png")
             if screenPiece is not None:
-                print("[GameManager] Summon mysterious book")
+                print("[GameManager] Summon basic book")
                 self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
                 time.sleep(1)
                 self.device.Touch(846, 360)
             else:
-                self.GoHome()
+                screenPiece = self.screen.Find("Summon_MysteriousBookAvaiable.png")
+                if screenPiece is not None:
+                    print("[GameManager] Summon mysterious book")
+                    self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
+                    time.sleep(1)
+                    self.device.Touch(846, 360)
+                else:
+                    self.gameState = GameState.PROMOTION_BATTLE
+                    self.GoHome()
 
     def GoHome(self):
         if self.screen.screenType == ScreenType.MAP:
