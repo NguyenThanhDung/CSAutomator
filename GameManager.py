@@ -450,6 +450,10 @@ class GameManager:
                 self.GoHome()
 
     def FindGoodItemInMagicShop(self):
+        screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Purple.png")
+        if screenPiece is not None:
+            print("[GameManager] Found 5 stars purple armor")
+            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Gloves_6stars_Gold.png")
         if screenPiece is not None:
             print("[GameManager] Found 6 stars gold gloves")
