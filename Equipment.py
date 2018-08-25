@@ -39,17 +39,17 @@ class Equipment:
             self.isGood = True
 
     def GetMainStatText(self):
-        return self.ImageToString((161, 97, 488, 128))
+        return self.ImageToString((385, 97, 488, 128))
 
     def GetSubStatText(self, slot):
         if slot == 1:
-            return self.ImageToString((161, 161, 488, 192))
+            return self.ImageToString((385, 161, 488, 192))
         if slot == 2:
-            return self.ImageToString((161, 192, 488, 221))
+            return self.ImageToString((385, 192, 488, 221))
         if slot == 3:
-            return self.ImageToString((161, 221, 488, 250))
+            return self.ImageToString((385, 221, 488, 250))
         if slot == 4:
-            return self.ImageToString((161, 250, 488, 280))
+            return self.ImageToString((385, 250, 488, 280))
         else:
             return None
     
