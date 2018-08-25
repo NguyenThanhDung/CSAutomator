@@ -36,6 +36,7 @@ class GameManager:
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
         self.scrollStep = 0
+        self.purchaseConfirmed = False
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -438,10 +439,20 @@ class GameManager:
             equipment = Equipment(self.screen)
             if equipment.isGood:
                 print("[GameManager] Good equipment. Should buy")
+                self.purchaseConfirmed = True
                 self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Purchase))
             else:
                 print("[GameManager] Not good equipment. Close")
+                self.purchaseConfirmed = False
                 self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
+            if self.purchaseConfirmed:
+                print("[GameManager] Confirm")
+                self.purchaseConfirmed = False
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_OK))
+            else:
+                print("[GameManager] Cancel")
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
         else:
             self.GoHome()
 
@@ -542,8 +553,11 @@ class GameManager:
             print("[GameManager] Press anywhere")
             self.device.Touch(500, 500)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
-            print("[GameManager] Close dialog...")
+            print("[GameManager] Close dialog")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
+            print("[GameManager] Cancel")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
         else:
             print("[GameManager] Idle")
 
