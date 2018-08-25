@@ -3,7 +3,7 @@ from enum import Enum
 from Screen import ScreenType
 from ButtonPositions import ButtonPositions, Button, Position
 from Equipment import Equipment
-from Prorfile import Profile, ProfileField
+from Profile import Profile, ProfileField
 
 class GameState(Enum):
     NONE = 0
@@ -121,6 +121,7 @@ class GameManager:
                         self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
                     else:
                         print("[GameManager] Can't find Event Dungeon button. Continue...")
+                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
                         self.PlaySubstate()
                 else:
                     print("[GameManager] There isn't any special event. Continue...")
