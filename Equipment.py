@@ -13,36 +13,21 @@ class Equipment:
         # self.equipmentImage.show()
         # self.equipmentImage.save("Temp/Equipment.png")
 
-        mainStatText = self.GetMainStatText()
-        print("[Equipment] mainStatText: " + mainStatText)
+        statTexts = {}
+        for i in range(5):
+            statTexts[i] = self.GetStatText(i)
+            print("[Equipment] statText[" + str(i) + "]: " + statTexts[i])
 
-        subStatText = self.GetSubStatText(1)
-        if subStatText is not None:
-            print("[Equipment] subStatTextSlot1: " + subStatText)
-
-        subStatText = self.GetSubStatText(2)
-        if subStatText is not None:
-            print("[Equipment] subStatTextSlot2: " + subStatText)
-
-        subStatText = self.GetSubStatText(3)
-        if subStatText is not None:
-            print("[Equipment] subStatTextSlot3: " + subStatText)
-
-        subStatText = self.GetSubStatText(4)
-        if subStatText is not None:
-            print("[Equipment] subStatTextSlot4: " + subStatText)
-
-        if "%" not in mainStatText:
+        if "%" not in statTexts[0]:
             self.isGood = False
         else:
             print("[Equipment] Continue...")
             self.isGood = True
 
-    def GetMainStatText(self):
-        return self.ImageToString((385, 97, 488, 128))
-
-    def GetSubStatText(self, slot):
-        if slot == 1:
+    def GetStatText(self, slot):
+        if slot == 0:
+            return self.ImageToString((385, 97, 488, 128))
+        elif slot == 1:
             return self.ImageToString((385, 161, 488, 192))
         if slot == 2:
             return self.ImageToString((385, 192, 488, 221))
