@@ -3,6 +3,7 @@ from enum import Enum
 from Screen import ScreenType
 from ButtonPositions import ButtonPositions, Button, Position
 from Equipment import Equipment
+from Prorfile import Profile, ProfileField
 
 class GameState(Enum):
     NONE = 0
@@ -113,7 +114,7 @@ class GameManager:
                 print("[GameManager] Summon available. Go to summon...")
                 self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
             else:
-                if self.profile.didPlayEventDungeon == False:
+                if self.profile.GetField(ProfileField.DidPlayEventDungeon) == False:
                     screenPiece = self.screen.Find("GameHome_EventDungeon.png")
                     if screenPiece is not None:
                         print("[GameManager] Open Event Dungeon")
@@ -131,7 +132,7 @@ class GameManager:
             screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
             if screenPiece is not None:
                 print("[GameManager] EXP Dungeon is out of entrance. Go home...")
-                self.profile.didPlayEventDungeon = True
+                self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
                 self.profile.Save()
                 self.GoHome()
             else:
@@ -139,7 +140,7 @@ class GameManager:
                 screenPiece = self.screen.Find("WeeklyLimited.png")
                 if screenPiece is not None:
                     print("[GameManager] Gold Dungeon is out of entrance. Go home...")
-                    self.profile.didPlayEventDungeon = True
+                    self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
                     self.profile.Save()
                     self.GoHome()
                 else:
