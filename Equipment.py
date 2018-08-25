@@ -55,4 +55,6 @@ class Equipment:
     
     def ImageToString(self, area):
         mainStatImage = self.equipmentImage.crop(area)
-        return pytesseract.image_to_string(mainStatImage)
+        text = pytesseract.image_to_string(mainStatImage)
+        text = text.replace("\n", "").replace("\t", "").replace(" ", "")
+        return text
