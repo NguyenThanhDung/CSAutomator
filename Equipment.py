@@ -5,8 +5,7 @@ from Screen import Screen
 class Equipment:
 
     def __init__(self, screen):
-        filePath = screen.Save()
-        screenshot = Image.open(filePath)
+        screenshot = Image.fromarray(screen.image)
 
         equipmentArea = (385, 106, 763, 614)
         equipmentImage = screenshot.crop(equipmentArea)
@@ -19,4 +18,7 @@ class Equipment:
         mainStatText = pytesseract.image_to_string(mainStatImage)
         print("[Equipment] Main Stat: " + mainStatText)
 
-        self.isGood = False
+        if "%" not in mainStatText:
+            self.isGood = False
+        else:
+            print("[Equipment] Continue...")

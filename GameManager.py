@@ -438,8 +438,10 @@ class GameManager:
             equipment = Equipment(self.screen)
             if equipment.isGood:
                 print("[GameManager] Good equipment. Should buy")
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Purchase))
             else:
                 print("[GameManager] Not good equipment. Close")
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
         else:
             self.GoHome()
 
