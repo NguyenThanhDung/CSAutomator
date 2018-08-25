@@ -38,7 +38,7 @@ def Run(isDebugging = False):
         gameManager = GameManager(device)
 
         print("Debugging...")
-        filePath = os.path.abspath("PendingScreens/Shop_6starsGloves.png")
+        filePath = os.path.abspath("PendingScreens/Shop_MysticalBook_6starsRing.png")
         screenshot = ScreenShot(filePath)
 
         screen = screenManager.GetScreen(screenshot)
