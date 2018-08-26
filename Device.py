@@ -18,10 +18,10 @@ class Device:
         self.screenOrientation = 0
 
     def Connect(self):
-        print("[Device " + self.deviceID + "] Connecting...")
+        self.Log("Connecting...")
         params = ["adb", "connect", self.deviceID]
         Device.ExecuteCommand(params)
-        print("[Device " + self.deviceID + "] Connected")
+        self.Log("Connected")
         self.LoadDeviceInfo()
 
     def LoadDeviceInfo(self):
@@ -47,8 +47,8 @@ class Device:
                 else:
                     self.screenOrientation = ScreenOrientation.PORTRAIT
                 continue
-        print("[Device " + self.deviceID + "] Screen size: " + str(self.screenWidth) + " " + str(self.screenHeight))
-        print("[Device " + self.deviceID + "] " + str(self.screenOrientation))
+        self.Log("Screen size: " + str(self.screenWidth) + " " + str(self.screenHeight))
+        self.Log("" + str(self.screenOrientation))
 
     def CaptureScreen(self):
         params = ["adb", "-s", self.deviceID, "shell", "screencap", "-p", "/sdcard/" + Device.screenShotFileName]
@@ -71,7 +71,7 @@ class Device:
         else:
             touchX = self.screenHeight - y
             touchY = x
-        print("[Device " + self.deviceID + "] Touch " + str(touchX) + " " + str(touchY))
+        self.Log("Touch " + str(touchX) + " " + str(touchY))
         params = ["adb", "-s", self.deviceID, "shell", "input", "tap", str(touchX), str(touchY)]
         Device.ExecuteCommand(params)
 
@@ -86,7 +86,7 @@ class Device:
             touchBeginY = beginX
             touchEndX = self.screenHeight - endY
             touchEndY = endX
-        print("[Device " + self.deviceID + "] Swipe " + str(touchBeginX) + ":" + str(touchBeginY) + " to " + str(touchEndX) + ":" + str(touchEndY))
+        self.Log("Swipe " + str(touchBeginX) + ":" + str(touchBeginY) + " to " + str(touchEndX) + ":" + str(touchEndY))
         params = ["adb", "-s", self.deviceID, "shell", "input", "swipe", str(touchBeginX), str(touchBeginY), str(touchEndX), str(touchEndY), str(duration)]
         Device.ExecuteCommand(params)
 
@@ -109,3 +109,7 @@ class Device:
             print("[Popen] OSError: " + e.filename)
         except:
             print("[Popen] SysError: " + sys.exc_info()[0])
+
+    def Log(self, log):
+        print("[Device " + self.deviceID + "] " + log)
+        return None
