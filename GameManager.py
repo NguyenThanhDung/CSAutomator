@@ -130,7 +130,7 @@ class GameManager:
         elif self.gameState == GameState.OUT_OF_SHOES:
             self.FindShoes()
         else:
-            self.GoHome()
+            self.PlayDefault()
 
     def PlayDailyMission(self):
         if self.dailMissionState == DailyMission.NONE:
@@ -143,8 +143,6 @@ class GameManager:
             elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
                 self.Log("Idle in 20 seconds...")
                 time.sleep(20)
-            elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-                self.Log("Idle")
             elif self.screen.screenType == ScreenType.DAILY_MISSION:
                 mission = self.screen.Find("DailyMission_Disassembly.png")
                 if mission is not None:
@@ -155,19 +153,19 @@ class GameManager:
                 mission = self.screen.Find("DailyMission_DearFriend.png")
                 if mission is not None:
                     self.dailMissionState = DailyMission.DEAR_FRIEND
-                    self.GoHome()
+                    self.PlayDefault()
                     return
             elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
                 self.Log("Close mail box")
                 self.device.Touch(51, 40)
             else:
-                self.GoHome()
+                self.PlayDefault()
         elif self.dailMissionState == DailyMission.DISASSEMBLY:
             if self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
                 self.Log("Go to play mission...")
                 self.device.Touch(785, 460)
             else:
-                self.Log("Idle")
+                self.PlayDefault()
         elif self.dailMissionState == DailyMission.DEAR_FRIEND:
             if self.screen.screenType == ScreenType.GAME_HOME:
                 self.Log("Open Community")
@@ -175,9 +173,9 @@ class GameManager:
                 time.sleep(1)
                 self.device.Touch(891, 632)
             else:
-                self.Log("Idle")
+                self.PlayDefault()
         else:
-            self.Log("Idle")
+            self.PlayDefault()
     
     def PlayPromotionBattle(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
@@ -278,7 +276,7 @@ class GameManager:
                     self.Log("Go home")
                     self.device.Touch(38, 46)
         else:
-            self.GoHome()
+            self.PlayDefault()
     
     def PlayMysteriousSanctuary(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
@@ -322,7 +320,7 @@ class GameManager:
             else:
                 self.Log("Not enough shoes. Close the pop-up")
         else:
-            self.GoHome()
+            self.PlayDefault()
 
     def FindShoes(self):
         if self.screen.screenType == ScreenType.GAME_HOME:
@@ -413,7 +411,7 @@ class GameManager:
             self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
             self.device.Touch(785, 357)
         else:
-            self.GoHome()
+            self.PlayDefault()
 
     def BuyGoodItemInMagicShop(self):
         screenPiece = self.FindGoodItemInMagicShop()
@@ -428,7 +426,7 @@ class GameManager:
             else:
                 self.Log("No good item is found")
                 self.scrollStep = 0
-                self.GoHome()
+                self.PlayDefault()
 
     def FindGoodItemInMagicShop(self):
         screenPiece = self.screen.Find("Shop_Equipment_Necklace_6stars_Purple.png")
@@ -456,17 +454,15 @@ class GameManager:
                 time.sleep(1)
                 self.device.Touch(846, 360)
             else:
-                self.GoHome()
+                self.PlayDefault()
 
-    def GoHome(self):
+    def PlayDefault(self):
+        self.Log("PlayDefault")
         if self.screen.screenType == ScreenType.MAP:
-            self.Log("Go home")
             self.device.Touch(1190, 360)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
-            self.Log("Go home")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
-            self.Log("Close")
             self.device.Touch(335, 77)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
             or self.screen.screenType == ScreenType.SHRINE_OF_LIGHT         \
@@ -478,20 +474,15 @@ class GameManager:
             or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB      \
             or self.screen.screenType == ScreenType.SHOP                    \
             or self.screen.screenType == ScreenType.SUMMON:
-            self.Log("Go home")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
-            self.Log("Go to play mission...")
             self.device.Touch(785, 460)
         elif self.screen.screenType == ScreenType.SUMMON_BASIC_DONE         \
             or self.screen.screenType == ScreenType.SUMMON_MYSTEROUS_DONE:
-            self.Log("OK")
             self.device.Touch(1185, 361)
         elif self.screen.screenType == ScreenType.LEVEL_UP:
-            self.Log("Press anywhere")
             self.device.Touch(500, 500)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
-            self.Log("Close dialog...")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
         else:
             self.Log("Idle")
