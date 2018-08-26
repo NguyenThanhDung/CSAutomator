@@ -189,6 +189,7 @@ class GameManager:
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
             print("[GameManager] Auto place and start")
             self.device.Touch(767, 627)
+            time.sleep(1)
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             print("[GameManager] Idle in 20 seconds...")
@@ -293,8 +294,13 @@ class GameManager:
             print("[GameManager] Open floor 7F")
             self.device.Touch(1123, 120)
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
-            print("[GameManager] Auto place and start")
+            screenPiece = self.screen.Find("GuardianPlacement_AutoPlayIsEnabled.png")
+            if screenPiece is not None:
+                self.Log("Auto Play is enabled. Disable it")
+                self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
+            self.Log("Auto place and start")
             self.device.Touch(767, 627)
+            time.sleep(1)
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             #print("[GameManager] Idle in 2 minutes...")
@@ -456,9 +462,12 @@ class GameManager:
         if self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Go home")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
+        elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
+            print("[GameManager] Close")
+            self.device.Touch(335, 77)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
             or self.screen.screenType == ScreenType.SHRINE_OF_LIGHT         \
             or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \
@@ -505,3 +514,7 @@ class GameManager:
             remainingTime = maxTime - currentTime
             print("[GameManager] Auto touch: " + str(remainingTime // 60).zfill(2) + ":" + str(remainingTime % 60).zfill(2))
             time.sleep(sleepTime)
+
+    def Log(self, log):
+        print("[GameManager] " + log)
+        return None
