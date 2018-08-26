@@ -437,7 +437,7 @@ class GameManager:
                 else:
                     print("[GameManager] Magic Shop isn't available. Go home...")
                     self.gameState = GameState.PROMOTION_BATTLE
-                    self.GoHome()
+                    self.PlayDefault()
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
             print("[GameManager] Opening item info...")
             equipment = Equipment(self.screen)
@@ -458,7 +458,7 @@ class GameManager:
                 print("[GameManager] Cancel")
                 self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
         else:
-            self.GoHome()
+            self.PlayDefault()
 
     def BuyGoodItemInMagicShop(self):
         screenPiece = self.FindGoodItemInMagicShop()
