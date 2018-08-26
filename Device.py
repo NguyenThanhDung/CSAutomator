@@ -19,17 +19,17 @@ class Device:
 
     def Connect(self):
         if self.deviceID is None:
-            print("[Device is None]")
+            self.Log("Idle")
         else:
-            print("[Device " + self.deviceID + "] Connecting...")
+            self.Log("Connecting...")
             params = ["adb", "connect", self.deviceID]
             Device.ExecuteCommand(params)
-            print("[Device " + self.deviceID + "] Connected")
+            self.Log("Connected")
             self.LoadDeviceInfo()
 
     def LoadDeviceInfo(self):
         if self.deviceID is None:
-            print("[Device is None]")
+            self.Log("Idle")
         else:
             params = ["adb", "-s", self.deviceID, "shell", "dumpsys", "input"]
             info = Device.ExecuteCommand(params)
@@ -53,12 +53,12 @@ class Device:
                     else:
                         self.screenOrientation = ScreenOrientation.PORTRAIT
                     continue
-            print("[Device " + self.deviceID + "] Screen size: " + str(self.screenWidth) + " " + str(self.screenHeight))
-            print("[Device " + self.deviceID + "] " + str(self.screenOrientation))
+            self.Log("Screen size: " + str(self.screenWidth) + " " + str(self.screenHeight))
+            self.Log("" + str(self.screenOrientation))
 
     def CaptureScreen(self):
         if self.deviceID is None:
-            print("[Device is None]")
+            self.Log("Idle")
         else:
             params = ["adb", "-s", self.deviceID, "shell", "screencap", "-p", "/sdcard/" + Device.screenShotFileName]
             Device.ExecuteCommand(params)
@@ -68,7 +68,7 @@ class Device:
     
     def Pull(self, fileName):
         if self.deviceID is None:
-            print("[Device is None]")
+            self.Log("Idle")
         else:
             params = ["adb", "-s", self.deviceID, "pull", "/sdcard/" + fileName]
             Device.ExecuteCommand(params)
@@ -78,7 +78,7 @@ class Device:
 
     def Touch(self, x, y):
         if self.deviceID is None:
-            print("[Device is None]")
+            self.Log("Idle")
         else:
             if self.screenOrientation == ScreenOrientation.LANDSCAPE:
                 touchX = x
@@ -86,13 +86,13 @@ class Device:
             else:
                 touchX = self.screenHeight - y
                 touchY = x
-            print("[Device " + self.deviceID + "] Touch " + str(touchX) + " " + str(touchY))
+            self.Log("Touch " + str(touchX) + " " + str(touchY))
             params = ["adb", "-s", self.deviceID, "shell", "input", "tap", str(touchX), str(touchY)]
             Device.ExecuteCommand(params)
 
     def Swipe(self, beginX, beginY, endX, endY, duration = 500):
         if self.deviceID is None:
-            print("[Device is None]")
+            self.Log("Idle")
         else:
             if self.screenOrientation == ScreenOrientation.LANDSCAPE:
                 touchBeginX = beginX
@@ -104,7 +104,7 @@ class Device:
                 touchBeginY = beginX
                 touchEndX = self.screenHeight - endY
                 touchEndY = endX
-            print("[Device " + self.deviceID + "] Swipe " + str(touchBeginX) + ":" + str(touchBeginY) + " to " + str(touchEndX) + ":" + str(touchEndY))
+            self.Log("Swipe " + str(touchBeginX) + ":" + str(touchBeginY) + " to " + str(touchEndX) + ":" + str(touchEndY))
             params = ["adb", "-s", self.deviceID, "shell", "input", "swipe", str(touchBeginX), str(touchBeginY), str(touchEndX), str(touchEndY), str(duration)]
             Device.ExecuteCommand(params)
 
@@ -127,3 +127,7 @@ class Device:
             print("[Popen] OSError: " + e.filename)
         except:
             print("[Popen] SysError: " + sys.exc_info()[0])
+
+    def Log(self, log):
+        print("[Device " + self.deviceID + "] " + log)
+        return None

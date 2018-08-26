@@ -17,7 +17,8 @@ class ScreenType(Enum):
     SHRINE_OF_LIGHT = 11
     GUARDIAN_PLACEMENT = 12
     PVE_RESULT_VICTORY = 13
-    NOT_ENOUGH_SHOES = 14
+    PVE_RESULT_REPEAT_RESULT = 14
+    NOT_ENOUGH_SHOES = 15
 
     BATTLE_LIST = 20
     BATTLE_LIST_REFRESH_CONFIRMATION = 21
@@ -67,7 +68,7 @@ class Screen:
         self.image = image
 
     def ShowName(self):
-        print("[Screen] " + str(self.screenType))
+        self.Log(str(self.screenType))
 
     def Find(self, fileName, precision = 1000):
         filePath = os.path.abspath("ScreenTemplate\\" + fileName)
@@ -76,7 +77,7 @@ class Screen:
             return None
         res = cv2.matchTemplate(self.image, targetImage, cv2.TM_SQDIFF)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-        print("[Screen] " + fileName.ljust(50) + " " + str(min_val).rjust(15))
+        self.Log(fileName.ljust(50) + " " + str(min_val).rjust(15))
         if min_val < precision:
             return min_loc
         else:
@@ -94,3 +95,7 @@ class Screen:
         cv2.imwrite(filePath, self.image)
 
         return filePath
+
+    def Log(self, log):
+        print("[Screen] " + log)
+        return None
