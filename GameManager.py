@@ -462,9 +462,12 @@ class GameManager:
         if self.screen.screenType == ScreenType.MAP:
             print("[GameManager] Go home")
             self.device.Touch(1190, 360)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             print("[GameManager] Go home")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
+        elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
+            print("[GameManager] Close")
+            self.device.Touch(335, 77)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
             or self.screen.screenType == ScreenType.SHRINE_OF_LIGHT         \
             or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \
