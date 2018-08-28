@@ -41,6 +41,7 @@ class ScreenType(Enum):
 
     SHOP = 50
     SHOP_DIALOG_IS_OPENNING = 51
+    SHOP_DIALOG_PURCHASE_CONFIRMATION = 52
 
     SUMMON = 60
     SUMMON_BASIC_DONE = 61
@@ -67,7 +68,7 @@ class Screen:
         self.image = image
 
     def ShowName(self):
-        print("[Screen] " + str(self.screenType))
+        self.Log(str(self.screenType))
 
     def Find(self, fileName, precision = 1000):
         filePath = os.path.abspath("ScreenTemplate\\" + fileName)
@@ -76,7 +77,7 @@ class Screen:
             return None
         res = cv2.matchTemplate(self.image, targetImage, cv2.TM_SQDIFF)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-        self.Log("Find Value: " + str(min_val))
+        self.Log(fileName.ljust(50) + " " + str(min_val).rjust(15))
         if min_val < precision:
             return min_loc
         else:

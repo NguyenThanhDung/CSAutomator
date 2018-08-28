@@ -10,6 +10,8 @@ class GameState(Enum):
     PROMOTION_BATTLE = 2
     MYSTERIOUS_SANCTUARY = 3
     OUT_OF_SHOES = 4
+    SHOPPING = 5
+    SUMMON = 6
 
 class ShoesSource(Enum):
     DAILY_MISSION_REWARD = 0
@@ -34,6 +36,7 @@ class GameManager:
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
         self.scrollStep = 0
+        self.purchaseConfirmed = False
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -107,16 +110,16 @@ class GameManager:
             self.Log("Yes")
             self.device.Touch(788, 244)
         elif self.screen.screenType == ScreenType.GAME_HOME:
-            screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
+            screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
             if screenPiece is not None:
-                self.Log("Summon available. Go to summon...")
-                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
+                self.Log("Shop available. Go for shoping...")
+                self.gameState = GameState.SHOPPING
             else:
-                self.Log("Shop isn't available. Continue...")
-                self.PlaySubstate()
-        elif self.screen.screenType == ScreenType.SUMMON:
-            self.Log("Summon...")
-            self.Summon()
+                screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
+                if screenPiece is not None:
+                    self.Log("Summon available. Go to summon...")
+                    self.gameState = GameState.SUMMON
+            self.PlaySubstate()
         else:
             self.PlaySubstate()
 
@@ -129,6 +132,10 @@ class GameManager:
             self.PlayMysteriousSanctuary()
         elif self.gameState == GameState.OUT_OF_SHOES:
             self.FindShoes()
+        elif self.gameState == GameState.SHOPPING:
+            self.Shopping()
+        elif self.gameState == GameState.SUMMON:
+            self.Summon()
         else:
             self.PlayDefault()
 
@@ -413,6 +420,46 @@ class GameManager:
         else:
             self.PlayDefault()
 
+    def Shopping(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            print("[GameManager] Press Shop button")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Shop))
+        elif self.screen.screenType == ScreenType.SHOP:
+            screenPiece = self.screen.Find("Shop_MagicShopAvailable.png")
+            if screenPiece is not None:
+                print("[GameManager] Magic shop is available. Open magic shop...")
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Shop_MagicShop))
+            else:
+                screenPiece = self.screen.Find("Shop_MagicShopOpening.png")
+                if screenPiece is not None:
+                    print("[GameManager] Magic shop is opening. Find good items...")
+                    self.BuyGoodItemInMagicShop()
+                else:
+                    print("[GameManager] Magic Shop isn't available. Go home...")
+                    self.gameState = GameState.PROMOTION_BATTLE
+                    self.PlayDefault()
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
+            print("[GameManager] Opening item info...")
+            equipment = Equipment(self.screen)
+            if equipment.isGood:
+                print("[GameManager] Good equipment. Should buy")
+                self.purchaseConfirmed = True
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Purchase))
+            else:
+                print("[GameManager] Not good equipment. Close")
+                self.purchaseConfirmed = False
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
+            if self.purchaseConfirmed:
+                print("[GameManager] Confirm")
+                self.purchaseConfirmed = False
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_OK))
+            else:
+                print("[GameManager] Cancel")
+                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
+        else:
+            self.PlayDefault()
+
     def BuyGoodItemInMagicShop(self):
         screenPiece = self.FindGoodItemInMagicShop()
         if screenPiece is not None:
@@ -426,9 +473,22 @@ class GameManager:
             else:
                 self.Log("No good item is found")
                 self.scrollStep = 0
+                self.gameState = GameState.PROMOTION_BATTLE
                 self.PlayDefault()
 
     def FindGoodItemInMagicShop(self):
+        screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Purple.png")
+        if screenPiece is not None:
+            print("[GameManager] Found 5 stars purple armor")
+            return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Gold.png")
+        if screenPiece is not None:
+            print("[GameManager] Found 5 stars gold armor")
+            return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Gloves_6stars_Gold.png")
+        if screenPiece is not None:
+            print("[GameManager] Found 6 stars gold gloves")
+            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Necklace_6stars_Purple.png")
         if screenPiece is not None:
             self.Log("Found 6 stars purple necklace")
@@ -437,24 +497,35 @@ class GameManager:
         if screenPiece is not None:
             self.Log("Found 6 stars gold ring")
             return screenPiece
+        screenPiece = self.screen.Find("Shop_MysticalBook.png")
+        if screenPiece is not None:
+            print("[GameManager] Found mystical book")
+            return screenPiece
         return None
 
     def Summon(self):
-        screenPiece = self.screen.Find("Summon_BasicBookAvaiable.png")
-        if screenPiece is not None:
-            self.Log("Summon basic book")
-            self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
-            time.sleep(1)
-            self.device.Touch(846, 360)
-        else:
-            screenPiece = self.screen.Find("Summon_MysteriousBookAvaiable.png")
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            self.Log("Press Summon button")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Home_Summon))
+        elif self.screen.screenType == ScreenType.SUMMON:
+            screenPiece = self.screen.Find("Summon_BasicBookAvaiable.png")
             if screenPiece is not None:
-                self.Log("Summon mysterious book")
+                self.Log("Summon basic book")
                 self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
                 time.sleep(1)
                 self.device.Touch(846, 360)
             else:
-                self.PlayDefault()
+                screenPiece = self.screen.Find("Summon_MysteriousBookAvaiable.png")
+                if screenPiece is not None:
+                    self.Log("Summon mysterious book")
+                    self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
+                    time.sleep(1)
+                    self.device.Touch(846, 360)
+                else:
+                    self.gameState = GameState.PROMOTION_BATTLE
+                    self.PlayDefault()
+        else:
+            self.PlayDefault()
 
     def PlayDefault(self):
         self.Log("PlayDefault")
@@ -484,6 +555,8 @@ class GameManager:
             self.device.Touch(500, 500)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
+        elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
         else:
             self.Log("Idle")
 

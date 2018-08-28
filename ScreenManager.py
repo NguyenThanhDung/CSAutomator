@@ -79,6 +79,11 @@ class ScreenManager:
         screenTemplate.AddCriteria("Shop_EquipmentInfo_Buttons.png", 30000)
         self.templates.append(screenTemplate)
 
+        screenTemplate = TemplateImage(ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION, "Shop_Equipment_PurchaseConfirmation.png", 30000)
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_OK.png", 30000)
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_Cancel.png", 30000)
+        self.templates.append(screenTemplate)
+
         self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png", 100000))
         self.templates.append(TemplateImage(ScreenType.SUMMON_BASIC_DONE, "Summon_BasicDone.png"))
         self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png"))
