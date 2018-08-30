@@ -9,6 +9,8 @@ An auto script to play game
 
 * Android SDK Platform Tools
 [Download](https://developer.android.com/studio/releases/platform-tools)
+  * Extract the downloaded file. For example: C:\platform-tools_r28.0.0-windows\
+  * Add the platform-tool folder into environment variable: C:\platform-tools_r28.0.0-windows\platform-tools
 
 ## First Setup
 
