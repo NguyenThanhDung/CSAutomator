@@ -24,6 +24,16 @@ Install enum module for python:
 pip install enum
 ```
 
+Install Pillow module (PIL) for python:
+``` bash
+pip install Pillow
+```
+
+Install pytesseract module for python:
+``` bash
+pip install pytesseract
+```
+
 ## Run
 
 ``` bash
