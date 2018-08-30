@@ -19,6 +19,11 @@ Install OpenCV for python:
 pip install opencv-python
 ```
 
+Install enum module for python:
+``` bash
+pip install enum
+```
+
 ## Run
 
 ``` bash
