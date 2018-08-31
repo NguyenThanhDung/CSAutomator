@@ -8,13 +8,7 @@ class ScreenManager:
     def __init__(self):
         self.templates = []
         
-        gameHome = TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png", 30000000)
-        gameHome.AddCriteria("GameHome_EventMailChatButtons.png", 1000000)
-        gameHome.AddCriteria("GameHome_Gold.png", 1000000)
-        gameHome.AddCriteria("GameHome_MoonStone.png", 1000000)
-        gameHome.AddCriteria("GameHome_Shoes.png", 1000000)
-        gameHome.AddCriteria("GameHome_BattleTickets.png", 1000000)
-        self.templates.append(gameHome)
+        self.templates.append(TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png"))
 
         map = TemplateImage(ScreenType.MAP, "Map_GoToLobby.png", 1000000)
         map.AddCriteria("Map_MysteriousSanctuary.png", 1000000)
@@ -90,7 +84,7 @@ class ScreenManager:
 
         self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
         self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
-        self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
+        self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 10000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_WEEKLY_LIMITED, "WeeklyLimited.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_LIMITED_OFFER, "LimitedOffer.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_SUGGESTED_ITEM, "Dialog_SuggestedItem.png", 100000))
