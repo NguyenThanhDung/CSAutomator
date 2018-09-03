@@ -22,3 +22,8 @@ class DailyMission(Enum):
     POWER_UP_EQUIPMENT = 3
     DISASSEMBLY = 4
     DEAR_FRIEND = 5
+
+class Position():
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y

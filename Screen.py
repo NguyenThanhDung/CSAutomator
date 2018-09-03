@@ -1,6 +1,7 @@
 import os, errno
 import cv2
 from enum import Enum
+from Defines import Position
 
 class ScreenType(Enum):
     DEVICE_HOME = 0
@@ -79,7 +80,7 @@ class Screen:
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
         self.Log(fileName.ljust(50) + " " + str(min_val).rjust(15))
         if min_val < precision:
-            return min_loc
+            return Position(min_loc[0], min_loc[1])
         else:
             return None
 

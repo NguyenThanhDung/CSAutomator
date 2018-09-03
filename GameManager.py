@@ -23,7 +23,7 @@ class GameManager:
             iconLocation = self.screen.Find("DeviceHome.png", 30000)
             if iconLocation is not None:
                 self.Log("Start game")
-                self.device.Touch(iconLocation[0] + 5, iconLocation[1] + 5)
+                self.device.Touch(iconLocation.x + 5, iconLocation.y + 5)
                 time.sleep(5)
                 self.device.LoadDeviceInfo()
             else:
@@ -132,7 +132,7 @@ class GameManager:
                 if mission is not None:
                     self.Log("Open mission")
                     self.dailMissionState = DailyMission.DISASSEMBLY
-                    self.device.Touch(mission[0] + 64, mission[1] + 240)
+                    self.device.Touch(mission.x + 64, mission.y + 240)
                     return
                 mission = self.screen.Find("DailyMission_DearFriend.png")
                 if mission is not None:
@@ -196,7 +196,7 @@ class GameManager:
                 if potentialMatch is not None:
                     self.Log("There is a potential match, go for battle")
                     self.scrollStep = 0
-                    self.device.Touch(potentialMatch[0] + 40, potentialMatch[1] + 70)
+                    self.device.Touch(potentialMatch.x + 40, potentialMatch.y + 70)
                 else:
                     if self.scrollStep < 2:
                         self.Log("Can not find any potential match, scroll up")
@@ -220,7 +220,7 @@ class GameManager:
                 batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
                 if batteButtonLocaltion is not None:
                     self.Log("Press Battle button at " + str(batteButtonLocaltion))
-                    self.device.Touch(batteButtonLocaltion[0] + 5, batteButtonLocaltion[1] + 5)
+                    self.device.Touch(batteButtonLocaltion.x + 5, batteButtonLocaltion.y + 5)
                 else:
                     self.Log("Schroll down")
                     self.device.Swipe(1116, 351, 569, 351)
@@ -228,7 +228,7 @@ class GameManager:
                 battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
                 if battleAvailable is not None:
                     self.Log("Switch to Battle tab")
-                    self.device.Touch(battleAvailable[0] + 52, battleAvailable[1] + 44)
+                    self.device.Touch(battleAvailable.x + 52, battleAvailable.y + 44)
                 else:
                     self.Log("Go home")
                     self.device.Touch(38, 46)
@@ -236,12 +236,12 @@ class GameManager:
             rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
             if rivalAvailable is not None:
                 self.Log("Switch to Rival tab")
-                self.device.Touch(rivalAvailable[0] + 62, rivalAvailable[1] + 66)
+                self.device.Touch(rivalAvailable.x + 62, rivalAvailable.y + 66)
             else:
                 battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
                 if battleAvailable is not None:
                     self.Log("Switch to Battle tab")
-                    self.device.Touch(battleAvailable[0] + 52, battleAvailable[1] + 44)
+                    self.device.Touch(battleAvailable.x + 52, battleAvailable.y + 44)
                 else:
                     self.Log("Play Mysterious Sanctuary...")
                     self.gameState = GameState.MYSTERIOUS_SANCTUARY
@@ -250,12 +250,12 @@ class GameManager:
             rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
             if rivalAvailable is not None:
                 self.Log("Switch to Rival tab")
-                self.device.Touch(rivalAvailable[0] + 62, rivalAvailable[1] + 66)
+                self.device.Touch(rivalAvailable.x + 62, rivalAvailable.y + 66)
             else:
                 battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
                 if battleAvailable is not None:
                     self.Log("Switch to Battle tab")
-                    self.device.Touch(battleAvailable[0] + 52, battleAvailable[1] + 44)
+                    self.device.Touch(battleAvailable.x + 52, battleAvailable.y + 44)
                 else:
                     self.Log("Go home")
                     self.device.Touch(38, 46)
@@ -279,7 +279,7 @@ class GameManager:
             screenPiece = self.screen.Find("GuardianPlacement_AutoPlayIsEnabled.png")
             if screenPiece is not None:
                 self.Log("Auto Play is enabled. Disable it")
-                self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
+                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
             self.Log("Auto place and start")
             self.device.Touch(767, 627)
             time.sleep(1)
@@ -338,7 +338,7 @@ class GameManager:
             collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
             if collectButton is not None:
                 self.Log("Collect reward")
-                self.device.Touch(collectButton[0] + 34, collectButton[1] + 66)
+                self.device.Touch(collectButton.x + 34, collectButton.y + 66)
             else:
                 if self.scrollStep < 2:
                     self.Log("Can not find any reward, scroll up")
@@ -441,7 +441,7 @@ class GameManager:
         screenPiece = self.FindGoodItemInMagicShop()
         if screenPiece is not None:
             self.Log("Open item info")
-            self.device.Touch(screenPiece[0] + 193, screenPiece[1] + 70)
+            self.device.Touch(screenPiece.x + 193, screenPiece.y + 70)
         else:
             if self.scrollStep < 2:
                 self.Log("No good item is found. Find more...")
@@ -492,14 +492,14 @@ class GameManager:
             screenPiece = self.screen.Find("Summon_BasicBookAvaiable.png")
             if screenPiece is not None:
                 self.Log("Summon basic book")
-                self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
+                self.device.Touch(screenPiece.x + 127, screenPiece.y + 88)
                 time.sleep(1)
                 self.device.Touch(846, 360)
             else:
                 screenPiece = self.screen.Find("Summon_MysteriousBookAvaiable.png")
                 if screenPiece is not None:
                     self.Log("Summon mysterious book")
-                    self.device.Touch(screenPiece[0] + 127, screenPiece[1] + 88)
+                    self.device.Touch(screenPiece.x + 127, screenPiece.y + 88)
                     time.sleep(1)
                     self.device.Touch(846, 360)
                 else:
