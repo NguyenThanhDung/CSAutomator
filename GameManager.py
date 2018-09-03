@@ -367,13 +367,13 @@ class GameManager:
             self.Log("Close pop up")
             self.device.Touch(436, 103)
         elif self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB:
-            collectButton = self.screen.Find("MailBox_CollectButton.png", 10000)
-            if collectButton is not None:
+            screenPiece = self.screen.Find("MailBox_CollectButton.png", 100000)
+            if screenPiece is not None:
                 self.Log("Collect reward")
-                self.device.Touch(299, 57)
-                self.gameState = GameState.PROMOTION_BATTLE
+                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
             else:
                 self.Log("Mail box is empty. Close mail box, go to shop...")
+                self.gameState = GameState.PROMOTION_BATTLE
                 self.shoesSource = ShoesSource.SHOP_WITH_FP
                 self.device.Touch(51, 40)
         elif self.screen.screenType == ScreenType.SHOP:
