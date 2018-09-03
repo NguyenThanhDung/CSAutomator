@@ -531,27 +531,31 @@ class GameManager:
             if screenPiece is not None:
                 self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
-            screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
+            screenPiece = self.screen.Find("EventDungeon_Gold.png", 100000)
             if screenPiece is not None:
-                print("[GameManager] EXP Dungeon is out of entrance. Go home...")
-                self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
-                self.profile.Save()
-                self.PlayDefault()
-            else:
-                # TODO: WIP
                 screenPiece = self.screen.Find("WeeklyLimited.png")
                 if screenPiece is not None:
-                    print("[GameManager] Gold Dungeon is out of entrance. Go home...")
+                    self.Log("Gold Dungeon is out of entrance. Go home...")
                     self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
                     self.profile.Save()
                     self.PlayDefault()
                 else:
-                    screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+                    self.Log("Play Gold Dungeon")
+                    self.device.Touch(513, 483)
+            else:
+                screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+                if screenPiece is not None:
+                    screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
                     if screenPiece is not None:
-                        print("[GameManager] Play EXP Dungeon")
-                        self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
-                    else:
+                        self.Log("EXP Dungeon is out of entrance. Go home...")
+                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                        self.profile.Save()
                         self.PlayDefault()
+                    else:
+                        self.Log("Play EXP Dungeon")
+                        self.device.Touch(923, 231)
+                else:
+                    self.PlayDefault()
         else:
             self.PlayDefault()
 
