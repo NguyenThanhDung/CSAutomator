@@ -1,6 +1,7 @@
 import os, errno
 import cv2
 from enum import Enum
+from Defines import Position
 
 class ScreenType(Enum):
     DEVICE_HOME = 0
@@ -17,7 +18,8 @@ class ScreenType(Enum):
     SHRINE_OF_LIGHT = 11
     GUARDIAN_PLACEMENT = 12
     PVE_RESULT_VICTORY = 13
-    NOT_ENOUGH_SHOES = 14
+    PVE_RESULT_REPEAT_RESULT = 14
+    NOT_ENOUGH_SHOES = 15
 
     BATTLE_LIST = 20
     BATTLE_LIST_REFRESH_CONFIRMATION = 21
@@ -40,6 +42,7 @@ class ScreenType(Enum):
 
     SHOP = 50
     SHOP_DIALOG_IS_OPENNING = 51
+    SHOP_DIALOG_PURCHASE_CONFIRMATION = 52
 
     SUMMON = 60
     SUMMON_BASIC_DONE = 61
@@ -69,18 +72,18 @@ class Screen:
         self.image = image
 
     def ShowName(self):
-        print("[Screen] " + str(self.screenType))
+        self.Log(str(self.screenType))
 
-    def Find(self, fileName, precision = 1000):
+    def Find(self, fileName, precision = 10000):
         filePath = os.path.abspath("ScreenTemplate\\" + fileName)
         targetImage = cv2.imread(filePath, 0)
         if targetImage is None:
             return None
         res = cv2.matchTemplate(self.image, targetImage, cv2.TM_SQDIFF)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-        print("[Screen] Find Value: " + str(min_val))
+        self.Log(fileName.ljust(50) + " " + str(min_val).rjust(15))
         if min_val < precision:
-            return min_loc
+            return Position(min_loc[0], min_loc[1])
         else:
             return None
 
@@ -96,3 +99,7 @@ class Screen:
         cv2.imwrite(filePath, self.image)
 
         return filePath
+
+    def Log(self, log):
+        print("[Screen] " + log)
+        return None

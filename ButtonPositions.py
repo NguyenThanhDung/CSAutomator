@@ -28,6 +28,8 @@ class Button(Enum):
 
     Dialog_BuyEquipment_Purchase = 30
     Dialog_BuyEquipment_Cancel = 31
+    Dialog_BuyEquipment_PurchaseConfirmation_OK = 32
+    Dialog_BuyEquipment_PurchaseConfirmation_Cancel = 33
 
     Back = 999
 
@@ -73,6 +75,10 @@ class ButtonPositions:
             return Position(717, 235)
         if button == Button.Dialog_BuyEquipment_Cancel:
             return Position(717, 481)
+        if button == Button.Dialog_BuyEquipment_PurchaseConfirmation_OK:
+            return Position(783, 244)
+        if button == Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel:
+            return Position(783, 472)
             
         if button == Button.Back:
             return Position(40, 48)

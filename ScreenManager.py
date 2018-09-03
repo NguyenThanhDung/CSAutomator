@@ -8,13 +8,7 @@ class ScreenManager:
     def __init__(self):
         self.templates = []
         
-        gameHome = TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png", 30000000)
-        gameHome.AddCriteria("GameHome_EventMailChatButtons.png", 1000000)
-        gameHome.AddCriteria("GameHome_Gold.png", 1000000)
-        gameHome.AddCriteria("GameHome_MoonStone.png", 1000000)
-        gameHome.AddCriteria("GameHome_Shoes.png", 1000000)
-        gameHome.AddCriteria("GameHome_BattleTickets.png", 1000000)
-        self.templates.append(gameHome)
+        self.templates.append(TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png"))
 
         map = TemplateImage(ScreenType.MAP, "Map_GoToLobby.png", 1000000)
         map.AddCriteria("Map_MysteriousSanctuary.png", 1000000)
@@ -39,8 +33,8 @@ class ScreenManager:
         promotionBattle_RewardInfo.AddCriteria("RewardInfo_OkButton.png")
         self.templates.append(promotionBattle_RewardInfo)
         
-        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png"))
-        self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png"))
+        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png", 100000))
         self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png"))
 
         pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png", 100000)
@@ -79,6 +73,11 @@ class ScreenManager:
         screenTemplate.AddCriteria("Shop_EquipmentInfo_Buttons.png", 30000)
         self.templates.append(screenTemplate)
 
+        screenTemplate = TemplateImage(ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION, "Shop_Equipment_PurchaseConfirmation.png", 30000)
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_OK.png", 30000)
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_Cancel.png", 30000)
+        self.templates.append(screenTemplate)
+
         self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png", 100000))
         self.templates.append(TemplateImage(ScreenType.SUMMON_BASIC_DONE, "Summon_BasicDone.png"))
         self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png"))
@@ -88,7 +87,7 @@ class ScreenManager:
 
         self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
         self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
-        self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 120000))
+        self.templates.append(TemplateImage(ScreenType.EVENT_INFO, "EventInfo.png", 10000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_WEEKLY_LIMITED, "WeeklyLimited.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_LIMITED_OFFER, "LimitedOffer.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_SUGGESTED_ITEM, "Dialog_SuggestedItem.png", 100000))
@@ -110,6 +109,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.BATTLE_RANKING, "Battle_Ranking.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_DEFENSE_RECORD, "Battle_DefenseRecord.png"))
 
+        self.templates.append(TemplateImage(ScreenType.PVE_RESULT_REPEAT_RESULT, "PvEResult_RepeatBattleResult.png", 100000))
         self.templates.append(TemplateImage(ScreenType.LEVEL_UP, "LevelUp.png"))
 
     def GetScreen(self, screenShot):
