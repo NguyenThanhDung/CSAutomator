@@ -6,7 +6,6 @@ from Defines import Position
 class ScreenType(Enum):
     DEVICE_HOME = 0
     TAP_TO_START = 1
-    EVENT_INFO = 2
     DAILY_LOGIN_REWARD = 3
     GAME_HOME = 4
     MAP = 5
@@ -62,6 +61,8 @@ class ScreenType(Enum):
     DIALOG_UNSTABLE_NETWORK = 87
 
     LEVEL_UP = 90
+    EVENT_INFO_1 = 91
+    EVENT_INFO_2 = 92
     
     UNKNOWN = 99
 
