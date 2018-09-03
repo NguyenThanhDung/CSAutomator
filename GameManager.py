@@ -560,6 +560,11 @@ class GameManager:
                         self.device.Touch(923, 231)
                 else:
                     self.PlayDefault()
+        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+            self.Log("Auto place and start")
+            self.device.Touch(767, 627)
+            time.sleep(1)
+            self.device.Touch(765, 141)
         else:
             self.PlayDefault()
 
