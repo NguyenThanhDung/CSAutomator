@@ -481,6 +481,10 @@ class GameManager:
         if screenPiece is not None:
             print("[GameManager] Found 5 stars purple armor")
             return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Gloves_5stars_Purple.png")
+        if screenPiece is not None:
+            print("[GameManager] Found 5 stars purple gloves")
+            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Gold.png")
         if screenPiece is not None:
             print("[GameManager] Found 5 stars gold armor")
