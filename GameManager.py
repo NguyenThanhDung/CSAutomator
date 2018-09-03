@@ -3,6 +3,7 @@ from Defines import GameState, ShoesSource, DailyMission
 from Screen import ScreenType
 from ButtonPositions import ButtonPositions, Button, Position
 from Equipment import Equipment
+from MagicShop import MagicShop
 
 class GameManager:
 
@@ -14,6 +15,7 @@ class GameManager:
         self.dailMissionState = DailyMission.NONE
         self.scrollStep = 0
         self.purchaseConfirmed = False
+        self.magicShop = MagicShop()
 
     def SetScreen(self, screen):
         self.screen = screen
@@ -442,7 +444,9 @@ class GameManager:
         if screenPiece is not None:
             self.Log("Open item info")
             self.device.Touch(screenPiece.x + 193, screenPiece.y + 70)
+            self.magicShop.AddOpenedEquipment(screenPiece)
         else:
+            self.magicShop.ClearOpenedEquipments()
             if self.scrollStep < 2:
                 self.Log("No good item is found. Find more...")
                 self.device.Swipe(989, 127, 989, 594)
@@ -455,31 +459,31 @@ class GameManager:
 
     def FindGoodItemInMagicShop(self):
         screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Purple.png")
-        if screenPiece is not None:
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             print("[GameManager] Found 5 stars purple armor")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Gloves_5stars_Purple.png")
-        if screenPiece is not None:
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             print("[GameManager] Found 5 stars purple gloves")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Gold.png")
-        if screenPiece is not None:
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             print("[GameManager] Found 5 stars gold armor")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Gloves_6stars_Gold.png")
-        if screenPiece is not None:
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             print("[GameManager] Found 6 stars gold gloves")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Necklace_6stars_Purple.png")
-        if screenPiece is not None:
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars purple necklace")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Ring_6stars_Gold.png")
-        if screenPiece is not None:
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars gold ring")
             return screenPiece
         screenPiece = self.screen.Find("Shop_MysticalBook.png")
-        if screenPiece is not None:
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             print("[GameManager] Found mystical book")
             return screenPiece
         return None
