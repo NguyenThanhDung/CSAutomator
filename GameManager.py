@@ -96,50 +96,18 @@ class GameManager:
                 self.Log("Shop available. Go for shoping...")
                 self.gameState = GameState.SHOPPING
             else:
-                if self.profile.GetField(ProfileField.DidPlayEventDungeon) == False:
-                    screenPiece = self.screen.Find("GameHome_EventDungeon.png")
-                    if screenPiece is not None:
-                        print("[GameManager] Open Event Dungeon")
-                        self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
-                    else:
-                        print("[GameManager] Can't find Event Dungeon button. Continue...")
-                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
-                        self.PlaySubstate()
-                else:
-                    print("[GameManager] There isn't any special event. Continue...")
-                    self.PlaySubstate()
-        elif self.screen.screenType == ScreenType.SUMMON:
-            print("[GameManager] Summon...")
-            self.Summon()
-        elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
-            screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
-            if screenPiece is not None:
-                print("[GameManager] EXP Dungeon is out of entrance. Go home...")
-                self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
-                self.profile.Save()
-                self.GoHome()
-            else:
-                # TODO: WIP
-                screenPiece = self.screen.Find("WeeklyLimited.png")
-                if screenPiece is not None:
-                    print("[GameManager] Gold Dungeon is out of entrance. Go home...")
-                    self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
-                    self.profile.Save()
-                    self.GoHome()
-                else:
-                    screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
-                    if screenPiece is not None:
-                        print("[GameManager] Play EXP Dungeon")
-                        self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
-                    else:
-                        self.PlaySubstate()
-        elif self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT:
-            print("[GameManager] Stop")
-            self.device.Touch(1195, 120)
                 screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
                 if screenPiece is not None:
                     self.Log("Summon available. Go to summon...")
                     self.gameState = GameState.SUMMON
+                elif self.profile.GetField(ProfileField.DidPlayEventDungeon) == False:
+                    screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+                    if screenPiece is not None:
+                        self.Log("Event Dungeon available. Go to dungeon...")
+                        self.gameState = GameState.EVENT_DUNGEON
+                    else:
+                        print("[GameManager] Can't find Event Dungeon button. Continue...")
+                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
             self.PlaySubstate()
         else:
             self.PlaySubstate()
@@ -157,6 +125,8 @@ class GameManager:
             self.Shopping()
         elif self.gameState == GameState.SUMMON:
             self.Summon()
+        elif self.gameState == GameState.EVENT_DUNGEON:
+            self.PlayEventDungeon()
         else:
             self.PlayDefault()
 
@@ -551,6 +521,37 @@ class GameManager:
                 else:
                     self.gameState = GameState.PROMOTION_BATTLE
                     self.PlayDefault()
+        else:
+            self.PlayDefault()
+
+    def PlayEventDungeon(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            self.Log("Press Event Dungeon button")
+            screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+            if screenPiece is not None:
+                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
+        elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
+            screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
+            if screenPiece is not None:
+                print("[GameManager] EXP Dungeon is out of entrance. Go home...")
+                self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                self.profile.Save()
+                self.PlayDefault()
+            else:
+                # TODO: WIP
+                screenPiece = self.screen.Find("WeeklyLimited.png")
+                if screenPiece is not None:
+                    print("[GameManager] Gold Dungeon is out of entrance. Go home...")
+                    self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                    self.profile.Save()
+                    self.PlayDefault()
+                else:
+                    screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+                    if screenPiece is not None:
+                        print("[GameManager] Play EXP Dungeon")
+                        self.device.Touch(screenPiece[0] + 10, screenPiece[1] + 10)
+                    else:
+                        self.PlayDefault()
         else:
             self.PlayDefault()
 
