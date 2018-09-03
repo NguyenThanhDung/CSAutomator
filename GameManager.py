@@ -4,11 +4,13 @@ from Screen import ScreenType
 from ButtonPositions import ButtonPositions, Button, Position
 from Equipment import Equipment
 from MagicShop import MagicShop
+from Profile import Profile, ProfileField
 
 class GameManager:
 
-    def __init__(self, device):
+    def __init__(self, device, profile):
         self.device = device
+        self.profile = profile
         self.screen = None
         self.gameState = GameState.PROMOTION_BATTLE
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
@@ -98,6 +100,14 @@ class GameManager:
                 if screenPiece is not None:
                     self.Log("Summon available. Go to summon...")
                     self.gameState = GameState.SUMMON
+                elif self.profile.GetField(ProfileField.DidPlayEventDungeon) == False:
+                    screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+                    if screenPiece is not None:
+                        self.Log("Event Dungeon available. Go to dungeon...")
+                        self.gameState = GameState.EVENT_DUNGEON
+                    else:
+                        print("[GameManager] Can't find Event Dungeon button. Continue...")
+                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
             self.PlaySubstate()
         else:
             self.PlaySubstate()
@@ -115,6 +125,8 @@ class GameManager:
             self.Shopping()
         elif self.gameState == GameState.SUMMON:
             self.Summon()
+        elif self.gameState == GameState.EVENT_DUNGEON:
+            self.PlayEventDungeon()
         else:
             self.PlayDefault()
 
@@ -516,11 +528,55 @@ class GameManager:
         else:
             self.PlayDefault()
 
+    def PlayEventDungeon(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            self.Log("Press Event Dungeon button")
+            screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+            if screenPiece is not None:
+                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
+        elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
+            screenPiece = self.screen.Find("EventDungeon_Gold.png", 100000)
+            if screenPiece is not None:
+                screenPiece = self.screen.Find("EventDungeon_Gold_OutOfEntrance.png")
+                if screenPiece is not None:
+                    self.Log("Gold Dungeon is out of entrance. Go home...")
+                    self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                    self.profile.Save()
+                    self.gameState = GameState.PROMOTION_BATTLE
+                    self.PlayDefault()
+                else:
+                    self.Log("Play Gold Dungeon")
+                    self.device.Touch(513, 483)
+            else:
+                screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+                if screenPiece is not None:
+                    screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
+                    if screenPiece is not None:
+                        self.Log("EXP Dungeon is out of entrance. Go home...")
+                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                        self.profile.Save()
+                        self.gameState = GameState.PROMOTION_BATTLE
+                        self.PlayDefault()
+                    else:
+                        self.Log("Play EXP Dungeon")
+                        self.device.Touch(923, 231)
+                else:
+                    self.PlayDefault()
+        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+            self.Log("Auto place and start")
+            self.device.Touch(767, 627)
+            time.sleep(1)
+            self.device.Touch(765, 141)
+        else:
+            self.PlayDefault()
+
     def PlayDefault(self):
         self.Log("PlayDefault")
         if self.screen.screenType == ScreenType.MAP:
             self.device.Touch(1190, 360)
-        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY              \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_EXP   \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_GOLD:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
             self.device.Touch(335, 77)
@@ -533,7 +589,8 @@ class GameManager:
             or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD   \
             or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB      \
             or self.screen.screenType == ScreenType.SHOP                    \
-            or self.screen.screenType == ScreenType.SUMMON:
+            or self.screen.screenType == ScreenType.SUMMON                  \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
             self.device.Touch(785, 460)

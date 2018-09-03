@@ -4,6 +4,7 @@ from Device import Device
 from ScreenManager import ScreenManager
 from ScreenShot import ScreenShot
 from GameManager import GameManager
+from Profile import Profile
 
 def Run(isDebugging = False):
 
@@ -11,8 +12,10 @@ def Run(isDebugging = False):
 
         device = Device("127.0.0.1:62001")
         device.Connect()
+        profile = Profile("GaChien")
+        profile.Load()
+        gameManager = GameManager(device, profile)
         screenManager = ScreenManager()
-        gameManager = GameManager(device)
 
         while True:
             screenshot = device.CaptureScreen()
@@ -34,8 +37,10 @@ def Run(isDebugging = False):
 
         device = Device(None)
         device.Connect()
+        profile = Profile("GaChien")
+        profile.Load()
+        gameManager = GameManager(device, profile)
         screenManager = ScreenManager()
-        gameManager = GameManager(device)
 
         print("Debugging...")
         filePath = os.path.abspath("PendingScreens/Screenshot.png")
