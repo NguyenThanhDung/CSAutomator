@@ -542,6 +542,7 @@ class GameManager:
                     self.Log("Gold Dungeon is out of entrance. Go home...")
                     self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
                     self.profile.Save()
+                    self.gameState = GameState.PROMOTION_BATTLE
                     self.PlayDefault()
                 else:
                     self.Log("Play Gold Dungeon")
@@ -554,6 +555,7 @@ class GameManager:
                         self.Log("EXP Dungeon is out of entrance. Go home...")
                         self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
                         self.profile.Save()
+                        self.gameState = GameState.PROMOTION_BATTLE
                         self.PlayDefault()
                     else:
                         self.Log("Play EXP Dungeon")
