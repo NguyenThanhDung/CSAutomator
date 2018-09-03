@@ -572,8 +572,9 @@ class GameManager:
         self.Log("PlayDefault")
         if self.screen.screenType == ScreenType.MAP:
             self.device.Touch(1190, 360)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY          \
-            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY              \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_EXP   \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_GOLD:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
             self.device.Touch(335, 77)
