@@ -12,7 +12,10 @@ An auto script to play game
   * Extract the downloaded file. For example: C:\platform-tools_r28.0.0-windows\
   * Add the platform-tool folder into environment variable: C:\platform-tools_r28.0.0-windows\platform-tools
 
-## First Setup
+* Tesseract
+[Download](https://github.com/UB-Mannheim/tesseract/wiki)
+
+## First time set up
 
 Install OpenCV for python:
 ``` bash
