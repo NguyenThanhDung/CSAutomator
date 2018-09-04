@@ -12,7 +12,7 @@ class GameManager:
         self.device = device
         self.profile = profile
         self.screen = None
-        self.gameState = GameState.PROMOTION_BATTLE
+        self.gameState = GameState.SHOPPING
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
         self.scrollStep = 0
