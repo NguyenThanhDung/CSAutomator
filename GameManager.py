@@ -508,6 +508,10 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars purple necklace")
             return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Weapon_6stars_Purple.png")
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
+            print("[GameManager] Found 6 stars gold weapon")
+            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Gloves_6stars_Gold.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             print("[GameManager] Found 6 stars gold gloves")
