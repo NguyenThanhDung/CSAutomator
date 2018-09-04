@@ -12,7 +12,7 @@ class GameManager:
         self.device = device
         self.profile = profile
         self.screen = None
-        self.gameState = GameState.SHOPPING
+        self.gameState = GameState.PROMOTION_BATTLE
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
         self.scrollStep = 0
@@ -431,16 +431,21 @@ class GameManager:
                     self.gameState = GameState.PROMOTION_BATTLE
                     self.PlayDefault()
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
-            print("[GameManager] Opening item info...")
-            equipment = Equipment(self.screen)
-            if equipment.isGood:
-                print("[GameManager] Good equipment. Should buy")
+            screenPiece = self.screen.Find("Shop_DialogIsOpening_MysticalBook.png")
+            if screenPiece is not None:
+                self.Log("Buy mystical book")
                 self.purchaseConfirmed = True
                 self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Purchase))
             else:
-                print("[GameManager] Not good equipment. Close")
-                self.purchaseConfirmed = False
-                self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
+                equipment = Equipment(self.screen)
+                if equipment.isGood:
+                    print("[GameManager] Good equipment. Buy!")
+                    self.purchaseConfirmed = True
+                    self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Purchase))
+                else:
+                    print("[GameManager] Not good equipment. Close")
+                    self.purchaseConfirmed = False
+                    self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
             if self.purchaseConfirmed:
                 print("[GameManager] Confirm")
