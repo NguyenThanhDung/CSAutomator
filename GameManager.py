@@ -101,7 +101,8 @@ class GameManager:
                 if screenPiece is not None:
                     self.Log("Summon available. Go to summon...")
                     self.gameState = GameState.SUMMON
-                elif self.profile.DidPlayEventDungeonToday() == False:
+                elif self.profile.DidPlayEventDungeonToday() == False   \
+                    and self.gameState != GameState.OUT_OF_SHOES:
                     screenPiece = self.screen.Find("GameHome_EventDungeon.png")
                     if screenPiece is not None:
                         self.Log("Event Dungeon available. Go to dungeon...")
