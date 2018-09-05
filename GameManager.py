@@ -478,11 +478,15 @@ class GameManager:
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Weapon_6stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            print("[GameManager] Found 6 stars gold weapon")
+            print("[GameManager] Found 6 stars purple weapon")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Shield_6stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            print("[GameManager] Found 6 stars gold shield")
+            print("[GameManager] Found 6 stars purple shield")
+            return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Armor_6stars_Purple.png")
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
+            print("[GameManager] Found 6 stars purple armor")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Necklace_6stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
