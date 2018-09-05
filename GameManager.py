@@ -565,7 +565,7 @@ class GameManager:
             if screenPiece is not None:
                 self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
-            screenPiece = self.screen.Find("EventDungeon_Gold.png", 100000)
+            screenPiece = self.screen.Find("EventDungeon_Gold.png", 500000)
             if screenPiece is not None:
                 screenPiece = self.screen.Find("EventDungeon_Gold_OutOfEntrance.png")
                 if screenPiece is not None:
@@ -578,7 +578,7 @@ class GameManager:
                     self.Log("Play Gold Dungeon")
                     self.device.Touch(513, 483)
             else:
-                screenPiece = self.screen.Find("EventDungeon_EXP.png", 100000)
+                screenPiece = self.screen.Find("EventDungeon_EXP.png", 500000)
                 if screenPiece is not None:
                     screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
                     if screenPiece is not None:
