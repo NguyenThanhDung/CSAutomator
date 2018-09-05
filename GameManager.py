@@ -101,14 +101,14 @@ class GameManager:
                 if screenPiece is not None:
                     self.Log("Summon available. Go to summon...")
                     self.gameState = GameState.SUMMON
-                elif self.profile.GetField(ProfileField.DidPlayEventDungeon) == False:
+                elif self.profile.DidPlayEventDungeonToday() == False:
                     screenPiece = self.screen.Find("GameHome_EventDungeon.png")
                     if screenPiece is not None:
                         self.Log("Event Dungeon available. Go to dungeon...")
                         self.gameState = GameState.EVENT_DUNGEON
                     else:
                         print("[GameManager] Can't find Event Dungeon button. Continue...")
-                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                        self.profile.SaveLastDatePlayEventDungeon()
             self.PlaySubstate()
         else:
             self.PlaySubstate()
@@ -570,7 +570,7 @@ class GameManager:
                 screenPiece = self.screen.Find("EventDungeon_Gold_OutOfEntrance.png")
                 if screenPiece is not None:
                     self.Log("Gold Dungeon is out of entrance. Go home...")
-                    self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                    self.profile.SaveLastDatePlayEventDungeon()
                     self.profile.Save()
                     self.gameState = GameState.PROMOTION_BATTLE
                     self.PlayDefault()
@@ -583,7 +583,7 @@ class GameManager:
                     screenPiece = self.screen.Find("EventDungeon_EXP_OutOfEntrance.png", 100000)
                     if screenPiece is not None:
                         self.Log("EXP Dungeon is out of entrance. Go home...")
-                        self.profile.SetField(ProfileField.DidPlayEventDungeon, True)
+                        self.profile.SaveLastDatePlayEventDungeon()
                         self.profile.Save()
                         self.gameState = GameState.PROMOTION_BATTLE
                         self.PlayDefault()
