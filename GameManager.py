@@ -535,7 +535,7 @@ class GameManager:
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON:
             screenPiece = self.screen.Find("EventDungeon_Gold.png", 500000)
             if screenPiece is not None:
-                screenPiece = self.screen.Find("EventDungeon_Gold_OutOfEntrance.png")
+                screenPiece = self.screen.Find("EventDungeon_Gold_OutOfEntrance.png", 100000)
                 if screenPiece is not None:
                     self.Log("Gold Dungeon is out of entrance. Go home...")
                     self.profile.SaveLastDatePlayEventDungeon()
