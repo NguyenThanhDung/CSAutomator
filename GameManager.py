@@ -612,6 +612,8 @@ class GameManager:
                 self.device.Touch(1197, 663)
             else:
                 self.Log("Not enough shoes. Close the pop-up")
+        elif self.screen.screenType == ScreenType.EVENT_DUNGEON_OUT_OF_ENTRANCE_POPUP:
+            self.device.Touch(784, 356)
         else:
             self.Log("Idle")
 
