@@ -192,17 +192,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             self.Log("Idle in 20 seconds...")
             time.sleep(20)
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            self.gameState = GameState.OUT_OF_SHOES
-            self.device.Touch(790, 474)
-            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png", 2000000) is not None:
-                self.Log("Not enough shoes at guardian placement. Find more shoes...")
-                self.device.Touch(46, 51)
-            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
-                self.Log("Not enough shoes at result. Find more shoes...")
-                self.device.Touch(1197, 663)
-            else:
-                self.Log("Not enough shoes. Close the pop-up")
         elif self.screen.screenType == ScreenType.BATTLE_LIST:
             if self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png") is not None:
                 self.Log("Rival available. Switch to Rival list")
@@ -308,17 +297,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             self.Log("Replay")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            self.gameState = GameState.OUT_OF_SHOES
-            self.device.Touch(790, 474)
-            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
-                self.Log("Not enough shoes at guardian placement. Find more shoes...")
-                self.device.Touch(46, 51)
-            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
-                self.Log("Not enough shoes at result. Find more shoes...")
-                self.device.Touch(1197, 663)
-            else:
-                self.Log("Not enough shoes. Close the pop-up")
         else:
             self.PlayDefault()
 
@@ -339,17 +317,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             self.Log("Idle in 20 seconds...")
             time.sleep(20)
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
-            self.gameState = GameState.OUT_OF_SHOES
-            self.device.Touch(790, 474)
-            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
-                self.Log("Not enough shoes at guardian placement. Find more shoes...")
-                self.device.Touch(46, 51)
-            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
-                self.Log("Not enough shoes at result. Find more shoes...")
-                self.device.Touch(1197, 663)
-            else:
-                self.Log("Not enough shoes. Close the pop-up")
         elif self.screen.screenType == ScreenType.DAILY_MISSION:
             collectButton = self.screen.Find("DailyChallenge_CollectButton.png")
             if collectButton is not None:
@@ -634,6 +601,17 @@ class GameManager:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+            self.gameState = GameState.OUT_OF_SHOES
+            self.device.Touch(790, 474)
+            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png", 2000000) is not None:
+                self.Log("Not enough shoes at guardian placement. Find more shoes...")
+                self.device.Touch(46, 51)
+            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
+                self.Log("Not enough shoes at result. Find more shoes...")
+                self.device.Touch(1197, 663)
+            else:
+                self.Log("Not enough shoes. Close the pop-up")
         else:
             self.Log("Idle")
 
