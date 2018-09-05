@@ -194,7 +194,7 @@ class GameManager:
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(790, 474)
-            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png") is not None:
+            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png", 2000000) is not None:
                 self.Log("Not enough shoes at guardian placement. Find more shoes...")
                 self.device.Touch(46, 51)
             elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
