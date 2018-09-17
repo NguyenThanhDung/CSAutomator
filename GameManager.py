@@ -348,8 +348,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.SHOP:
             if self.shoesSource == ShoesSource.SHOP_WITH_FP:
                 self.Log("Buy shoes with FP")
-                self.device.Swipe(924, 118, 924, 591)
-                time.sleep(1)
+                # self.device.Swipe(924, 118, 924, 591)
+                # time.sleep(1)
                 self.device.Touch(1063, 133)
             elif self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
                 self.Log("Buy shoes with moonstones")
