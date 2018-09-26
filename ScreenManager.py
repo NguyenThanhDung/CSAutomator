@@ -80,7 +80,7 @@ class ScreenManager:
 
         self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png", 100000))
         self.templates.append(TemplateImage(ScreenType.SUMMON_BASIC_DONE, "Summon_BasicDone.png"))
-        self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png"))
+        self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png", 100000))
 
         self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON, "EventDungeon.png", 100000))
         self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON_RESULT_EXP, "EventDungeon_Result_EXP.png"))
