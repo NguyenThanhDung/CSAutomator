@@ -84,7 +84,7 @@ class Screen:
             return None
         res = cv2.matchTemplate(self.image, targetImage, cv2.TM_SQDIFF)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-        self.Log(fileName.ljust(50) + " " + str(min_val).rjust(15))
+        # self.Log(fileName.ljust(50) + " " + str(min_val).rjust(15))
         if min_val < precision:
             return Position(min_loc[0], min_loc[1])
         else:

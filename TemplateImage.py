@@ -28,5 +28,5 @@ class TemplateImage:
         return isFound
 
     def Log(self, log):
-        print("[TemplateImage] " + log)
+        # print("[TemplateImage] " + log)
         return None
