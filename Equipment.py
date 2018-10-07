@@ -22,16 +22,15 @@ class Equipment:
             self.Log("Main stat is not %")
             self.isGood = False
         else:
-            percentCount = 0
+            self.isGood = True
             for i in range(1, 5):
-                if "%" in statTexts[i]:
-                    percentCount = percentCount + 1
-            if percentCount >= 3:
-                self.Log("Main stat and at least 3 sub stats are %")
-                self.isGood = True
+                if "%" not in statTexts[i]:
+                    self.isGood = False
+                    break
+            if self.isGood:
+                self.Log("All stats are %")
             else:
-                self.Log("Less than 3 sub stats are %")
-                self.isGood = False
+                self.Log("There's at least one stat which is not %")
 
     def GetStatText(self, slot):
         if slot == 0:
