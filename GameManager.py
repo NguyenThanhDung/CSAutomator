@@ -615,9 +615,10 @@ class GameManager:
         self.Log("PlayDefault")
         if self.screen.screenType == ScreenType.MAP:
             self.device.Touch(1190, 360)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY              \
-            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_EXP   \
-            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_GOLD:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY                      \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_EXP            \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_GOLD           \
+            or self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_RESULT_LOSE:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
             self.device.Touch(335, 77)
@@ -656,7 +657,7 @@ class GameManager:
                 self.Log("Not enough shoes. Close the pop-up")
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON_OUT_OF_ENTRANCE_POPUP:
             self.device.Touch(784, 356)
-        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_LOSED:
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_LOSE:
             self.device.Touch(788, 472)
         else:
             self.Log("Idle")
