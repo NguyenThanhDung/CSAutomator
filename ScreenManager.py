@@ -30,6 +30,7 @@ class ScreenManager:
         self.templates.append(promotionBattle_RewardInfo)
         
         self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png"))
+        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY_LOSED, "MysteriousSanctuary_Losed.png", 100000))
         self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png"))
 
         pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png", 100000)
