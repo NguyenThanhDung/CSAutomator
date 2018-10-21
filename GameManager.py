@@ -282,12 +282,12 @@ class GameManager:
             else:
                 screenPiece = self.screen.Find("ShrineOfLight.png", 100000)
                 if screenPiece is not None:
-                    self.Log("Swipe up to find 9F")
+                    self.Log("Swipe up to find 8F")
                     self.device.Swipe(1120, 360, 577, 360)
                 else:
-                    screenPiece = self.screen.Find("ShrineOfLight_9F.png", 1000000)
+                    screenPiece = self.screen.Find("ShrineOfLight_8F.png", 1000000)
                     if screenPiece is not None:
-                        self.Log("Open floor 9F")
+                        self.Log("Open floor 8F")
                         self.device.Touch(screenPiece.x + 54, screenPiece.y + 81)
                     else:
                         self.PlayDefault()
