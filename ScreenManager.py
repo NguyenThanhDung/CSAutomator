@@ -9,11 +9,7 @@ class ScreenManager:
         self.templates = []
         
         self.templates.append(TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png"))
-
-        map = TemplateImage(ScreenType.MAP, "Map_GoToLobby.png", 1000000)
-        map.AddCriteria("Map_MysteriousSanctuary.png", 1000000)
-        map.AddCriteria("Map_UnknownLand.png", 1000000)
-        self.templates.append(map)
+        self.templates.append(TemplateImage(ScreenType.MAP, "Map_GoToLobby.png", 1000000))
 
         actionPhase_PlayButtonEnabled = TemplateImage(ScreenType.ACTION_PHASE_PLAY_ENABLED, "ActionPhase_AutoPlayButton_Enabled.png", 1000000)
         actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_ChatButton.png", 1000000)
@@ -33,8 +29,7 @@ class ScreenManager:
         promotionBattle_RewardInfo.AddCriteria("RewardInfo_OkButton.png")
         self.templates.append(promotionBattle_RewardInfo)
         
-        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png", 100000))
-        self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png"))
         self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png"))
 
         pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png", 100000)

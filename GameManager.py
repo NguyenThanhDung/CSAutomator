@@ -275,11 +275,22 @@ class GameManager:
             self.Log("Open Mysterious Sanctuary")
             self.device.Touch(630, 600)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
-            self.Log("Open Shrine of Light")
-            self.device.Touch(400, 560)
-        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            self.Log("Open floor 7F")
-            self.device.Touch(1123, 120)
+            screenPiece = self.screen.Find("MysteriousSanctuary_MapClosed.png", 100000)
+            if screenPiece is not None:
+                self.Log("Open Shrine of Light")
+                self.device.Touch(400, 560)
+            else:
+                screenPiece = self.screen.Find("ShrineOfLight.png", 100000)
+                if screenPiece is not None:
+                    self.Log("Swipe up to find 9F")
+                    self.device.Swipe(1120, 360, 577, 360)
+                else:
+                    screenPiece = self.screen.Find("ShrineOfLight_9F.png", 1000000)
+                    if screenPiece is not None:
+                        self.Log("Open floor 9F")
+                        self.device.Touch(screenPiece.x + 54, screenPiece.y + 81)
+                    else:
+                        self.PlayDefault()
         elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
             screenPiece = self.screen.Find("GuardianPlacement_AutoPlayIsEnabled.png")
             if screenPiece is not None:
@@ -611,7 +622,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
             self.device.Touch(335, 77)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
-            or self.screen.screenType == ScreenType.SHRINE_OF_LIGHT         \
             or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \
             or self.screen.screenType == ScreenType.BATTLE_LIST             \
             or self.screen.screenType == ScreenType.RIVAL_LIST              \
