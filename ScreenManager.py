@@ -94,7 +94,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.DIALOG_SHOES_RECHARGE_II, "Dialog_ShoesRechargeII.png", 100000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_NOT_ENOUGH_FP, "Dialog_NotEnoughFP.png", 100000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_PURCHASE_COMPLETE, "Dialog_PurchaseComplete.png", 1000000))
-        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 1000000))
 
         screenTemplate = TemplateImage(ScreenType.EVENT_DUNGEON_OUT_OF_ENTRANCE_POPUP, "EventDungeon_PopUpIsOpening.png", 100000)
         screenTemplate.AddCriteria("EventDungeon_OutOfEntrancePopUp.png", 1000000)
