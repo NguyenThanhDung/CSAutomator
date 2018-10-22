@@ -301,10 +301,10 @@ class GameManager:
             time.sleep(1)
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
-            #self.Log("Idle in 2 minutes...")
-            #time.sleep(120)
-            self.Log("Auto touch...")
-            self.AutoTouch(10)
+            self.Log("Idle in 20 seconds...")
+            time.sleep(20)
+            # self.Log("Auto touch...")
+            # self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             self.Log("Replay")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
