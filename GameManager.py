@@ -539,7 +539,7 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars gold ring")
             return screenPiece
-        screenPiece = self.screen.Find("Shop_MysticalBook.png")
+        screenPiece = self.screen.Find("Shop_MysticalBook.png", 1000000)
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found mystical book")
             return screenPiece
