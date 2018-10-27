@@ -205,28 +205,32 @@ class GameManager:
                         self.Log("Find match...")
                         self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
                     else:
-                        self.Log("TODO")
+                        self.Log("Switch to Mysterious Sanctuary...")
+                        self.gameState = GameState.MYSTERIOUS_SANCTUARY
             else:
-                self.Log("TODO: Check if Rival tab")
-        elif self.screen.screenType == ScreenType.RIVAL_LIST:
-            rivalAvailable = self.screen.Find("PromotionBattle_RivalList_Available.png")
-            if rivalAvailable is not None:
-                self.Log("Start Rival match...")
-                batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
-                if batteButtonLocaltion is not None:
-                    self.Log("Press Battle button at " + str(batteButtonLocaltion))
-                    self.device.Touch(batteButtonLocaltion.x + 5, batteButtonLocaltion.y + 5)
+                screenPiece = self.screen.Find("PromotionBattle_RivalTab_Available.png")
+                if screenPiece is not None:
+                    self.Log("Start Rival match...")
+                    batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalTab_BattleButton.png")
+                    if batteButtonLocaltion is not None:
+                        self.Log("Press Battle button at " + str(batteButtonLocaltion))
+                        self.device.Touch(batteButtonLocaltion.x + 5, batteButtonLocaltion.y + 5)
+                    else:
+                        self.Log("Schroll down")
+                        self.device.Swipe(1116, 351, 569, 351)
                 else:
-                    self.Log("Schroll down")
-                    self.device.Swipe(1116, 351, 569, 351)
-            else:
-                battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
-                if battleAvailable is not None:
-                    self.Log("Switch to Battle tab")
-                    self.device.Touch(battleAvailable.x + 52, battleAvailable.y + 44)
-                else:
-                    self.Log("Go home")
-                    self.device.Touch(38, 46)
+                    screenPiece = self.screen.Find("PromotionBattle_RivalTab_NotAvailable.png")
+                    if screenPiece is not None:
+                        screenPiece = self.screen.Find("PromotionBattle_BattleAvailable.png")
+                        if screenPiece is not None:
+                            self.Log("Switch to Battle tab")
+                            self.device.Touch(screenPiece.x + 52, screenPiece.y + 44)
+                        else:
+                            self.Log("Switch to Mysterious Sanctuary...")
+                            self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                    else:
+                        self.Log("Switch to Mysterious Sanctuary...")
+                        self.gameState = GameState.MYSTERIOUS_SANCTUARY
         elif self.screen.screenType == ScreenType.BATTLE_RANKING:
             rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
             if rivalAvailable is not None:
