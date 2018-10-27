@@ -192,32 +192,22 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             self.Log("Idle in 20 seconds...")
             time.sleep(20)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST:
-            if self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png") is not None:
-                self.Log("Rival available. Switch to Rival list")
-                self.device.Touch(1221, 505)
-            else:
-                potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
-                if potentialMatch is not None:
-                    self.Log("There is a potential match, go for battle")
-                    self.scrollStep = 0
-                    self.device.Touch(potentialMatch.x + 40, potentialMatch.y + 70)
+        elif self.screen.screenType == ScreenType.PROMOTION_BATTLE:
+            screenPiece = self.screen.Find("PromotionBattle_BattleTab.png")
+            if screenPiece is not None:
+                screenPiece = self.screen.Find("PromotionBattle_RivalAvailable.png")
+                if screenPiece is not None:
+                    self.Log("Rival available. Switch to Rival list")
+                    self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
                 else:
-                    if self.scrollStep < 2:
-                        self.Log("Can not find any potential match, scroll up")
-                        self.device.Swipe(1016, 226, 614, 226)
-                        self.scrollStep = self.scrollStep + 1
+                    screenPiece = self.screen.Find("PromotionBattle_BattleTab_BattleButton.png")
+                    if screenPiece is not None:
+                        self.Log("Find match...")
+                        self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
                     else:
-                        self.scrollStep = 0
-                        refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
-                        if refreshAvailable is not None:
-                            self.Log("There isn't any potential match, refresh list")
-                            self.device.Swipe(569, 226, 1116, 226)
-                            self.device.Swipe(569, 226, 1116, 226)
-                            self.device.Touch(514, 108)
-                        else:
-                            self.Log("There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
-                            self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                        self.Log("TODO")
+            else:
+                self.Log("TODO: Check if Rival tab")
         elif self.screen.screenType == ScreenType.RIVAL_LIST:
             rivalAvailable = self.screen.Find("PromotionBattle_RivalList_Available.png")
             if rivalAvailable is not None:
@@ -624,7 +614,7 @@ class GameManager:
             self.device.Touch(335, 77)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
             or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \
-            or self.screen.screenType == ScreenType.BATTLE_LIST             \
+            or self.screen.screenType == ScreenType.PROMOTION_BATTLE        \
             or self.screen.screenType == ScreenType.RIVAL_LIST              \
             or self.screen.screenType == ScreenType.BATTLE_RANKING          \
             or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD   \
