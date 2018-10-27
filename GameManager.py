@@ -281,7 +281,7 @@ class GameManager:
                         self.device.Touch(screenPiece.x + 54, screenPiece.y + 81)
                     else:
                         self.PlayDefault()
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT:
             screenPiece = self.screen.Find("GuardianPlacement_AutoPlayIsEnabled.png")
             if screenPiece is not None:
                 self.Log("Auto Play is enabled. Disable it")
@@ -593,7 +593,7 @@ class GameManager:
                         self.device.Touch(923, 231)
                 else:
                     self.PlayDefault()
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT:
             self.Log("Auto place and start")
             self.device.Touch(767, 627)
             time.sleep(1)
@@ -614,7 +614,7 @@ class GameManager:
             self.device.Touch(335, 77)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY                      \
             or self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT     \
-            or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT                      \
+            or self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT                  \
             or self.screen.screenType == ScreenType.PROMOTION_BATTLE                        \
             or self.screen.screenType == ScreenType.RIVAL_LIST                              \
             or self.screen.screenType == ScreenType.BATTLE_RANKING                          \
