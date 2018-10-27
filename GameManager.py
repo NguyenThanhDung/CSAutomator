@@ -224,27 +224,18 @@ class GameManager:
                         screenPiece = self.screen.Find("PromotionBattle_BattleAvailable.png")
                         if screenPiece is not None:
                             self.Log("Switch to Battle tab")
-                            self.device.Touch(screenPiece.x + 52, screenPiece.y + 44)
+                            self.device.Touch(1219, 648)
                         else:
                             self.Log("Switch to Mysterious Sanctuary...")
                             self.gameState = GameState.MYSTERIOUS_SANCTUARY
                     else:
-                        self.Log("Switch to Mysterious Sanctuary...")
-                        self.gameState = GameState.MYSTERIOUS_SANCTUARY
-        elif self.screen.screenType == ScreenType.BATTLE_RANKING:
-            rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
-            if rivalAvailable is not None:
-                self.Log("Switch to Rival tab")
-                self.device.Touch(rivalAvailable.x + 62, rivalAvailable.y + 66)
-            else:
-                battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
-                if battleAvailable is not None:
-                    self.Log("Switch to Battle tab")
-                    self.device.Touch(battleAvailable.x + 52, battleAvailable.y + 44)
-                else:
-                    self.Log("Play Mysterious Sanctuary...")
-                    self.gameState = GameState.MYSTERIOUS_SANCTUARY
-                    self.device.Touch(38, 46)
+                        screenPiece = self.screen.Find("Battle_Ranking.png")
+                        if screenPiece is not None:
+                            self.Log("Switch to Battle tab")
+                            self.device.Touch(1219, 648)
+                        else:
+                            self.Log("Switch to Mysterious Sanctuary...")
+                            self.gameState = GameState.MYSTERIOUS_SANCTUARY
         elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
             rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
             if rivalAvailable is not None:
