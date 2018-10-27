@@ -78,7 +78,7 @@ class Screen:
     def ShowName(self):
         self.Log(str(self.screenType))
 
-    def Find(self, fileName, precision = 10000):
+    def Find(self, fileName, precision = 100000):
         filePath = os.path.abspath("ScreenTemplate\\" + fileName)
         targetImage = cv2.imread(filePath, 0)
         if targetImage is None:
