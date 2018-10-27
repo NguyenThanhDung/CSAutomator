@@ -184,7 +184,7 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAP:
             self.Log("Open Promotion Battle")
             self.device.Touch(1077, 547)
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT:
             self.Log("Auto place and start")
             self.device.Touch(767, 627)
             time.sleep(1)
@@ -612,15 +612,16 @@ class GameManager:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
             self.device.Touch(335, 77)
-        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
-            or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \
-            or self.screen.screenType == ScreenType.PROMOTION_BATTLE        \
-            or self.screen.screenType == ScreenType.RIVAL_LIST              \
-            or self.screen.screenType == ScreenType.BATTLE_RANKING          \
-            or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD   \
-            or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB      \
-            or self.screen.screenType == ScreenType.SHOP                    \
-            or self.screen.screenType == ScreenType.SUMMON                  \
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY                      \
+            or self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT     \
+            or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT                      \
+            or self.screen.screenType == ScreenType.PROMOTION_BATTLE                        \
+            or self.screen.screenType == ScreenType.RIVAL_LIST                              \
+            or self.screen.screenType == ScreenType.BATTLE_RANKING                          \
+            or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD                   \
+            or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB                      \
+            or self.screen.screenType == ScreenType.SHOP                                    \
+            or self.screen.screenType == ScreenType.SUMMON                                  \
             or self.screen.screenType == ScreenType.EVENT_DUNGEON:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:

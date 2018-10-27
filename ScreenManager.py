@@ -44,6 +44,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION, "PromotionBattle_BattleList_RefreshConfirmation.png", 1500000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE, "PromotionBattle_BattleList_RefreshWithMoonstone.png", 1500000))
         self.templates.append(TemplateImage(ScreenType.RIVAL_LIST, "PromotionBattle_RivalList.png"))
+        self.templates.append(TemplateImage(ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT, "PromotionBattle_GuardianPlacement.png"))
         self.templates.append(TemplateImage(ScreenType.RIVAL_MATCH_END, "RevalMatch_End.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT_WIN, "Battle_Result_Win.png", 1000000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT_LOSE, "Battle_Result_Lose.png", 1000000))
