@@ -630,17 +630,10 @@ class GameManager:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES_AT_GUARDIAN_PLACEMENT    \
+            or self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES_AT_RESULT:
             self.gameState = GameState.OUT_OF_SHOES
             self.device.Touch(463, 103)
-            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png", 2000000) is not None:
-                self.Log("Not enough shoes at guardian placement. Find more shoes...")
-                self.device.Touch(46, 51)
-            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
-                self.Log("Not enough shoes at result. Find more shoes...")
-                self.device.Touch(1197, 663)
-            else:
-                self.Log("Not enough shoes. Close the pop-up")
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON_OUT_OF_ENTRANCE_POPUP:
             self.device.Touch(784, 356)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_LOSE:

@@ -38,7 +38,8 @@ class ScreenManager:
         pve_result_victory.AddCriteria("PvEResult_Victory.png", 500000)
         self.templates.append(pve_result_victory)
 
-        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES, "NotEnoughShoes.png", 300000))
+        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES_AT_GUARDIAN_PLACEMENT, "NotEnoughShoes_AtGuardianPlacement.png"))
+        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES_AT_RESULT, "NotEnoughShoes_AtResult.png"))
 
         self.templates.append(TemplateImage(ScreenType.PROMOTION_BATTLE, "PromotionBattle.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION, "PromotionBattle_BattleList_RefreshConfirmation.png", 1500000))
