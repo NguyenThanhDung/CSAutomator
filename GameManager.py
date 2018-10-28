@@ -184,7 +184,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAP:
             self.Log("Open Promotion Battle")
             self.device.Touch(1077, 547)
-        elif self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT   \
+            or self.screen.screenType == ScreenType.RIVAL_GUARDIAN_PLACEMENT:
             self.Log("Auto place and start")
             self.device.Touch(767, 627)
             time.sleep(1)
