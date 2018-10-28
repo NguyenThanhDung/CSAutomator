@@ -231,8 +231,13 @@ class GameManager:
                     else:
                         screenPiece = self.screen.Find("Battle_Ranking.png")
                         if screenPiece is not None:
-                            self.Log("Switch to Battle tab")
-                            self.device.Touch(1219, 648)
+                            screenPiece = self.screen.Find("PromotionBattle_RivalAvailable.png")
+                            if screenPiece is not None:
+                                self.Log("Rival available. Switch to Rival list")
+                                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
+                            else:
+                                self.Log("Switch to Mysterious Sanctuary...")
+                                self.gameState = GameState.MYSTERIOUS_SANCTUARY
                         else:
                             self.Log("Switch to Mysterious Sanctuary...")
                             self.gameState = GameState.MYSTERIOUS_SANCTUARY
