@@ -71,11 +71,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_REFRESH_RESET:
             self.Log("OK")
             self.device.Touch(784, 357)
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_TICKETS:
-            self.Log("Go to Mysterious Sanctuary...")
-            self.gameState = GameState.MYSTERIOUS_SANCTUARY
-            self.device.Touch(788, 471)
-            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.DIALOG_PURCHASE_COMPLETE:
             self.Log("Close dialog. Go to battle...")
             self.gameState = GameState.PROMOTION_BATTLE
@@ -644,6 +639,10 @@ class GameManager:
             self.device.Touch(784, 356)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_LOSE:
             self.device.Touch(788, 472)
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_TICKETS:
+            self.Log("Go to Mysterious Sanctuary...")
+            self.gameState = GameState.MYSTERIOUS_SANCTUARY
+            self.device.Touch(463, 104)
         else:
             self.Log("Idle")
 
