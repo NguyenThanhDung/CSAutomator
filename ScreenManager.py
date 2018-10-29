@@ -74,20 +74,21 @@ class ScreenManager:
         self.templates.append(screenTemplate)
 
         screenTemplate = TemplateImage(ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION, "Shop_Equipment_PurchaseConfirmation.png", 30000)
-        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_OK.png", 30000)
-        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_Cancel.png", 30000)
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_OK.png")
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_Cancel.png")
         self.templates.append(screenTemplate)
 
-        self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png"))
         self.templates.append(TemplateImage(ScreenType.SUMMON_BASIC_DONE, "Summon_BasicDone.png"))
-        self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png"))
+        self.templates.append(TemplateImage(ScreenType.SUMMON_LEGEND_DONE, "Summon_LegendDone.png"))
 
-        self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON, "EventDungeon.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON, "EventDungeon.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON_RESULT_EXP, "EventDungeon_Result_EXP.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON_RESULT_GOLD, "EventDungeon_Result_Gold.png"))
 
-        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
-        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png"))
+        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_1, "EventInfo1.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_2, "EventInfo2.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_WEEKLY_LIMITED, "WeeklyLimited.png"))

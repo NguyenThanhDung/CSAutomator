@@ -623,7 +623,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
             self.device.Touch(785, 460)
         elif self.screen.screenType == ScreenType.SUMMON_BASIC_DONE         \
-            or self.screen.screenType == ScreenType.SUMMON_MYSTEROUS_DONE:
+            or self.screen.screenType == ScreenType.SUMMON_MYSTEROUS_DONE   \
+            or self.screen.screenType == ScreenType.SUMMON_LEGEND_DONE:
             self.device.Touch(1185, 361)
         elif self.screen.screenType == ScreenType.LEVEL_UP:
             self.device.Touch(500, 500)
