@@ -610,6 +610,7 @@ class GameManager:
             self.device.Touch(335, 77)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY                      \
             or self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT     \
+            or self.screen.screenType == ScreenType.RIVAL_GUARDIAN_PLACEMENT                \
             or self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT                  \
             or self.screen.screenType == ScreenType.PROMOTION_BATTLE                        \
             or self.screen.screenType == ScreenType.RIVAL_LIST                              \
