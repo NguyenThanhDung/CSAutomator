@@ -69,6 +69,7 @@ class ScreenType(Enum):
     LEVEL_UP = 90
     EVENT_INFO_1 = 91
     EVENT_INFO_2 = 92
+    EVENT_INFO_3 = 93
     
     UNKNOWN = 99
 

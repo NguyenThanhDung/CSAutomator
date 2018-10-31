@@ -91,6 +91,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_1, "EventInfo1.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_2, "EventInfo2.png"))
+        self.templates.append(TemplateImage(ScreenType.EVENT_INFO_3, "EventInfo3.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_WEEKLY_LIMITED, "WeeklyLimited.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_LIMITED_OFFER, "LimitedOffer.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_SUGGESTED_ITEM, "Dialog_SuggestedItem.png", 100000))

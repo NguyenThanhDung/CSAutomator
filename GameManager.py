@@ -35,8 +35,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.TAP_TO_START:
             self.Log("Tap to start...")
             self.device.Touch(640, 360)
-        elif self.screen.screenType == ScreenType.EVENT_INFO_1    \
-            or self.screen.screenType == ScreenType.EVENT_INFO_2:
+        elif self.screen.screenType == ScreenType.EVENT_INFO_1      \
+            or self.screen.screenType == ScreenType.EVENT_INFO_2    \
+            or self.screen.screenType == ScreenType.EVENT_INFO_3:
             self.Log("Close event information dialog")
             self.device.Touch(1215, 630)
         elif self.screen.screenType == ScreenType.DIALOG_WEEKLY_LIMITED    \
