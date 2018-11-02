@@ -2,7 +2,12 @@
 
 An auto script to play game
 
-## Requirement
+## Compatible Environments
+
+* Nox App Player resolution: 1280x720
+* CS game version: 1.2.5 1.0.70280
+
+## Required Tools
 
 * Python 2.7.9 or above
   * [Download](https://www.python.org/downloads/)
