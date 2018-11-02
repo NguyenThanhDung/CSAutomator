@@ -88,7 +88,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON_RESULT_GOLD, "EventDungeon_Result_Gold.png"))
 
         self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png"))
-        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png"))
+        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 1000))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_1, "EventInfo1.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_2, "EventInfo2.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_3, "EventInfo3.png"))
