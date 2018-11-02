@@ -13,9 +13,16 @@ An auto script to play game
   * [Download](https://www.python.org/downloads/)
 
 * Android SDK Platform Tools
-  * [Download](https://developer.android.com/studio/releases/platform-tools)
-  * Extract the downloaded file. For example: C:\platform-tools_r28.0.0-windows\
-  * Add the platform-tool folder into environment variable: C:\platform-tools_r28.0.0-windows\platform-tools
+  * Windows
+    * [Download](https://developer.android.com/studio/releases/platform-tools)
+    * Extract the downloaded file. For example: C:\platform-tools_r28.0.0-windows\
+    * Add the platform-tool folder into environment variable: C:\platform-tools_r28.0.0-windows\platform-tools
+  * Mac OS
+    * Install brew (if not available) at https://brew.sh
+    * Install adb via brew:
+        ``` bash
+        brew cask install android-platform-tools
+        ```
 
 * Tesseract
   * [Download](https://github.com/UB-Mannheim/tesseract/wiki)
