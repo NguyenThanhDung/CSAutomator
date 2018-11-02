@@ -57,6 +57,10 @@ Install pytesseract module for python:
 pip install pytesseract
 ```
 
+> Note:
+>
+> On Mac OS, append **sudo** at the beginning of the command to install with admin privilege, otherwise we may encounter permission deny error.
+
 ## Run
 
 ``` bash
