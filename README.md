@@ -25,8 +25,15 @@ An auto script to play game
         ```
 
 * Tesseract
-  * [Download](https://github.com/UB-Mannheim/tesseract/wiki)
-  * Install and add the installation path into environment variable. For example: C:\Program Files (x86)\Tesseract-OCR
+  * Windows
+    * [Download](https://github.com/UB-Mannheim/tesseract/wiki)
+    * Install and add the installation path into environment variable. For example: C:\Program Files (x86)\Tesseract-OCR
+  * Mac OS
+    * Install brew (if not available) at https://brew.sh
+    * Install Tesseract via brew:
+        ``` bash
+        brew install tesseract
+        ```
 
 ## First time set up
 
