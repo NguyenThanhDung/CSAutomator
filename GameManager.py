@@ -12,7 +12,7 @@ class GameManager:
         self.device = device
         self.profile = profile
         self.screen = None
-        self.gameState = GameState.PROMOTION_BATTLE
+        self.gameState = GameState.SHOPPING
         self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
         self.dailMissionState = DailyMission.NONE
         self.scrollStep = 0
@@ -373,7 +373,7 @@ class GameManager:
                 self.device.Touch(735, 477)
         elif self.screen.screenType == ScreenType.DIALOG_NOT_ENOUGH_FP:
             self.Log("Close dialog. Go to buy shoes by moonstones...")
-            self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
+            self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
             self.device.Touch(785, 357)
         else:
             self.PlayDefault()
@@ -514,9 +514,13 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars gold weapon")
             return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Armor_6stars_Gold.png")
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
+            self.Log("Found 6 stars gold armor")
+            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Shield_6stars_Gold.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 6 stars gold gloves")
+            self.Log("Found 6 stars gold shield")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Gloves_6stars_Gold.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
