@@ -110,9 +110,8 @@ class ScreenManager:
         unstableNetworkDialog.AddCriteria("UnstableNetwork_NoButton.png", 1000000)
         self.templates.append(unstableNetworkDialog)
         
-        battleNewSeason = TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000)
-        battleNewSeason.AddCriteria("Dialog_OK_Button.png", 100000)
-        self.templates.append(battleNewSeason)
+        self.templates.append(TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png"))
+        self.templates.append(TemplateImage(ScreenType.BATTLE_PREPARING_NEW_SEASON, "PromotionBattle_PreparingForNewSeason.png"))
         
         self.templates.append(TemplateImage(ScreenType.BATTLE_RANKING, "Battle_Ranking.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_DEFENSE_RECORD, "Battle_DefenseRecord.png"))

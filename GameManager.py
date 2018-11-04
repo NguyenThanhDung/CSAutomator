@@ -650,6 +650,9 @@ class GameManager:
             self.Log("Go to Mysterious Sanctuary...")
             self.gameState = GameState.MYSTERIOUS_SANCTUARY
             self.device.Touch(463, 104)
+        elif self.screen.screenType == ScreenType.BATTLE_PREPARING_NEW_SEASON:
+            self.Log("OK")
+            self.device.Touch(785, 357)
         else:
             self.Log("Idle")
 
