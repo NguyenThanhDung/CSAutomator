@@ -38,12 +38,16 @@ class Device:
             lines = info.split('\n')
             for line in lines:
                 if "SurfaceWidth" in line:
-                    widthLine = line.split(' ')
-                    self.screenWidth = int(widthLine[len(widthLine)-1][:-4])
+                    widthLineParts = line.split(' ')
+                    strWidth = widthLineParts[len(widthLineParts)-1]
+                    pxCharIndex = strWidth.index("px")
+                    self.screenWidth = int(strWidth[0:pxCharIndex])
                     continue
                 elif "SurfaceHeight" in line:
-                    heightLine = line.split(' ')
-                    self.screenHeight = int(heightLine[len(heightLine)-1][:-4])
+                    heightLineParts = line.split(' ')
+                    strHeight = heightLineParts[len(heightLineParts)-1]
+                    pxCharIndex = strHeight.index("px")
+                    self.screenHeight = int(strHeight[0:pxCharIndex])
                     continue
                 elif "SurfaceOrientation" in line:
                     orientationLine = line.split(' ')

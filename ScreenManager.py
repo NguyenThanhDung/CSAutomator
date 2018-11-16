@@ -9,11 +9,7 @@ class ScreenManager:
         self.templates = []
         
         self.templates.append(TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png"))
-
-        map = TemplateImage(ScreenType.MAP, "Map_GoToLobby.png", 1000000)
-        map.AddCriteria("Map_MysteriousSanctuary.png", 1000000)
-        map.AddCriteria("Map_UnknownLand.png", 1000000)
-        self.templates.append(map)
+        self.templates.append(TemplateImage(ScreenType.MAP, "Map_GoToLobby.png", 1000000))
 
         actionPhase_PlayButtonEnabled = TemplateImage(ScreenType.ACTION_PHASE_PLAY_ENABLED, "ActionPhase_AutoPlayButton_Enabled.png", 1000000)
         actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_ChatButton.png", 1000000)
@@ -33,17 +29,19 @@ class ScreenManager:
         promotionBattle_RewardInfo.AddCriteria("RewardInfo_OkButton.png")
         self.templates.append(promotionBattle_RewardInfo)
         
-        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png", 100000))
-        self.templates.append(TemplateImage(ScreenType.SHRINE_OF_LIGHT, "ShrineOfLight.png", 100000))
-        self.templates.append(TemplateImage(ScreenType.GUARDIAN_PLACEMENT, "GuardianPlacement.png"))
+        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY, "MysteriousSanctuary.png"))
+        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY_LOSE, "MysteriousSanctuary_Lose.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.MYSTERIOUS_SANCTUARY_RESULT_LOSE, "MysteriousSanctuary_Result_Lose.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.PvE_GUARDIAN_PLACEMENT, "PvE_GuardianPlacement.png"))
 
         pve_result_victory = TemplateImage(ScreenType.PVE_RESULT_VICTORY, "PvEResult_MenuButtons.png", 100000)
         pve_result_victory.AddCriteria("PvEResult_Victory.png", 500000)
         self.templates.append(pve_result_victory)
 
-        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES, "NotEnoughShoes.png", 300000))
+        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES_AT_GUARDIAN_PLACEMENT, "NotEnoughShoes_AtGuardianPlacement.png"))
+        self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_SHOES_AT_RESULT, "NotEnoughShoes_AtResult.png"))
 
-        self.templates.append(TemplateImage(ScreenType.BATTLE_LIST, "PromotionBattle_BattleList.png"))
+        self.templates.append(TemplateImage(ScreenType.PROMOTION_BATTLE, "PromotionBattle.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION, "PromotionBattle_BattleList_RefreshConfirmation.png", 1500000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE, "PromotionBattle_BattleList_RefreshWithMoonstone.png", 1500000))
         self.templates.append(TemplateImage(ScreenType.RIVAL_LIST, "PromotionBattle_RivalList.png"))
@@ -51,6 +49,8 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT_WIN, "Battle_Result_Win.png", 1000000))
         self.templates.append(TemplateImage(ScreenType.BATTLE_RESULT_LOSE, "Battle_Result_Lose.png", 1000000))
         self.templates.append(TemplateImage(ScreenType.NOT_ENOUGH_TICKETS, "PromotionBattle_NotEnoughTickets.png", 500000))
+        self.templates.append(TemplateImage(ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT, "PromotionBattle_GuardianPlacement.png"))
+        self.templates.append(TemplateImage(ScreenType.RIVAL_GUARDIAN_PLACEMENT, "Rival_GuardianPlacement.png"))
         
         battleRefreshReset = TemplateImage(ScreenType.BATTLE_REFRESH_RESET, "PromotionBattle_RefreshReset_Title.png", 500000)
         battleRefreshReset.AddCriteria("PromotionBattle_RefreshReset_OkButton.png")
@@ -74,22 +74,24 @@ class ScreenManager:
         self.templates.append(screenTemplate)
 
         screenTemplate = TemplateImage(ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION, "Shop_Equipment_PurchaseConfirmation.png", 30000)
-        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_OK.png", 30000)
-        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_Cancel.png", 30000)
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_OK.png")
+        screenTemplate.AddCriteria("Shop_Equipment_PurchaseConfirmation_Cancel.png")
         self.templates.append(screenTemplate)
 
-        self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.SUMMON, "Summon.png"))
         self.templates.append(TemplateImage(ScreenType.SUMMON_BASIC_DONE, "Summon_BasicDone.png"))
-        self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.SUMMON_MYSTEROUS_DONE, "Summon_MysteriousDone.png"))
+        self.templates.append(TemplateImage(ScreenType.SUMMON_LEGEND_DONE, "Summon_LegendDone.png"))
 
-        self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON, "EventDungeon.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON, "EventDungeon.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON_RESULT_EXP, "EventDungeon_Result_EXP.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_DUNGEON_RESULT_GOLD, "EventDungeon_Result_Gold.png"))
 
-        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png", 30000))
-        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.DEVICE_HOME, "DeviceHome.png"))
+        self.templates.append(TemplateImage(ScreenType.TAP_TO_START, "TapToStart.png", 1000))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_1, "EventInfo1.png"))
         self.templates.append(TemplateImage(ScreenType.EVENT_INFO_2, "EventInfo2.png"))
+        self.templates.append(TemplateImage(ScreenType.EVENT_INFO_3, "EventInfo3.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_WEEKLY_LIMITED, "WeeklyLimited.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_LIMITED_OFFER, "LimitedOffer.png"))
         self.templates.append(TemplateImage(ScreenType.DIALOG_SUGGESTED_ITEM, "Dialog_SuggestedItem.png", 100000))
@@ -97,7 +99,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.DIALOG_SHOES_RECHARGE_II, "Dialog_ShoesRechargeII.png", 100000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_NOT_ENOUGH_FP, "Dialog_NotEnoughFP.png", 100000))
         self.templates.append(TemplateImage(ScreenType.DIALOG_PURCHASE_COMPLETE, "Dialog_PurchaseComplete.png", 1000000))
-        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 100000))
+        self.templates.append(TemplateImage(ScreenType.DAILY_LOGIN_REWARD, "DailyLoginReward.png", 1000000))
 
         screenTemplate = TemplateImage(ScreenType.EVENT_DUNGEON_OUT_OF_ENTRANCE_POPUP, "EventDungeon_PopUpIsOpening.png", 100000)
         screenTemplate.AddCriteria("EventDungeon_OutOfEntrancePopUp.png", 1000000)
@@ -108,9 +110,8 @@ class ScreenManager:
         unstableNetworkDialog.AddCriteria("UnstableNetwork_NoButton.png", 1000000)
         self.templates.append(unstableNetworkDialog)
         
-        battleNewSeason = TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png", 100000)
-        battleNewSeason.AddCriteria("Dialog_OK_Button.png", 100000)
-        self.templates.append(battleNewSeason)
+        self.templates.append(TemplateImage(ScreenType.BATTLE_NEW_SEASON, "Battle_NewSeason.png"))
+        self.templates.append(TemplateImage(ScreenType.BATTLE_PREPARING_NEW_SEASON, "PromotionBattle_PreparingForNewSeason.png"))
         
         self.templates.append(TemplateImage(ScreenType.BATTLE_RANKING, "Battle_Ranking.png"))
         self.templates.append(TemplateImage(ScreenType.BATTLE_DEFENSE_RECORD, "Battle_DefenseRecord.png"))

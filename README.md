@@ -2,19 +2,38 @@
 
 An auto script to play game
 
-## Requirement
+## Compatible Environments
+
+* Nox App Player resolution: 1280x720
+* CS game version: 1.2.5 1.0.70280
+
+## Required Tools
 
 * Python 2.7.9 or above
   * [Download](https://www.python.org/downloads/)
 
 * Android SDK Platform Tools
-  * [Download](https://developer.android.com/studio/releases/platform-tools)
-  * Extract the downloaded file. For example: C:\platform-tools_r28.0.0-windows\
-  * Add the platform-tool folder into environment variable: C:\platform-tools_r28.0.0-windows\platform-tools
+  * Windows
+    * [Download](https://developer.android.com/studio/releases/platform-tools)
+    * Extract the downloaded file. For example: C:\platform-tools_r28.0.0-windows\
+    * Add the platform-tool folder into environment variable: C:\platform-tools_r28.0.0-windows\platform-tools
+  * Mac OS
+    * Install brew (if not available) at https://brew.sh
+    * Install adb via brew:
+        ``` bash
+        brew cask install android-platform-tools
+        ```
 
 * Tesseract
-  * [Download](https://github.com/UB-Mannheim/tesseract/wiki)
-  * Install and add the installation path into environment variable. For example: C:\Program Files (x86)\Tesseract-OCR
+  * Windows
+    * [Download](https://github.com/UB-Mannheim/tesseract/wiki)
+    * Install and add the installation path into environment variable. For example: C:\Program Files (x86)\Tesseract-OCR
+  * Mac OS
+    * Install brew (if not available) at https://brew.sh
+    * Install Tesseract via brew:
+        ``` bash
+        brew install tesseract
+        ```
 
 ## First time set up
 
@@ -37,6 +56,10 @@ Install pytesseract module for python:
 ``` bash
 pip install pytesseract
 ```
+
+> Note:
+>
+> On Mac OS, append **sudo** at the beginning of the command to install with admin privilege, otherwise we may encounter permission deny error.
 
 ## Run
 

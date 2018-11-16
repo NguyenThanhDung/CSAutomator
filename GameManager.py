@@ -35,8 +35,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.TAP_TO_START:
             self.Log("Tap to start...")
             self.device.Touch(640, 360)
-        elif self.screen.screenType == ScreenType.EVENT_INFO_1    \
-            or self.screen.screenType == ScreenType.EVENT_INFO_2:
+        elif self.screen.screenType == ScreenType.EVENT_INFO_1      \
+            or self.screen.screenType == ScreenType.EVENT_INFO_2    \
+            or self.screen.screenType == ScreenType.EVENT_INFO_3:
             self.Log("Close event information dialog")
             self.device.Touch(1215, 630)
         elif self.screen.screenType == ScreenType.DIALOG_WEEKLY_LIMITED    \
@@ -71,11 +72,6 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_REFRESH_RESET:
             self.Log("OK")
             self.device.Touch(784, 357)
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_TICKETS:
-            self.Log("Go to Mysterious Sanctuary...")
-            self.gameState = GameState.MYSTERIOUS_SANCTUARY
-            self.device.Touch(788, 471)
-            self.device.Touch(40, 48)
         elif self.screen.screenType == ScreenType.DIALOG_PURCHASE_COMPLETE:
             self.Log("Close dialog. Go to battle...")
             self.gameState = GameState.PROMOTION_BATTLE
@@ -184,7 +180,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAP:
             self.Log("Open Promotion Battle")
             self.device.Touch(1077, 547)
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT   \
+            or self.screen.screenType == ScreenType.RIVAL_GUARDIAN_PLACEMENT:
             self.Log("Auto place and start")
             self.device.Touch(767, 627)
             time.sleep(1)
@@ -192,65 +189,55 @@ class GameManager:
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             self.Log("Idle in 20 seconds...")
             time.sleep(20)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST:
-            if self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png") is not None:
-                self.Log("Rival available. Switch to Rival list")
-                self.device.Touch(1221, 505)
-            else:
-                potentialMatch = self.screen.Find("PromotionBattle_BattleList_PotentialMatch.png")
-                if potentialMatch is not None:
-                    self.Log("There is a potential match, go for battle")
-                    self.scrollStep = 0
-                    self.device.Touch(potentialMatch.x + 40, potentialMatch.y + 70)
+        elif self.screen.screenType == ScreenType.PROMOTION_BATTLE:
+            screenPiece = self.screen.Find("PromotionBattle_BattleTab.png")
+            if screenPiece is not None:
+                screenPiece = self.screen.Find("PromotionBattle_RivalAvailable.png")
+                if screenPiece is not None:
+                    self.Log("Rival available. Switch to Rival list")
+                    self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
                 else:
-                    if self.scrollStep < 2:
-                        self.Log("Can not find any potential match, scroll up")
-                        self.device.Swipe(1016, 226, 614, 226)
-                        self.scrollStep = self.scrollStep + 1
+                    screenPiece = self.screen.Find("PromotionBattle_BattleTab_BattleButton.png")
+                    if screenPiece is not None:
+                        self.Log("Find match...")
+                        self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
                     else:
-                        self.scrollStep = 0
-                        refreshAvailable = self.screen.Find("PromotionBattle_BattleList_RefreshAvailable.png")
-                        if refreshAvailable is not None:
-                            self.Log("There isn't any potential match, refresh list")
-                            self.device.Swipe(569, 226, 1116, 226)
-                            self.device.Swipe(569, 226, 1116, 226)
-                            self.device.Touch(514, 108)
+                        self.Log("Switch to Mysterious Sanctuary...")
+                        self.gameState = GameState.MYSTERIOUS_SANCTUARY
+            else:
+                screenPiece = self.screen.Find("PromotionBattle_RivalTab_Available.png")
+                if screenPiece is not None:
+                    self.Log("Start Rival match...")
+                    batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalTab_BattleButton.png")
+                    if batteButtonLocaltion is not None:
+                        self.Log("Press Battle button at " + str(batteButtonLocaltion))
+                        self.device.Touch(batteButtonLocaltion.x + 5, batteButtonLocaltion.y + 5)
+                    else:
+                        self.Log("Schroll down")
+                        self.device.Swipe(1116, 351, 569, 351)
+                else:
+                    screenPiece = self.screen.Find("PromotionBattle_RivalTab_NotAvailable.png")
+                    if screenPiece is not None:
+                        screenPiece = self.screen.Find("PromotionBattle_BattleAvailable.png")
+                        if screenPiece is not None:
+                            self.Log("Switch to Battle tab")
+                            self.device.Touch(1219, 648)
                         else:
-                            self.Log("There isn't any potential match, refresh is not available, go to Mysterious Sanctuary")
+                            self.Log("Switch to Mysterious Sanctuary...")
                             self.gameState = GameState.MYSTERIOUS_SANCTUARY
-        elif self.screen.screenType == ScreenType.RIVAL_LIST:
-            rivalAvailable = self.screen.Find("PromotionBattle_RivalList_Available.png")
-            if rivalAvailable is not None:
-                self.Log("Start Rival match...")
-                batteButtonLocaltion = self.screen.Find("PromotionBattle_RivalList_BattleButton.png")
-                if batteButtonLocaltion is not None:
-                    self.Log("Press Battle button at " + str(batteButtonLocaltion))
-                    self.device.Touch(batteButtonLocaltion.x + 5, batteButtonLocaltion.y + 5)
-                else:
-                    self.Log("Schroll down")
-                    self.device.Swipe(1116, 351, 569, 351)
-            else:
-                battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
-                if battleAvailable is not None:
-                    self.Log("Switch to Battle tab")
-                    self.device.Touch(battleAvailable.x + 52, battleAvailable.y + 44)
-                else:
-                    self.Log("Go home")
-                    self.device.Touch(38, 46)
-        elif self.screen.screenType == ScreenType.BATTLE_RANKING:
-            rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
-            if rivalAvailable is not None:
-                self.Log("Switch to Rival tab")
-                self.device.Touch(rivalAvailable.x + 62, rivalAvailable.y + 66)
-            else:
-                battleAvailable = self.screen.Find("PromotionBattle_BattleAvailable.png")
-                if battleAvailable is not None:
-                    self.Log("Switch to Battle tab")
-                    self.device.Touch(battleAvailable.x + 52, battleAvailable.y + 44)
-                else:
-                    self.Log("Play Mysterious Sanctuary...")
-                    self.gameState = GameState.MYSTERIOUS_SANCTUARY
-                    self.device.Touch(38, 46)
+                    else:
+                        screenPiece = self.screen.Find("Battle_Ranking.png")
+                        if screenPiece is not None:
+                            screenPiece = self.screen.Find("PromotionBattle_RivalAvailable.png")
+                            if screenPiece is not None:
+                                self.Log("Rival available. Switch to Rival list")
+                                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
+                            else:
+                                self.Log("Switch to Mysterious Sanctuary...")
+                                self.gameState = GameState.MYSTERIOUS_SANCTUARY
+                        else:
+                            self.Log("Switch to Mysterious Sanctuary...")
+                            self.gameState = GameState.MYSTERIOUS_SANCTUARY
         elif self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD:
             rivalAvailable = self.screen.Find("PromotionBattle_BattleList_RivalAvailable.png")
             if rivalAvailable is not None:
@@ -275,12 +262,23 @@ class GameManager:
             self.Log("Open Mysterious Sanctuary")
             self.device.Touch(630, 600)
         elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY:
-            self.Log("Open Shrine of Light")
-            self.device.Touch(400, 560)
-        elif self.screen.screenType == ScreenType.SHRINE_OF_LIGHT:
-            self.Log("Open floor 7F")
-            self.device.Touch(1123, 120)
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+            screenPiece = self.screen.Find("MysteriousSanctuary_MapClosed.png", 100000)
+            if screenPiece is not None:
+                self.Log("Open Shrine of Light")
+                self.device.Touch(400, 560)
+            else:
+                screenPiece = self.screen.Find("ShrineOfLight.png", 100000)
+                if screenPiece is not None:
+                    self.Log("Swipe up to find 8F")
+                    self.device.Swipe(1120, 360, 577, 360)
+                else:
+                    screenPiece = self.screen.Find("ShrineOfLight_8F.png", 1000000)
+                    if screenPiece is not None:
+                        self.Log("Open floor 8F")
+                        self.device.Touch(screenPiece.x + 54, screenPiece.y + 81)
+                    else:
+                        self.PlayDefault()
+        elif self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT:
             screenPiece = self.screen.Find("GuardianPlacement_AutoPlayIsEnabled.png")
             if screenPiece is not None:
                 self.Log("Auto Play is enabled. Disable it")
@@ -290,10 +288,10 @@ class GameManager:
             time.sleep(1)
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
-            #self.Log("Idle in 2 minutes...")
-            #time.sleep(120)
-            self.Log("Auto touch...")
-            self.AutoTouch(10)
+            self.Log("Idle in 20 seconds...")
+            time.sleep(20)
+            # self.Log("Auto touch...")
+            # self.AutoTouch(10)
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             self.Log("Replay")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
@@ -375,7 +373,7 @@ class GameManager:
                 self.device.Touch(735, 477)
         elif self.screen.screenType == ScreenType.DIALOG_NOT_ENOUGH_FP:
             self.Log("Close dialog. Go to buy shoes by moonstones...")
-            self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
+            self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
             self.device.Touch(785, 357)
         else:
             self.PlayDefault()
@@ -448,13 +446,13 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 5 stars purple weapon")
             return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Shield_5stars_Purple.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars purple shield")
-            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 5 stars purple armor")
+            return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Shield_5stars_Purple.png")
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
+            self.Log("Found 5 stars purple shield")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Gloves_5stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
@@ -472,13 +470,13 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 5 stars gold weapon")
             return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Shield_5stars_Gold.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars gold shield")
-            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Gold.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 5 stars gold armor")
+            return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Shield_5stars_Gold.png")
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
+            self.Log("Found 5 stars gold shield")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Necklace_5stars_Gold.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
@@ -492,13 +490,17 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars purple weapon")
             return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Armor_6stars_Purple.png")
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
+            self.Log("Found 6 stars purple armor")
+            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Shield_6stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars purple shield")
             return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Armor_6stars_Purple.png")
+        screenPiece = self.screen.Find("Shop_Equipment_Gloves_6stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 6 stars purple armor")
+            self.Log("Found 6 stars purple gloves")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Necklace_6stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
@@ -512,9 +514,13 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars gold weapon")
             return screenPiece
+        screenPiece = self.screen.Find("Shop_Equipment_Armor_6stars_Gold.png")
+        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
+            self.Log("Found 6 stars gold armor")
+            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Shield_6stars_Gold.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 6 stars gold gloves")
+            self.Log("Found 6 stars gold shield")
             return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Gloves_6stars_Gold.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
@@ -524,7 +530,7 @@ class GameManager:
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars gold ring")
             return screenPiece
-        screenPiece = self.screen.Find("Shop_MysticalBook.png")
+        screenPiece = self.screen.Find("Shop_MysticalBook.png", 1000000)
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found mystical book")
             return screenPiece
@@ -588,7 +594,7 @@ class GameManager:
                         self.device.Touch(923, 231)
                 else:
                     self.PlayDefault()
-        elif self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT:
+        elif self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT:
             self.Log("Auto place and start")
             self.device.Touch(767, 627)
             time.sleep(1)
@@ -600,28 +606,31 @@ class GameManager:
         self.Log("PlayDefault")
         if self.screen.screenType == ScreenType.MAP:
             self.device.Touch(1190, 360)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY              \
-            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_EXP   \
-            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_GOLD:
+        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY                      \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_EXP            \
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_GOLD           \
+            or self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_RESULT_LOSE:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Home))
         elif self.screen.screenType == ScreenType.PVE_RESULT_REPEAT_RESULT:
             self.device.Touch(335, 77)
-        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY      \
-            or self.screen.screenType == ScreenType.SHRINE_OF_LIGHT         \
-            or self.screen.screenType == ScreenType.GUARDIAN_PLACEMENT      \
-            or self.screen.screenType == ScreenType.BATTLE_LIST             \
-            or self.screen.screenType == ScreenType.RIVAL_LIST              \
-            or self.screen.screenType == ScreenType.BATTLE_RANKING          \
-            or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD   \
-            or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB      \
-            or self.screen.screenType == ScreenType.SHOP                    \
-            or self.screen.screenType == ScreenType.SUMMON                  \
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY                      \
+            or self.screen.screenType == ScreenType.PROMOTION_BATTLE_GUARDIAN_PLACEMENT     \
+            or self.screen.screenType == ScreenType.RIVAL_GUARDIAN_PLACEMENT                \
+            or self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT                  \
+            or self.screen.screenType == ScreenType.PROMOTION_BATTLE                        \
+            or self.screen.screenType == ScreenType.RIVAL_LIST                              \
+            or self.screen.screenType == ScreenType.BATTLE_RANKING                          \
+            or self.screen.screenType == ScreenType.BATTLE_DEFENSE_RECORD                   \
+            or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB                      \
+            or self.screen.screenType == ScreenType.SHOP                                    \
+            or self.screen.screenType == ScreenType.SUMMON                                  \
             or self.screen.screenType == ScreenType.EVENT_DUNGEON:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
             self.device.Touch(785, 460)
         elif self.screen.screenType == ScreenType.SUMMON_BASIC_DONE         \
-            or self.screen.screenType == ScreenType.SUMMON_MYSTEROUS_DONE:
+            or self.screen.screenType == ScreenType.SUMMON_MYSTEROUS_DONE   \
+            or self.screen.screenType == ScreenType.SUMMON_LEGEND_DONE:
             self.device.Touch(1185, 361)
         elif self.screen.screenType == ScreenType.LEVEL_UP:
             self.device.Touch(500, 500)
@@ -629,19 +638,21 @@ class GameManager:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
-        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES:
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES_AT_GUARDIAN_PLACEMENT    \
+            or self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES_AT_RESULT:
             self.gameState = GameState.OUT_OF_SHOES
-            self.device.Touch(790, 474)
-            if self.screen.Find("NotEnoughShoes_At_GuardianPlacement.png", 2000000) is not None:
-                self.Log("Not enough shoes at guardian placement. Find more shoes...")
-                self.device.Touch(46, 51)
-            elif self.screen.Find("NotEnoughShoes_At_Result.png") is not None:
-                self.Log("Not enough shoes at result. Find more shoes...")
-                self.device.Touch(1197, 663)
-            else:
-                self.Log("Not enough shoes. Close the pop-up")
+            self.device.Touch(463, 103)
         elif self.screen.screenType == ScreenType.EVENT_DUNGEON_OUT_OF_ENTRANCE_POPUP:
             self.device.Touch(784, 356)
+        elif self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_LOSE:
+            self.device.Touch(788, 472)
+        elif self.screen.screenType == ScreenType.NOT_ENOUGH_TICKETS:
+            self.Log("Go to Mysterious Sanctuary...")
+            self.gameState = GameState.MYSTERIOUS_SANCTUARY
+            self.device.Touch(463, 104)
+        elif self.screen.screenType == ScreenType.BATTLE_PREPARING_NEW_SEASON:
+            self.Log("OK")
+            self.device.Touch(785, 357)
         else:
             self.Log("Idle")
 

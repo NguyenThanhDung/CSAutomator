@@ -5,12 +5,12 @@ class TemplateImage:
 
     templateFolder = "ScreenTemplate"
 
-    def __init__(self, screenType, fileName, precision = 10000):
+    def __init__(self, screenType, fileName, precision = 100000):
         self.screenType = screenType
         self.criterias = []
         self.AddCriteria(fileName, precision)
 
-    def AddCriteria(self, fileName, precision = 10000):
+    def AddCriteria(self, fileName, precision = 100000):
         filePath = os.path.abspath(TemplateImage.templateFolder + "/" +  fileName)
         self.criterias.append([fileName, cv2.imread(filePath, 0), precision])
 
