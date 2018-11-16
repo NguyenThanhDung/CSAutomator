@@ -71,8 +71,10 @@ class ScreenType(Enum):
     EVENT_INFO_1 = 91
     EVENT_INFO_2 = 92
     EVENT_INFO_3 = 93
+
+    UNKNOWN_LAND = 100
     
-    UNKNOWN = 99
+    UNKNOWN = 999
 
 
 class Screen:

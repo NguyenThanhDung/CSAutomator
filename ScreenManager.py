@@ -104,6 +104,8 @@ class ScreenManager:
         screenTemplate = TemplateImage(ScreenType.EVENT_DUNGEON_OUT_OF_ENTRANCE_POPUP, "EventDungeon_PopUpIsOpening.png", 100000)
         screenTemplate.AddCriteria("EventDungeon_OutOfEntrancePopUp.png", 1000000)
         self.templates.append(screenTemplate)
+
+        self.templates.append(TemplateImage(ScreenType.UNKNOWN_LAND, "UnknownLand.png"))
         
         unstableNetworkDialog = TemplateImage(ScreenType.DIALOG_UNSTABLE_NETWORK, "UnstableNetwork_Title.png", 10000000)
         unstableNetworkDialog.AddCriteria("UnstableNetwork_YesButton.png", 1000000)

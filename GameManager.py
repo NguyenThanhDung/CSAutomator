@@ -548,6 +548,14 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAP:
             self.Log("Open Unknown Land")
             self.device.Touch(715, 147)
+        elif self.screen.screenType == ScreenType.UNKNOWN_LAND:
+            screenPiece = self.screen.Find("UnknownLand_5F.png")
+            if screenPiece is not None:
+                self.Log("Open Floor 5")
+                self.device.Touch(screenPiece.x + 45, screenPiece.y + 68)
+            else:
+                self.Log("Expand floors...")
+                self.device.Touch(411, 394)
         else:
             self.PlayDefault()
 
