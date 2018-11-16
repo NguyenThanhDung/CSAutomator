@@ -9,6 +9,7 @@ class GameState(Enum):
     SHOPPING = 5
     SUMMON = 6
     EVENT_DUNGEON = 7
+    UNKNOWN_LAND = 8
 
 class ShoesSource(Enum):
     DAILY_MISSION_REWARD = 0

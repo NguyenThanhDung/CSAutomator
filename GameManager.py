@@ -23,71 +23,7 @@ class GameManager:
         self.screen = screen
 
     def Play(self):
-        if self.screen.screenType == ScreenType.DEVICE_HOME:
-            iconLocation = self.screen.Find("DeviceHome.png", 30000)
-            if iconLocation is not None:
-                self.Log("Start game")
-                self.device.Touch(iconLocation.x + 5, iconLocation.y + 5)
-                time.sleep(5)
-                self.device.LoadDeviceInfo()
-            else:
-                self.Log("Can not find the game icon!")
-        elif self.screen.screenType == ScreenType.TAP_TO_START:
-            self.Log("Tap to start...")
-            self.device.Touch(640, 360)
-        elif self.screen.screenType == ScreenType.EVENT_INFO_1      \
-            or self.screen.screenType == ScreenType.EVENT_INFO_2    \
-            or self.screen.screenType == ScreenType.EVENT_INFO_3:
-            self.Log("Close event information dialog")
-            self.device.Touch(1215, 630)
-        elif self.screen.screenType == ScreenType.DIALOG_WEEKLY_LIMITED    \
-            or self.screen.screenType == ScreenType.DIALOG_LIMITED_OFFER:
-            self.Log("Close dialog")
-            self.device.Touch(344, 38)
-        elif self.screen.screenType == ScreenType.DIALOG_SUGGESTED_ITEM:
-            self.Log("Close dialog")
-            self.device.Touch(960, 448)
-        elif self.screen.screenType == ScreenType.DAILY_LOGIN_REWARD:
-            self.Log("Close dayly log-gin reward")
-            self.device.Touch(974, 357)
-        elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
-            self.Log("Enable auto play")
-            self.device.Touch(58, 107)
-        elif self.screen.screenType == ScreenType.REWARD_INFO:
-            self.Log("Press OK")
-            self.device.Touch(797, 356)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
-            self.Log("Confirm refresh")
-            self.device.Touch(784, 243)
-        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
-            self.Log("Don't refresh with moonstone")
-            self.device.Touch(784, 474)
-        elif self.screen.screenType == ScreenType.BATTLE_RESULT_WIN \
-            or self.screen.screenType == ScreenType.BATTLE_RESULT_LOSE:
-            self.Log("Press Exit")
-            self.device.Touch(1196, 115)
-        elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
-            self.Log("Press Skip")
-            self.device.Touch(1223, 58)
-        elif self.screen.screenType == ScreenType.BATTLE_REFRESH_RESET:
-            self.Log("OK")
-            self.device.Touch(784, 357)
-        elif self.screen.screenType == ScreenType.DIALOG_PURCHASE_COMPLETE:
-            self.Log("Close dialog. Go to battle...")
-            self.gameState = GameState.PROMOTION_BATTLE
-            self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
-            self.device.Touch(783, 355)
-            self.device.Touch(40, 48)
-        elif self.screen.screenType == ScreenType.BATTLE_NEW_SEASON:
-            self.Log("OK")
-            self.device.Touch(784, 358)
-        elif self.screen.screenType == ScreenType.MAIL_BOX_COLLECT:
-            self.Log("OK")
-            self.device.Touch(799, 357)
-        elif self.screen.screenType == ScreenType.DIALOG_UNSTABLE_NETWORK:
-            self.Log("Yes")
-            self.device.Touch(788, 244)
-        elif self.screen.screenType == ScreenType.GAME_HOME:
+        if self.screen.screenType == ScreenType.GAME_HOME:
             screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
             if screenPiece is not None:
                 self.Log("Shop available. Go for shoping...")
@@ -97,18 +33,19 @@ class GameManager:
                 if screenPiece is not None:
                     self.Log("Summon available. Go to summon...")
                     self.gameState = GameState.SUMMON
-                elif self.profile.DidPlayEventDungeonToday() == False   \
-                    and self.gameState != GameState.OUT_OF_SHOES:
-                    screenPiece = self.screen.Find("GameHome_EventDungeon.png")
-                    if screenPiece is not None:
-                        self.Log("Event Dungeon available. Go to dungeon...")
-                        self.gameState = GameState.EVENT_DUNGEON
-                    else:
-                        self.Log("Can't find Event Dungeon button. Continue...")
-                        self.profile.SaveLastDatePlayEventDungeon()
-            self.PlaySubstate()
-        else:
-            self.PlaySubstate()
+                elif self.gameState != GameState.OUT_OF_SHOES:
+                    if self.profile.DidPlayEventDungeonToday() == False:
+                        screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+                        if screenPiece is not None:
+                            self.Log("Event Dungeon available. Go to dungeon...")
+                            self.gameState = GameState.EVENT_DUNGEON
+                        else:
+                            self.Log("Can't find Event Dungeon button. Continue...")
+                            self.profile.SaveLastDatePlayEventDungeon()
+                    elif self.profile.DidPlayUnknownLand() == False:
+                        self.Log("Play Unknown Land...")
+                        self.gameState = GameState.UNKNOWN_LAND
+        self.PlaySubstate()
 
     def PlaySubstate(self):
         if self.gameState == GameState.DAILY_MISSION:
@@ -125,6 +62,8 @@ class GameManager:
             self.Summon()
         elif self.gameState == GameState.EVENT_DUNGEON:
             self.PlayEventDungeon()
+        elif self.gameState == GameState.UNKNOWN_LAND:
+            self.PlayUnknownLand()
         else:
             self.PlayDefault()
 
@@ -602,11 +541,85 @@ class GameManager:
         else:
             self.PlayDefault()
 
+    def PlayUnknownLand(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            self.Log("Open map")
+            self.device.Touch(1174, 360)
+        elif self.screen.screenType == ScreenType.MAP:
+            self.Log("Open Unknown Land")
+            self.device.Touch(715, 147)
+        else:
+            self.PlayDefault()
+
     def PlayDefault(self):
         self.Log("PlayDefault")
-        if self.screen.screenType == ScreenType.MAP:
+        if self.screen.screenType == ScreenType.DEVICE_HOME:
+            iconLocation = self.screen.Find("DeviceHome.png", 30000)
+            if iconLocation is not None:
+                self.Log("Start game")
+                self.device.Touch(iconLocation.x + 5, iconLocation.y + 5)
+                time.sleep(5)
+                self.device.LoadDeviceInfo()
+            else:
+                self.Log("Can not find the game icon!")
+        elif self.screen.screenType == ScreenType.TAP_TO_START:
+            self.Log("Tap to start...")
+            self.device.Touch(640, 360)
+        elif self.screen.screenType == ScreenType.EVENT_INFO_1      \
+            or self.screen.screenType == ScreenType.EVENT_INFO_2    \
+            or self.screen.screenType == ScreenType.EVENT_INFO_3:
+            self.Log("Close event information dialog")
+            self.device.Touch(1215, 630)
+        elif self.screen.screenType == ScreenType.DIALOG_WEEKLY_LIMITED    \
+            or self.screen.screenType == ScreenType.DIALOG_LIMITED_OFFER:
+            self.Log("Close dialog")
+            self.device.Touch(344, 38)
+        elif self.screen.screenType == ScreenType.DIALOG_SUGGESTED_ITEM:
+            self.Log("Close dialog")
+            self.device.Touch(960, 448)
+        elif self.screen.screenType == ScreenType.DAILY_LOGIN_REWARD:
+            self.Log("Close dayly log-gin reward")
+            self.device.Touch(974, 357)
+        elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_DISABLED:
+            self.Log("Enable auto play")
+            self.device.Touch(58, 107)
+        elif self.screen.screenType == ScreenType.REWARD_INFO:
+            self.Log("Press OK")
+            self.device.Touch(797, 356)
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_CONFIRMATION:
+            self.Log("Confirm refresh")
+            self.device.Touch(784, 243)
+        elif self.screen.screenType == ScreenType.BATTLE_LIST_REFRESH_WITH_MOONSTONE:
+            self.Log("Don't refresh with moonstone")
+            self.device.Touch(784, 474)
+        elif self.screen.screenType == ScreenType.BATTLE_RESULT_WIN \
+            or self.screen.screenType == ScreenType.BATTLE_RESULT_LOSE:
+            self.Log("Press Exit")
+            self.device.Touch(1196, 115)
+        elif self.screen.screenType == ScreenType.RIVAL_MATCH_END:
+            self.Log("Press Skip")
+            self.device.Touch(1223, 58)
+        elif self.screen.screenType == ScreenType.BATTLE_REFRESH_RESET:
+            self.Log("OK")
+            self.device.Touch(784, 357)
+        elif self.screen.screenType == ScreenType.DIALOG_PURCHASE_COMPLETE:
+            self.Log("Close dialog. Go to battle...")
+            self.gameState = GameState.PROMOTION_BATTLE
+            self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
+            self.device.Touch(783, 355)
+            self.device.Touch(40, 48)
+        elif self.screen.screenType == ScreenType.BATTLE_NEW_SEASON:
+            self.Log("OK")
+            self.device.Touch(784, 358)
+        elif self.screen.screenType == ScreenType.MAIL_BOX_COLLECT:
+            self.Log("OK")
+            self.device.Touch(799, 357)
+        elif self.screen.screenType == ScreenType.DIALOG_UNSTABLE_NETWORK:
+            self.Log("Yes")
+            self.device.Touch(788, 244)
+        elif self.screen.screenType == ScreenType.MAP:
             self.device.Touch(1190, 360)
-        if self.screen.screenType == ScreenType.PVE_RESULT_VICTORY                      \
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY                      \
             or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_EXP            \
             or self.screen.screenType == ScreenType.EVENT_DUNGEON_RESULT_GOLD           \
             or self.screen.screenType == ScreenType.MYSTERIOUS_SANCTUARY_RESULT_LOSE:

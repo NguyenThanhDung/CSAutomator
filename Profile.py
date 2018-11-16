@@ -5,6 +5,7 @@ from enum import Enum
 
 class ProfileField(Enum):
     LastDatePlayEventDungeon = 0
+    UnknownLandMatchCount = 1
 
 class Profile:
 
@@ -20,6 +21,7 @@ class Profile:
             today = datetime.now()
             todayString = str(today.year) + "-" + str(today.month) + "-" + str(today.day - 1)
             self.data[ProfileField.LastDatePlayEventDungeon.name] = todayString
+            self.data[ProfileField.UnknownLandMatchCount.name] = 0
             with open(self.filePath, 'w') as outfile:
                 json.dump(self.data, outfile)
 
@@ -27,6 +29,7 @@ class Profile:
         with open(self.filePath) as fileData:
             jsonData = json.load(fileData)
         self.data[ProfileField.LastDatePlayEventDungeon.name] = jsonData[ProfileField.LastDatePlayEventDungeon.name]
+        self.data[ProfileField.UnknownLandMatchCount.name] = jsonData[ProfileField.UnknownLandMatchCount.name]
 
     def Save(self):
         with open(self.filePath, 'w') as outfile:
@@ -49,3 +52,14 @@ class Profile:
         today = datetime.now()
         todayString = str(today.year) + "-" + str(today.month) + "-" + str(today.day)
         self.data[ProfileField.LastDatePlayEventDungeon.name] = todayString
+    
+    def DidPlayUnknownLand(self):
+        playedCount = self.data[ProfileField.UnknownLandMatchCount.name]
+        if playedCount < 10:
+            return False
+        else:
+            return True
+    
+    def IncreaseUnknownLandMatchCount(self):
+        playedCount = self.data[ProfileField.UnknownLandMatchCount.name]
+        self.data[ProfileField.UnknownLandMatchCount.name] = playedCount + 1
