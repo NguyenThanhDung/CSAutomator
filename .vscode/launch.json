@@ -11,6 +11,12 @@
             "program": "${workspaceFolder}/CSAutomator.py"
         },
         {
+            "name": "Python: Capture Screen",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/CaptureScreen.py"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
