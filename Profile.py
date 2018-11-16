@@ -63,3 +63,4 @@ class Profile:
     def IncreaseUnknownLandMatchCount(self):
         playedCount = self.data[ProfileField.UnknownLandMatchCount.name]
         self.data[ProfileField.UnknownLandMatchCount.name] = playedCount + 1
+        self.Save()

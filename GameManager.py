@@ -565,6 +565,10 @@ class GameManager:
             self.device.Touch(767, 627)
             time.sleep(1)
             self.device.Touch(765, 141)
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            self.Log("Replay")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
+            self.profile.IncreaseUnknownLandMatchCount()
         else:
             self.PlayDefault()
 
