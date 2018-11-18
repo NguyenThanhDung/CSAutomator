@@ -7,6 +7,7 @@ class ProfileField(Enum):
     LastDatePlayEventDungeon = 0
     LastDatePlayUnknownLand = 1
     UnknownLandMatchCount = 2
+    LastDatePlayHallOfJudgment = 3
 
 class Profile:
 
@@ -23,15 +24,22 @@ class Profile:
             self.SetField(ProfileField.LastDatePlayEventDungeon, yesterdayString)
             self.SetField(ProfileField.LastDatePlayUnknownLand, yesterdayString)
             self.SetField(ProfileField.UnknownLandMatchCount, 0)
+            self.SetField(ProfileField.LastDatePlayHallOfJudgment, yesterdayString)
             with open(self.filePath, 'w') as outfile:
                 json.dump(self.data, outfile)
 
     def Load(self):
         with open(self.filePath) as fileData:
             jsonData = json.load(fileData)
-        self.SetField(ProfileField.LastDatePlayEventDungeon, jsonData[ProfileField.LastDatePlayEventDungeon.name])
-        self.SetField(ProfileField.LastDatePlayUnknownLand, jsonData[ProfileField.LastDatePlayUnknownLand.name])
-        self.SetField(ProfileField.UnknownLandMatchCount, jsonData[ProfileField.UnknownLandMatchCount.name])
+        yesterdayString = self.GetYesterdayString()
+        for key in ProfileField:
+            if key.name in jsonData:
+                self.SetField(key, jsonData[key.name])
+            else:
+                if key == ProfileField.UnknownLandMatchCount:
+                    self.SetField(key, 0)
+                else:
+                    self.SetField(key, yesterdayString)
 
     def Save(self):
         with open(self.filePath, 'w') as outfile:
@@ -86,3 +94,11 @@ class Profile:
             playedCount = self.GetField(ProfileField.UnknownLandMatchCount)
             self.SetField(ProfileField.UnknownLandMatchCount, playedCount + 1)
         self.Save()
+
+    def DidPlayHallOfJudgmentToday(self):
+        dateString = self.GetField(ProfileField.LastDatePlayHallOfJudgment)
+        return self.IsToday(dateString)
+
+    def SaveLastDatePlayHallOfJudgment(self):
+        todayString = self.GetTodayString()
+        self.SetField(ProfileField.LastDatePlayHallOfJudgment, todayString)

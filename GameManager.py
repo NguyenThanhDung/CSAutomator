@@ -40,6 +40,8 @@ class GameManager:
             self.PlayEventDungeon()
         elif self.gameState == GameState.UNKNOWN_LAND:
             self.PlayUnknownLand()
+        elif self.gameState == GameState.HALL_OF_JUDGMENT:
+            self.PlayHallOfJudgment()
         else:
             self.PlayDefault()
     
@@ -66,6 +68,8 @@ class GameManager:
         if self.profile.DidPlayUnknownLand() == False:
             self.Log("Play Unknown Land...")
             return GameState.UNKNOWN_LAND
+        if self.profile.DidPlayHallOfJudgmentToday() == False:
+            return GameState.HALL_OF_JUDGMENT
         return self.gameState
 
     def PlayDailyMission(self):
@@ -526,6 +530,16 @@ class GameManager:
             self.Log("Replay")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
             self.profile.IncreaseUnknownLandMatchCount()
+        else:
+            self.PlayDefault()
+    
+    def PlayHallOfJudgment(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            self.Log("Open map")
+            self.device.Touch(1174, 360)
+        elif self.screen.screenType == ScreenType.MAP:
+            self.Log("Open Hall of Judgment")
+            self.device.Touch(314, 518)
         else:
             self.PlayDefault()
 
