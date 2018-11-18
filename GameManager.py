@@ -42,6 +42,8 @@ class GameManager:
             self.PlayUnknownLand()
         elif self.gameState == GameState.HALL_OF_JUDGMENT:
             self.PlayHallOfJudgment()
+        elif self.gameState == GameState.DAILY_DUNGEON:
+            self.PlayDailyDungeon()
         else:
             self.PlayDefault()
     
@@ -80,6 +82,11 @@ class GameManager:
         if self.profile.DidPlayHallOfJudgmentToday() == False:
             return GameState.HALL_OF_JUDGMENT
         elif self.gameState == GameState.HALL_OF_JUDGMENT:
+            return GameState.PROMOTION_BATTLE
+        
+        if self.profile.DidPlayDailyDungeonToday() == False:
+            return GameState.DAILY_DUNGEON
+        elif self.gameState == GameState.DAILY_DUNGEON:
             return GameState.PROMOTION_BATTLE
 
         return self.gameState
@@ -572,6 +579,17 @@ class GameManager:
             self.device.Touch(789, 473)
         else:
             self.PlayDefault()
+    
+    def PlayDailyDungeon(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            self.Log("Open map")
+            self.device.Touch(1174, 360)
+        elif self.screen.screenType == ScreenType.MAP:
+            self.Log("Open Daily Dungeon")
+            self.device.Touch(232, 174)
+        else:
+            self.PlayDefault()
+
 
     def PlayDefault(self):
         self.Log("PlayDefault")

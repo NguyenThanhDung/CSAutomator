@@ -8,6 +8,7 @@ class ProfileField(Enum):
     LastDatePlayUnknownLand = 1
     UnknownLandMatchCount = 2
     LastDatePlayHallOfJudgment = 3
+    LastDatePlayDailyDungeon = 4
 
 class Profile:
 
@@ -21,10 +22,11 @@ class Profile:
             os.makedirs(os.path.dirname(self.filePath))
         if os.path.exists(self.filePath) == False:
             yesterdayString = self.GetYesterdayString()
-            self.SetField(ProfileField.LastDatePlayEventDungeon, yesterdayString)
-            self.SetField(ProfileField.LastDatePlayUnknownLand, yesterdayString)
-            self.SetField(ProfileField.UnknownLandMatchCount, 0)
-            self.SetField(ProfileField.LastDatePlayHallOfJudgment, yesterdayString)
+            for key in ProfileField:
+                if key == ProfileField.UnknownLandMatchCount:
+                    self.SetField(key, 0)
+                else:
+                    self.SetField(key, yesterdayString)
             with open(self.filePath, 'w') as outfile:
                 json.dump(self.data, outfile)
 
@@ -103,4 +105,13 @@ class Profile:
     def SaveLastDatePlayHallOfJudgment(self):
         todayString = self.GetTodayString()
         self.SetField(ProfileField.LastDatePlayHallOfJudgment, todayString)
+        self.Save()
+
+    def DidPlayDailyDungeonToday(self):
+        dateString = self.GetField(ProfileField.LastDatePlayDailyDungeon)
+        return self.IsToday(dateString)
+
+    def SaveLastDatePlayDailyDungeon(self):
+        todayString = self.GetTodayString()
+        self.SetField(ProfileField.LastDatePlayDailyDungeon, todayString)
         self.Save()
