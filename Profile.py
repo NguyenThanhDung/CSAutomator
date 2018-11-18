@@ -5,7 +5,8 @@ from enum import Enum
 
 class ProfileField(Enum):
     LastDatePlayEventDungeon = 0
-    UnknownLandMatchCount = 1
+    LastDatePlayUnknownLand = 1
+    UnknownLandMatchCount = 2
 
 class Profile:
 
@@ -19,17 +20,19 @@ class Profile:
             os.makedirs(os.path.dirname(self.filePath))
         if os.path.exists(self.filePath) == False:
             today = datetime.now()
-            todayString = str(today.year) + "-" + str(today.month) + "-" + str(today.day - 1)
-            self.data[ProfileField.LastDatePlayEventDungeon.name] = todayString
-            self.data[ProfileField.UnknownLandMatchCount.name] = 0
+            yesterdayString = str(today.year) + "-" + str(today.month) + "-" + str(today.day - 1)
+            self.SetField(ProfileField.LastDatePlayEventDungeon, yesterdayString)
+            self.SetField(ProfileField.LastDatePlayUnknownLand, yesterdayString)
+            self.SetField(ProfileField.UnknownLandMatchCount, 0)
             with open(self.filePath, 'w') as outfile:
                 json.dump(self.data, outfile)
 
     def Load(self):
         with open(self.filePath) as fileData:
             jsonData = json.load(fileData)
-        self.data[ProfileField.LastDatePlayEventDungeon.name] = jsonData[ProfileField.LastDatePlayEventDungeon.name]
-        self.data[ProfileField.UnknownLandMatchCount.name] = jsonData[ProfileField.UnknownLandMatchCount.name]
+        self.SetField(ProfileField.LastDatePlayEventDungeon, jsonData[ProfileField.LastDatePlayEventDungeon.name])
+        self.SetField(ProfileField.LastDatePlayUnknownLand, jsonData[ProfileField.LastDatePlayUnknownLand.name])
+        self.SetField(ProfileField.UnknownLandMatchCount, jsonData[ProfileField.UnknownLandMatchCount.name])
 
     def Save(self):
         with open(self.filePath, 'w') as outfile:
@@ -40,27 +43,39 @@ class Profile:
     
     def SetField(self, fieldID, fieldValue):
         self.data[fieldID.name] = fieldValue
-
-    def DidPlayEventDungeonToday(self):
-        dataParts = self.data[ProfileField.LastDatePlayEventDungeon.name].split("-")
-        lastDatePlayed = datetime(int(dataParts[0]), int(dataParts[1]), int(dataParts[2]))
+    
+    def IsToday(self, dateString):
+        dateParts = dateString.split("-")
+        lastDatePlayed = datetime(int(dateParts[0]), int(dateParts[1]), int(dateParts[2]))
         now = datetime.now()
         today = datetime(now.year, now.month, now.day)
         return lastDatePlayed == today
 
-    def SaveLastDatePlayEventDungeon(self):
+    def GetTodayString(self):
         today = datetime.now()
-        todayString = str(today.year) + "-" + str(today.month) + "-" + str(today.day)
-        self.data[ProfileField.LastDatePlayEventDungeon.name] = todayString
+        return str(today.year) + "-" + str(today.month) + "-" + str(today.day)
+
+    def DidPlayEventDungeonToday(self):
+        dateString = self.GetField(ProfileField.LastDatePlayEventDungeon)
+        return self.IsToday(dateString)
+
+    def SaveLastDatePlayEventDungeon(self):
+        todayString = self.GetTodayString()
+        self.SetField(ProfileField.LastDatePlayEventDungeon, todayString)
     
     def DidPlayUnknownLand(self):
-        playedCount = self.data[ProfileField.UnknownLandMatchCount.name]
-        if playedCount < 10:
+        dateString = self.GetField(ProfileField.LastDatePlayUnknownLand)
+        if self.IsToday(dateString) == False:
+            return False
+        playedCount = self.GetField(ProfileField.UnknownLandMatchCount)
+        if playedCount < 5:
             return False
         else:
             return True
     
     def IncreaseUnknownLandMatchCount(self):
-        playedCount = self.data[ProfileField.UnknownLandMatchCount.name]
-        self.data[ProfileField.UnknownLandMatchCount.name] = playedCount + 1
+        todayString = self.GetTodayString()
+        self.SetField(ProfileField.LastDatePlayUnknownLand, todayString)
+        playedCount = self.GetField(ProfileField.UnknownLandMatchCount)
+        self.SetField(ProfileField.UnknownLandMatchCount, playedCount + 1)
         self.Save()
