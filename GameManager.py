@@ -540,6 +540,21 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAP:
             self.Log("Open Hall of Judgment")
             self.device.Touch(314, 518)
+        elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT:
+            self.Log("Open Middle Level")
+            self.device.Touch(1042, 355)
+        elif self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT:
+            screenPiece = self.screen.Find("GuardianPlacement_AutoPlayIsEnabled.png")
+            if screenPiece is not None:
+                self.Log("Auto Play is enabled. Disable it")
+                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
+            self.Log("Auto place and start")
+            self.device.Touch(767, 627)
+            time.sleep(1)
+            self.device.Touch(765, 141)
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            self.Log("Replay")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
         else:
             self.PlayDefault()
 

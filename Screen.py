@@ -73,6 +73,8 @@ class ScreenType(Enum):
     EVENT_INFO_3 = 93
 
     UNKNOWN_LAND = 100
+
+    HALL_OF_JUDGMENT = 110
     
     UNKNOWN = 999
 
