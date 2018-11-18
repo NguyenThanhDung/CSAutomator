@@ -74,8 +74,12 @@ class Profile:
             return True
     
     def IncreaseUnknownLandMatchCount(self):
-        todayString = self.GetTodayString()
-        self.SetField(ProfileField.LastDatePlayUnknownLand, todayString)
-        playedCount = self.GetField(ProfileField.UnknownLandMatchCount)
-        self.SetField(ProfileField.UnknownLandMatchCount, playedCount + 1)
+        dateString = self.GetField(ProfileField.LastDatePlayUnknownLand)
+        if self.IsToday(dateString) == False:
+            todayString = self.GetTodayString()
+            self.SetField(ProfileField.LastDatePlayUnknownLand, todayString)
+            self.SetField(ProfileField.UnknownLandMatchCount, 1)
+        else:
+            playedCount = self.GetField(ProfileField.UnknownLandMatchCount)
+            self.SetField(ProfileField.UnknownLandMatchCount, playedCount + 1)
         self.Save()
