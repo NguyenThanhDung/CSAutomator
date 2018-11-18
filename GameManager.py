@@ -48,8 +48,10 @@ class GameManager:
 
     def GetPreferState(self):
 
-        if self.gameState == GameState.OUT_OF_SHOES:
-            return GameState.OUT_OF_SHOES
+        if self.gameState == GameState.OUT_OF_SHOES \
+            or self.gameState == GameState.SHOPPING \
+            or self.gameState == GameState.SUMMON:
+            return self.gameState
 
         if self.screen.screenType == ScreenType.GAME_HOME:
             screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
