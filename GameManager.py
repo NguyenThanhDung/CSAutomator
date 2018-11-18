@@ -23,31 +23,7 @@ class GameManager:
         self.screen = screen
 
     def Play(self):
-        if self.screen.screenType == ScreenType.GAME_HOME:
-            screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
-            if screenPiece is not None:
-                self.Log("Shop available. Go for shoping...")
-                self.gameState = GameState.SHOPPING
-            else:
-                screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
-                if screenPiece is not None:
-                    self.Log("Summon available. Go to summon...")
-                    self.gameState = GameState.SUMMON
-                elif self.gameState != GameState.OUT_OF_SHOES:
-                    if self.profile.DidPlayEventDungeonToday() == False:
-                        screenPiece = self.screen.Find("GameHome_EventDungeon.png")
-                        if screenPiece is not None:
-                            self.Log("Event Dungeon available. Go to dungeon...")
-                            self.gameState = GameState.EVENT_DUNGEON
-                        else:
-                            self.Log("Can't find Event Dungeon button. Continue...")
-                            self.profile.SaveLastDatePlayEventDungeon()
-                    elif self.profile.DidPlayUnknownLand() == False:
-                        self.Log("Play Unknown Land...")
-                        self.gameState = GameState.UNKNOWN_LAND
-        self.PlaySubstate()
-
-    def PlaySubstate(self):
+        self.gameState = self.GetPreferState()
         if self.gameState == GameState.DAILY_MISSION:
             self.PlayDailyMission()
         elif self.gameState == GameState.PROMOTION_BATTLE:
@@ -66,6 +42,31 @@ class GameManager:
             self.PlayUnknownLand()
         else:
             self.PlayDefault()
+    
+    def GetPreferState(self):
+        if self.gameState == GameState.OUT_OF_SHOES:
+            return GameState.OUT_OF_SHOES
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
+            if screenPiece is not None:
+                self.Log("Shop available. Go for shoping...")
+                return GameState.SHOPPING
+            screenPiece = self.screen.Find("GameHome_SummonAvailable.png")
+            if screenPiece is not None:
+                self.Log("Summon available. Go to summon...")
+                return GameState.SUMMON
+        if self.profile.DidPlayEventDungeonToday() == False:
+            screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+            if screenPiece is not None:
+                self.Log("Event Dungeon available. Go to dungeon...")
+                return GameState.EVENT_DUNGEON
+            else:
+                self.Log("Can't find Event Dungeon button. Continue...")
+                self.profile.SaveLastDatePlayEventDungeon()
+        if self.profile.DidPlayUnknownLand() == False:
+            self.Log("Play Unknown Land...")
+            return GameState.UNKNOWN_LAND
+        return self.gameState
 
     def PlayDailyMission(self):
         if self.dailMissionState == DailyMission.NONE:
