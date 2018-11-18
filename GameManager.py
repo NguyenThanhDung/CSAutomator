@@ -45,9 +45,12 @@ class GameManager:
         else:
             self.PlayDefault()
     
+
     def GetPreferState(self):
+
         if self.gameState == GameState.OUT_OF_SHOES:
             return GameState.OUT_OF_SHOES
+
         if self.screen.screenType == ScreenType.GAME_HOME:
             screenPiece = self.screen.Find("GameHome_ShopAvailable.png")
             if screenPiece is not None:
@@ -57,6 +60,7 @@ class GameManager:
             if screenPiece is not None:
                 self.Log("Summon available. Go to summon...")
                 return GameState.SUMMON
+
         if self.profile.DidPlayEventDungeonToday() == False:
             screenPiece = self.screen.Find("GameHome_EventDungeon.png")
             if screenPiece is not None:
@@ -65,12 +69,19 @@ class GameManager:
             else:
                 self.Log("Can't find Event Dungeon button. Continue...")
                 self.profile.SaveLastDatePlayEventDungeon()
+
         if self.profile.DidPlayUnknownLand() == False:
-            self.Log("Play Unknown Land...")
             return GameState.UNKNOWN_LAND
+        elif self.gameState == GameState.UNKNOWN_LAND:
+            return GameState.PROMOTION_BATTLE
+
         if self.profile.DidPlayHallOfJudgmentToday() == False:
             return GameState.HALL_OF_JUDGMENT
+        elif self.gameState == GameState.HALL_OF_JUDGMENT:
+            return GameState.PROMOTION_BATTLE
+
         return self.gameState
+
 
     def PlayDailyMission(self):
         if self.dailMissionState == DailyMission.NONE:
@@ -473,7 +484,6 @@ class GameManager:
                 if screenPiece is not None:
                     self.Log("Gold Dungeon is out of entrance. Go home...")
                     self.profile.SaveLastDatePlayEventDungeon()
-                    self.profile.Save()
                     self.gameState = GameState.PROMOTION_BATTLE
                     self.PlayDefault()
                 else:
@@ -486,7 +496,6 @@ class GameManager:
                     if screenPiece is not None:
                         self.Log("EXP Dungeon is out of entrance. Go home...")
                         self.profile.SaveLastDatePlayEventDungeon()
-                        self.profile.Save()
                         self.gameState = GameState.PROMOTION_BATTLE
                         self.PlayDefault()
                     else:
@@ -555,6 +564,10 @@ class GameManager:
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             self.Log("Replay")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
+        elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES:
+            self.Log("Out of chances. Press cancel")
+            self.profile.SaveLastDatePlayHallOfJudgment()
+            self.device.Touch(789, 473)
         else:
             self.PlayDefault()
 
@@ -644,7 +657,9 @@ class GameManager:
             or self.screen.screenType == ScreenType.MAIL_BOX_INBOX_TAB                      \
             or self.screen.screenType == ScreenType.SHOP                                    \
             or self.screen.screenType == ScreenType.SUMMON                                  \
-            or self.screen.screenType == ScreenType.EVENT_DUNGEON:
+            or self.screen.screenType == ScreenType.EVENT_DUNGEON                           \
+            or self.screen.screenType == ScreenType.UNKNOWN_LAND                            \
+            or self.screen.screenType == ScreenType.HALL_OF_JUDGMENT:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
             self.device.Touch(785, 460)
@@ -673,6 +688,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_PREPARING_NEW_SEASON:
             self.Log("OK")
             self.device.Touch(785, 357)
+        elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES:
+            self.Log("Out of chances. Press cancel")
+            self.device.Touch(789, 473)
         else:
             self.Log("Idle")
 

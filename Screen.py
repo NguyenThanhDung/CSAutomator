@@ -75,6 +75,7 @@ class ScreenType(Enum):
     UNKNOWN_LAND = 100
 
     HALL_OF_JUDGMENT = 110
+    HALL_OF_JUDGMENT_OUT_OF_CHANCES = 111
     
     UNKNOWN = 999
 

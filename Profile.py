@@ -73,6 +73,7 @@ class Profile:
     def SaveLastDatePlayEventDungeon(self):
         todayString = self.GetTodayString()
         self.SetField(ProfileField.LastDatePlayEventDungeon, todayString)
+        self.Save()
     
     def DidPlayUnknownLand(self):
         dateString = self.GetField(ProfileField.LastDatePlayUnknownLand)
@@ -102,3 +103,4 @@ class Profile:
     def SaveLastDatePlayHallOfJudgment(self):
         todayString = self.GetTodayString()
         self.SetField(ProfileField.LastDatePlayHallOfJudgment, todayString)
+        self.Save()
