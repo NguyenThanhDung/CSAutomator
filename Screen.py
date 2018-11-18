@@ -76,6 +76,8 @@ class ScreenType(Enum):
 
     HALL_OF_JUDGMENT = 110
     HALL_OF_JUDGMENT_OUT_OF_CHANCES = 111
+
+    DAILY_DUNGEON = 120
     
     UNKNOWN = 999
 

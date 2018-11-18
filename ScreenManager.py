@@ -108,6 +108,7 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.UNKNOWN_LAND, "UnknownLand.png"))
         self.templates.append(TemplateImage(ScreenType.HALL_OF_JUDGMENT, "HallOfJudgment.png"))
         self.templates.append(TemplateImage(ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES, "HallOfJudgment_OutOfChances.png"))
+        self.templates.append(TemplateImage(ScreenType.DAILY_DUNGEON, "DailyDungeon.png"))
         
         unstableNetworkDialog = TemplateImage(ScreenType.DIALOG_UNSTABLE_NETWORK, "UnstableNetwork_Title.png", 10000000)
         unstableNetworkDialog.AddCriteria("UnstableNetwork_YesButton.png", 1000000)

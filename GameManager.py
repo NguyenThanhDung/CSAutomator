@@ -587,6 +587,21 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAP:
             self.Log("Open Daily Dungeon")
             self.device.Touch(232, 174)
+        elif self.screen.screenType == ScreenType.DAILY_DUNGEON:
+            self.Log("Open Low Level")
+            self.device.Touch(1188, 589)
+        elif self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT:
+            screenPiece = self.screen.Find("GuardianPlacement_AutoPlayIsEnabled.png")
+            if screenPiece is not None:
+                self.Log("Auto Play is enabled. Disable it")
+                self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
+            self.Log("Auto place and start")
+            self.device.Touch(767, 627)
+            time.sleep(1)
+            self.device.Touch(765, 141)
+        elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
+            self.Log("Replay")
+            self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
         else:
             self.PlayDefault()
 
@@ -679,7 +694,8 @@ class GameManager:
             or self.screen.screenType == ScreenType.SUMMON                                  \
             or self.screen.screenType == ScreenType.EVENT_DUNGEON                           \
             or self.screen.screenType == ScreenType.UNKNOWN_LAND                            \
-            or self.screen.screenType == ScreenType.HALL_OF_JUDGMENT:
+            or self.screen.screenType == ScreenType.HALL_OF_JUDGMENT                        \
+            or self.screen.screenType == ScreenType.DAILY_DUNGEON:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Back))
         elif self.screen.screenType == ScreenType.DAILY_MISSION_POPUP:
             self.device.Touch(785, 460)
