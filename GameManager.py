@@ -602,6 +602,10 @@ class GameManager:
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             self.Log("Replay")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
+        elif self.screen.screenType == ScreenType.DAILY_DUNGEON_OUT_OF_CHANCES:
+            self.Log("Press OK")
+            self.profile.SaveLastDatePlayDailyDungeon()
+            self.device.Touch(786, 358)
         else:
             self.PlayDefault()
 
@@ -725,8 +729,11 @@ class GameManager:
             self.Log("OK")
             self.device.Touch(785, 357)
         elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES:
-            self.Log("Out of chances. Press cancel")
+            self.Log("OK")
             self.device.Touch(789, 473)
+        elif self.screen.screenType == ScreenType.DAILY_DUNGEON_OUT_OF_CHANCES:
+            self.Log("OK")
+            self.device.Touch(786, 358)
         else:
             self.Log("Idle")
 
