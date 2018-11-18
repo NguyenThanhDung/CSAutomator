@@ -19,8 +19,7 @@ class Profile:
         if os.path.exists(os.path.dirname(self.filePath)) == False:
             os.makedirs(os.path.dirname(self.filePath))
         if os.path.exists(self.filePath) == False:
-            today = datetime.now()
-            yesterdayString = str(today.year) + "-" + str(today.month) + "-" + str(today.day - 1)
+            yesterdayString = self.GetYesterdayString()
             self.SetField(ProfileField.LastDatePlayEventDungeon, yesterdayString)
             self.SetField(ProfileField.LastDatePlayUnknownLand, yesterdayString)
             self.SetField(ProfileField.UnknownLandMatchCount, 0)
@@ -54,6 +53,10 @@ class Profile:
     def GetTodayString(self):
         today = datetime.now()
         return str(today.year) + "-" + str(today.month) + "-" + str(today.day)
+    
+    def GetYesterdayString(self):
+        today = datetime.now()
+        return str(today.year) + "-" + str(today.month) + "-" + str(today.day - 1)
 
     def DidPlayEventDungeonToday(self):
         dateString = self.GetField(ProfileField.LastDatePlayEventDungeon)
