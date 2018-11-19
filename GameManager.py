@@ -573,7 +573,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.PVE_RESULT_VICTORY:
             self.Log("Replay")
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Result_Replay))
-        elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES:
+        elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES_1     \
+            or self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES_2:
             self.Log("Out of chances. Press cancel")
             self.profile.SaveLastDatePlayHallOfJudgment()
             self.device.Touch(789, 473)
@@ -728,7 +729,8 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_PREPARING_NEW_SEASON:
             self.Log("OK")
             self.device.Touch(785, 357)
-        elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES:
+        elif self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES_1     \
+            or self.screen.screenType == ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES_2:
             self.Log("OK")
             self.device.Touch(789, 473)
         elif self.screen.screenType == ScreenType.DAILY_DUNGEON_OUT_OF_CHANCES:

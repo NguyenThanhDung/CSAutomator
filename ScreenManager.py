@@ -107,7 +107,8 @@ class ScreenManager:
 
         self.templates.append(TemplateImage(ScreenType.UNKNOWN_LAND, "UnknownLand.png"))
         self.templates.append(TemplateImage(ScreenType.HALL_OF_JUDGMENT, "HallOfJudgment.png"))
-        self.templates.append(TemplateImage(ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES, "HallOfJudgment_OutOfChances.png"))
+        self.templates.append(TemplateImage(ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES_1, "HallOfJudgment_OutOfChances1.png"))
+        self.templates.append(TemplateImage(ScreenType.HALL_OF_JUDGMENT_OUT_OF_CHANCES_2, "HallOfJudgment_OutOfChances2.png"))
         self.templates.append(TemplateImage(ScreenType.DAILY_DUNGEON, "DailyDungeon.png"))
         
         screenTemplate = TemplateImage(ScreenType.DAILY_DUNGEON_OUT_OF_CHANCES, "DailyDungeon_DialogIsOpening.png")
