@@ -64,15 +64,14 @@ class GameManager:
             if screenPiece is not None:
                 self.Log("Summon available. Go to summon...")
                 return GameState.SUMMON
-
-        if self.profile.DidPlayEventDungeonToday() == False:
-            screenPiece = self.screen.Find("GameHome_EventDungeon.png")
-            if screenPiece is not None:
-                self.Log("Event Dungeon available. Go to dungeon...")
-                return GameState.EVENT_DUNGEON
-            else:
-                self.Log("Can't find Event Dungeon button. Continue...")
-                self.profile.SaveLastDatePlayEventDungeon()
+            if self.profile.DidPlayEventDungeonToday() == False:
+                screenPiece = self.screen.Find("GameHome_EventDungeon.png")
+                if screenPiece is not None:
+                    self.Log("Event Dungeon available. Go to dungeon...")
+                    return GameState.EVENT_DUNGEON
+                else:
+                    self.Log("Can't find Event Dungeon button. Continue...")
+                    self.profile.SaveLastDatePlayEventDungeon()
 
         if self.profile.DidPlayUnknownLand() == False:
             return GameState.UNKNOWN_LAND
