@@ -511,8 +511,13 @@ class GameManager:
                     time.sleep(1)
                     self.device.Touch(846, 360)
                 else:
-                    self.gameState = GameState.PROMOTION_BATTLE
-                    self.PlayDefault()
+                    if self.scrollStep < 2:
+                        self.Log("Can not find any reward, scroll up")
+                        self.device.Swipe(1110, 195, 1110, 603)
+                        self.scrollStep = self.scrollStep + 1
+                    else:
+                        self.gameState = GameState.PROMOTION_BATTLE
+                        self.PlayDefault()
         else:
             self.PlayDefault()
 
