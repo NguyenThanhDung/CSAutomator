@@ -309,7 +309,8 @@ class GameManager:
             elif self.shoesSource == ShoesSource.MAIL_BOX:
                 self.Log("Open mail box")
                 self.device.Touch(137, 52)
-            elif self.shoesSource == ShoesSource.SHOP_WITH_FP:
+            elif self.shoesSource == ShoesSource.SHOP_WITH_FP   \
+                or self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
                 self.Log("Open shop")
                 self.device.Touch(1193, 224)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
@@ -350,13 +351,14 @@ class GameManager:
                 # time.sleep(1)
                 self.device.Touch(1063, 133)
             elif self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
-                self.Log("Buy shoes with moonstones")
-                self.device.Swipe(924, 591, 924, 118)
-                time.sleep(1)
-                self.device.Touch(1063, 358)
+                screenPiece = self.screen.Find("Shop_ShoesRechargeII.png")
+                if screenPiece is not None:
+                    self.Log("Buy shoes with moonstones...")
+                    self.device.Touch(screenPiece.x + 259, screenPiece.y + 60)
+                else:
+                    self.PlayDefault()
             else:
-                self.Log("Go home")
-                self.device.Touch(40, 48)
+                self.PlayDefault()
         elif self.screen.screenType == ScreenType.DIALOG_SHOES_RECHARGE_FP:
             if self.shoesSource == ShoesSource.SHOP_WITH_FP:
                 self.Log("Confirm buy shoes with FP")
