@@ -346,10 +346,12 @@ class GameManager:
                 self.device.Touch(51, 40)
         elif self.screen.screenType == ScreenType.SHOP:
             if self.shoesSource == ShoesSource.SHOP_WITH_FP:
-                self.Log("Buy shoes with FP")
-                # self.device.Swipe(924, 118, 924, 591)
-                # time.sleep(1)
-                self.device.Touch(1063, 133)
+                screenPiece = self.screen.Find("Shop_ShoesRechargeFP.png")
+                if screenPiece is not None:
+                    self.Log("Buy shoes with FP...")
+                    self.device.Touch(screenPiece.x + 249, screenPiece.y + 60)
+                else:
+                    self.PlayDefault()
             elif self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
                 screenPiece = self.screen.Find("Shop_ShoesRechargeII.png")
                 if screenPiece is not None:
