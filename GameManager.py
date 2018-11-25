@@ -24,7 +24,7 @@ class GameManager:
 
     def Play(self):
         if self.screen.screenType == ScreenType.DEVICE_HOME:
-            iconLocation = self.screen.Find("DeviceHome.png", 30000)
+            iconLocation = self.screen.Find("DeviceHome.png")
             if iconLocation is not None:
                 self.Log("Start game")
                 self.device.Touch(iconLocation.x + 5, iconLocation.y + 5)
