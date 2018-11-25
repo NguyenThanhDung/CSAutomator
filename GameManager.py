@@ -125,6 +125,8 @@ class GameManager:
             self.Summon()
         elif self.gameState == GameState.EVENT_DUNGEON:
             self.PlayEventDungeon()
+        elif self.gameState == GameState.QUIT_GAME:
+            self.QuitGame()
         else:
             self.PlayDefault()
 
@@ -566,6 +568,16 @@ class GameManager:
             self.device.Touch(765, 141)
         else:
             self.PlayDefault()
+    
+    def QuitGame(self):
+        if self.screen.screenType == ScreenType.GAME_HOME:
+            self.Log("Quit game")
+            self.device.PressBackButton()
+        elif self.screen.screenType == ScreenType.MAP_LOST_TEXTURE:
+            self.Log("Go home")
+            self.device.Touch(1180, 361)
+        else:
+            self.PlayDefault()
 
     def PlayDefault(self):
         self.Log("PlayDefault")
@@ -618,6 +630,10 @@ class GameManager:
         elif self.screen.screenType == ScreenType.BATTLE_PREPARING_NEW_SEASON:
             self.Log("OK")
             self.device.Touch(785, 357)
+        elif self.screen.screenType == ScreenType.MAP_LOST_TEXTURE:
+            self.Log("Lost texture, quit game...")
+            self.gameState = GameState.QUIT_GAME
+            self.device.Touch(1180, 361)
         else:
             self.Log("Idle")
 

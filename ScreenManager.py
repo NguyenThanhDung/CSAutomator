@@ -9,7 +9,8 @@ class ScreenManager:
         self.templates = []
         
         self.templates.append(TemplateImage(ScreenType.GAME_HOME, "GameHome_MainMenu.png"))
-        self.templates.append(TemplateImage(ScreenType.MAP, "Map_GoToLobby.png", 1000000))
+        self.templates.append(TemplateImage(ScreenType.MAP, "Map_GoToLobby.png"))
+        self.templates.append(TemplateImage(ScreenType.MAP_LOST_TEXTURE, "Map_GoToLobby_LostTexture.png"))
 
         actionPhase_PlayButtonEnabled = TemplateImage(ScreenType.ACTION_PHASE_PLAY_ENABLED, "ActionPhase_AutoPlayButton_Enabled.png", 1000000)
         actionPhase_PlayButtonEnabled.AddCriteria("ActionPhase_ChatButton.png", 1000000)
