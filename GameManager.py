@@ -24,7 +24,6 @@ class GameManager:
 
     def Play(self):
         if self.screen.screenType == ScreenType.DEVICE_HOME:
-            self.device.LoadDeviceInfo()
             iconLocation = self.screen.Find("DeviceHome.png", 30000)
             if iconLocation is not None:
                 self.Log("Start game")
@@ -579,7 +578,6 @@ class GameManager:
             self.device.Touch(1180, 361)
         elif self.screen.screenType == ScreenType.EXIT_CONFIRM_POPUP:
             self.Log("Yes")
-            self.gameState = GameState.PROMOTION_BATTLE
             self.device.Touch(775, 170)
         else:
             self.PlayDefault()
