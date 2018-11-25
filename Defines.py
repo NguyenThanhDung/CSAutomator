@@ -9,7 +9,6 @@ class GameState(Enum):
     SHOPPING = 5
     SUMMON = 6
     EVENT_DUNGEON = 7
-    QUIT_GAME = 8
 
 class ShoesSource(Enum):
     DAILY_MISSION_REWARD = 0

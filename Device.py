@@ -111,14 +111,6 @@ class Device:
             self.Log("Swipe " + str(touchBeginX) + ":" + str(touchBeginY) + " to " + str(touchEndX) + ":" + str(touchEndY))
             params = ["adb", "-s", self.deviceID, "shell", "input", "swipe", str(touchBeginX), str(touchBeginY), str(touchEndX), str(touchEndY), str(duration)]
             Device.ExecuteCommand(params)
-    
-    def PressBackButton(self):
-        if self.deviceID is None:
-            self.Log("Idle")
-        else:
-            self.Log("Press back button")
-            params = ["adb", "-s", self.deviceID, "shell", "input", "keyevent", "4"]
-            Device.ExecuteCommand(params)
 
     @staticmethod
     def ExecuteCommand(params):
