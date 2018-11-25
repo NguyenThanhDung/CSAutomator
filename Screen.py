@@ -72,10 +72,8 @@ class ScreenType(Enum):
     EVENT_INFO_1 = 91
     EVENT_INFO_2 = 92
     EVENT_INFO_3 = 93
-
-    EXIT_CONFIRM_POPUP = 100
     
-    UNKNOWN = 999
+    UNKNOWN = 99
 
 
 class Screen:
