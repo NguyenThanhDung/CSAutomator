@@ -576,6 +576,9 @@ class GameManager:
         elif self.screen.screenType == ScreenType.MAP_LOST_TEXTURE:
             self.Log("Go home")
             self.device.Touch(1180, 361)
+        elif self.screen.screenType == ScreenType.EXIT_CONFIRM_POPUP:
+            self.Log("Yes")
+            self.device.Touch(775, 170)
         else:
             self.PlayDefault()
 
@@ -634,6 +637,9 @@ class GameManager:
             self.Log("Lost texture, quit game...")
             self.gameState = GameState.QUIT_GAME
             self.device.Touch(1180, 361)
+        elif self.screen.screenType == ScreenType.EXIT_CONFIRM_POPUP:
+            self.Log("No")
+            self.device.Touch(775, 358)
         else:
             self.Log("Idle")
 

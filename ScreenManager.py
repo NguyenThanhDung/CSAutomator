@@ -2,6 +2,7 @@ import cv2
 from Screen import Screen
 from Screen import ScreenType
 from TemplateImage import TemplateImage
+from TemplateText import TemplateText
 
 class ScreenManager:
 
@@ -120,6 +121,9 @@ class ScreenManager:
         self.templates.append(TemplateImage(ScreenType.PVE_RESULT_REPEAT_RESULT, "PvEResult_RepeatBattleResult.png", 100000))
         self.templates.append(TemplateImage(ScreenType.LEVEL_UP, "LevelUp.png"))
 
+        self.textTemplates = []
+        self.textTemplates.append(TemplateText(ScreenType.EXIT_CONFIRM_POPUP, "End the game now?", 567, 229, 67, 266))
+
     def GetScreen(self, screenShot):
         screenType = ScreenType.UNKNOWN
         image = None
@@ -127,5 +131,9 @@ class ScreenManager:
             if template.IsMatch(screenShot) == True:
                 screenType = template.screenType
                 image = screenShot.image
-                break
+                return Screen(screenType, image)
+        for template in self.textTemplates:
+            if template.IsMatch(screenShot) == True:
+                screenType = template.screenType
+                return Screen(screenType, image)
         return Screen(screenType, image)
