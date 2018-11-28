@@ -601,6 +601,8 @@ class GameManager:
             self.device.Touch(500, 500)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
+        elif self.screen.screenType == ScreenType.DIALOG_SHOES_RECHARGE_II:
+            self.device.Touch(731, 481)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES_AT_GUARDIAN_PLACEMENT    \
