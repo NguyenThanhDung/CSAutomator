@@ -284,8 +284,8 @@ class GameManager:
                 self.Log("Auto Play is enabled. Disable it")
                 self.device.Touch(screenPiece.x + 10, screenPiece.y + 10)
             self.Log("Auto place and start")
-            self.device.Touch(767, 627)
-            time.sleep(1)
+            # self.device.Touch(767, 627)
+            # time.sleep(1)
             self.device.Touch(765, 141)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
             self.Log("Idle in 20 seconds...")
