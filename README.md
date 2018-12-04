@@ -5,7 +5,7 @@ An auto script to play game
 ## Compatible Environments
 
 * Nox App Player resolution: 1280x720
-* CS game version: 1.2.5 1.0.70280
+* CS game version: 1.2.6
 
 ## Required Tools
 

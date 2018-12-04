@@ -24,7 +24,7 @@ class GameManager:
 
     def Play(self):
         if self.screen.screenType == ScreenType.DEVICE_HOME:
-            iconLocation = self.screen.Find("DeviceHome.png", 30000)
+            iconLocation = self.screen.Find("DeviceHome.png")
             if iconLocation is not None:
                 self.Log("Start game")
                 self.device.Touch(iconLocation.x + 5, iconLocation.y + 5)
@@ -309,7 +309,8 @@ class GameManager:
             elif self.shoesSource == ShoesSource.MAIL_BOX:
                 self.Log("Open mail box")
                 self.device.Touch(137, 52)
-            elif self.shoesSource == ShoesSource.SHOP_WITH_FP:
+            elif self.shoesSource == ShoesSource.SHOP_WITH_FP   \
+                or self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
                 self.Log("Open shop")
                 self.device.Touch(1193, 224)
         elif self.screen.screenType == ScreenType.ACTION_PHASE_PLAY_ENABLED:
@@ -345,18 +346,21 @@ class GameManager:
                 self.device.Touch(51, 40)
         elif self.screen.screenType == ScreenType.SHOP:
             if self.shoesSource == ShoesSource.SHOP_WITH_FP:
-                self.Log("Buy shoes with FP")
-                # self.device.Swipe(924, 118, 924, 591)
-                # time.sleep(1)
-                self.device.Touch(1063, 133)
+                screenPiece = self.screen.Find("Shop_ShoesRechargeFP.png")
+                if screenPiece is not None:
+                    self.Log("Buy shoes with FP...")
+                    self.device.Touch(screenPiece.x + 249, screenPiece.y + 60)
+                else:
+                    self.PlayDefault()
             elif self.shoesSource == ShoesSource.SHOP_WITH_MOONSTONE:
-                self.Log("Buy shoes with moonstones")
-                self.device.Swipe(924, 591, 924, 118)
-                time.sleep(1)
-                self.device.Touch(1063, 358)
+                screenPiece = self.screen.Find("Shop_ShoesRechargeII.png")
+                if screenPiece is not None:
+                    self.Log("Buy shoes with moonstones...")
+                    self.device.Touch(screenPiece.x + 259, screenPiece.y + 60)
+                else:
+                    self.PlayDefault()
             else:
-                self.Log("Go home")
-                self.device.Touch(40, 48)
+                self.PlayDefault()
         elif self.screen.screenType == ScreenType.DIALOG_SHOES_RECHARGE_FP:
             if self.shoesSource == ShoesSource.SHOP_WITH_FP:
                 self.Log("Confirm buy shoes with FP")
@@ -442,50 +446,6 @@ class GameManager:
                 self.PlayDefault()
 
     def FindGoodItemInMagicShop(self):
-        screenPiece = self.screen.Find("Shop_Equipment_Weapon_5stars_Purple.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars purple weapon")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Purple.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars purple armor")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Shield_5stars_Purple.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars purple shield")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Gloves_5stars_Purple.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars purple gloves")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Necklace_5stars_Purple.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars purple necklace")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Ring_5stars_Purple.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars purple ring")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Weapon_5stars_Gold.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars gold weapon")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Armor_5stars_Gold.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars gold armor")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Shield_5stars_Gold.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars gold shield")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Necklace_5stars_Gold.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars gold necklace")
-            return screenPiece
-        screenPiece = self.screen.Find("Shop_Equipment_Ring_5stars_Gold.png")
-        if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
-            self.Log("Found 5 stars gold ring")
-            return screenPiece
         screenPiece = self.screen.Find("Shop_Equipment_Weapon_6stars_Purple.png")
         if screenPiece is not None and self.magicShop.DidOpenEquipment(screenPiece) == False:
             self.Log("Found 6 stars purple weapon")
@@ -555,8 +515,13 @@ class GameManager:
                     time.sleep(1)
                     self.device.Touch(846, 360)
                 else:
-                    self.gameState = GameState.PROMOTION_BATTLE
-                    self.PlayDefault()
+                    if self.scrollStep < 2:
+                        self.Log("Can not find any reward, scroll up")
+                        self.device.Swipe(1110, 195, 1110, 603)
+                        self.scrollStep = self.scrollStep + 1
+                    else:
+                        self.gameState = GameState.PROMOTION_BATTLE
+                        self.PlayDefault()
         else:
             self.PlayDefault()
 
@@ -636,6 +601,8 @@ class GameManager:
             self.device.Touch(500, 500)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_IS_OPENNING:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_Cancel))
+        elif self.screen.screenType == ScreenType.DIALOG_SHOES_RECHARGE_II:
+            self.device.Touch(731, 481)
         elif self.screen.screenType == ScreenType.SHOP_DIALOG_PURCHASE_CONFIRMATION:
             self.device.TouchAtPosition(ButtonPositions.GetPosition(Button.Dialog_BuyEquipment_PurchaseConfirmation_Cancel))
         elif self.screen.screenType == ScreenType.NOT_ENOUGH_SHOES_AT_GUARDIAN_PLACEMENT    \
