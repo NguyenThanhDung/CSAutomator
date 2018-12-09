@@ -24,7 +24,7 @@ class Equipment:
         else:
             self.isGood = True
             for i in range(1, 5):
-                if "%" not in statTexts[i]:
+                if statTexts[i] != "" and "%" not in statTexts[i]:
                     self.isGood = False
                     break
             if self.isGood:
