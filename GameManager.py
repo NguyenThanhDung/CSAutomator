@@ -561,8 +561,8 @@ class GameManager:
                     self.PlayDefault()
         elif self.screen.screenType == ScreenType.PvE_GUARDIAN_PLACEMENT:
             self.Log("Auto place and start")
-            self.device.Touch(767, 627)
-            time.sleep(1)
+            # self.device.Touch(767, 627)
+            # time.sleep(1)
             self.device.Touch(765, 141)
         else:
             self.PlayDefault()
