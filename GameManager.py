@@ -377,7 +377,7 @@ class GameManager:
                 self.device.Touch(735, 477)
         elif self.screen.screenType == ScreenType.DIALOG_NOT_ENOUGH_FP:
             self.Log("Close dialog. Go to buy shoes by moonstones...")
-            self.shoesSource = ShoesSource.SHOP_WITH_MOONSTONE
+            self.shoesSource = ShoesSource.DAILY_MISSION_REWARD
             self.device.Touch(785, 357)
         else:
             self.PlayDefault()
